@@ -6,6 +6,9 @@ auth_check($auth[$sub_menu]);
 $pageNum = 5;
 $subNum = 2;
 ?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <style>
     /**************************
   DEFAULT BOOTSTRAP STYLES
@@ -80,11 +83,22 @@ $subNum = 2;
         background: #0099cc;
         color: #ffffff;
     }
+    .btn-danger {
+        background: #FF0000;
+        color: #ffffff;
+    }
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
         background: #33a6cc;
     }
+    .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+        background: #ed1c24;
+    }
     .btn-primary:active, .btn-primary.active {
         background: #007299;
+        box-shadow: none;
+    }
+    .btn-danger:active, .btn-danger.active {
+        background: #b20101;
         box-shadow: none;
     }
     .ta6 {
@@ -92,14 +106,68 @@ $subNum = 2;
         width: 230px;
         height: 60px;
     }
+    .winput {
 
+        width: 100%;
+        padding: 10px 10px;
+        margin: 10px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
 
+    }
+
+    table.type09 {
+        border-collapse: collapse;
+        text-align: left;
+        line-height: 1.5;
+
+    }
+    table.type09 thead th {
+        padding: 20px;
+        font-weight: bold;
+        vertical-align: top;
+        color: #369;
+        border-bottom: 3px solid #036;
+    }
+    table.type09 tbody th {
+        width: 100px;
+        padding: 20px;
+        font-weight: bold;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+        background: #f3f6f7;
+    }
+    table.type09 td {
+        width: 400px;
+        padding: 10px;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+    }
 </style>
-
+<script>
+    $(function() {
+        $( "#datepicker1" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dayNames: ['일','월','화','수','목','금','토'],
+            dayNamesShort: ['일','월','화','수','목','금','토'],
+            dayNamesMin: ['일','월','화','수','목','금','토'],
+            showMonthAfterYear: true,
+            changeMonth: true,
+            changeYear: true,
+            yearSuffix: '년'
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         var inst = $('[data-remodal-id=modal]').remodal();
-
+        var instWrite = $('[data-remodal-id=modalWrite]').remodal();
         $( window ).bind('beforeunload', function()
         {
 
@@ -115,7 +183,7 @@ $subNum = 2;
             processing: true,
             serverSide: true,
             ajax:{
-                url :"/admin/proc/online_counsel_json.php", // json datasource
+                url :"/admin/proc/board_notice_json.php", // json datasource
                 type: "post"  // method  , by default get
 //			error: function(){  // error handling
 //				$(".employee-grid-error").html("");
@@ -124,12 +192,6 @@ $subNum = 2;
 //
 //			}
             },
-
-
-
-//		scrollY:     300,
-//		scroller:    true,
-//		iDisplayLength: 15,
             language: {
                 "search": "검색",
                 "lengthMenu": "정렬수 _MENU_ ",
@@ -201,8 +263,9 @@ $subNum = 2;
 //		alert( 'You clicked on '+data[0]+'\'s row' );
                 inst.open();
                 var html = ""
-                var boardtype = "online"
+                var boardtype = "notice"
                 var idx = data[0]
+
                 $.post("/admin/proc/boardAjax.php", {
                     'type': 'list',
                     'boardtype': boardtype,
@@ -211,8 +274,8 @@ $subNum = 2;
                     var result = JSON.parse(response)
                     console.log(result)
                     html += "<tr>"
-                    html += "<th scope='row'>분류</th>"
-                    html += "<td>" + result['fid'] + "</td>"
+                    html += "<th scope='row'>글번호</th>"
+                    html += "<td>" + result['idx'] + "</td>"
                     html += "<input type='hidden' id='hiddenIdx' value='" + result['idx'] + "'/>"
                     html += "</tr>"
                     html += "<tr>"
@@ -220,17 +283,11 @@ $subNum = 2;
                     html += "<td>" + result['name'] + "</td>"
                     html += "</tr>"
                     html += "<tr>"
-                    html += "<th scope='row'>연락처</th>"
-                    html += "<td>" + result['mobile'] + "</td>"
-                    html += "</tr>"
                     html += "<tr>"
                     html += "<th scope='row'>작성일</th>"
                     html += "<td>" + result['date'] + "</td>"
                     html += "</tr>"
                     html += "<tr>"
-                    html += "<th scope='row'>조회수</th>"
-                    html += "<td>" + result['count'] + "</td>"
-                    html += "</tr>"
                     html += "<tr>"
                     html += "<th scope='row'>글제목</th>"
                     html += "<td>" + result['subject'] + "</td>"
@@ -316,38 +373,17 @@ $subNum = 2;
                 $(this).val(s+"\n");
             }
         });
+
+        $('.btn-primary').on('click',function(){
+            instWrite.open();
+        })
+
+
+
+
     } );
 
 </script>
-<style>
-    table.type09 {
-        border-collapse: collapse;
-        text-align: left;
-        line-height: 1.5;
-
-    }
-    table.type09 thead th {
-        padding: 10px;
-        font-weight: bold;
-        vertical-align: top;
-        color: #369;
-        border-bottom: 3px solid #036;
-    }
-    table.type09 tbody th {
-        width: 150px;
-        padding: 10px;
-        font-weight: bold;
-        vertical-align: top;
-        border-bottom: 1px solid #ccc;
-        background: #f3f6f7;
-    }
-    table.type09 td {
-        width: 400px;
-        padding: 10px;
-        vertical-align: top;
-        border-bottom: 1px solid #ccc;
-    }
-</style>
 
 <body class="commonBg">
 <div id="bodyWrap">
@@ -379,6 +415,39 @@ $subNum = 2;
 
                         </tbody>
                     </table>
+<!--                    <table class="type09">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="cols"></th>-->
+<!--                            <th scope="cols"></th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr>-->
+<!--                            <th scope='row'>답변자</th>-->
+<!--                            <td>관리자</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th scope='row'>답변내용</th>-->
+<!--                            <td><textarea class="ta6" style="height:180px;width:380px;"></textarea></td>-->
+<!--                        </tr>-->
+<!--                        <!--<tr>-->
+<!--                        <!--<th scope='row'>발송</th>-->
+<!--                        <!--<td><input type="checkbox"/> 답변시 메일발송 <input type="checkbox"/> 답변시 문자발송</td>-->
+<!--                        <!--</tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+
+                    <br>
+                    <button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
+                    <button data-remodal-action="confirm" class="remodal-confirm">저장</button>
+                </div>
+                <!--팝업폼-->
+                <!--팝업폼-->
+                <div class="remodal" data-remodal-id="modalWrite"
+                     data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
+                    <button data-remodal-action="close" class="remodal-close"></button>
+                    <h1><span id="subject">공지사항 등록</span></h1>
                     <table class="type09">
                         <thead>
                         <tr>
@@ -388,17 +457,41 @@ $subNum = 2;
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope='row'>답변자</th>
-                            <td>관리자</td>
+                            <th scope='row'>제목</th>
+                            <td><input type="text" id="title" value="" class="winput" style="width:380px; height: 100%;"/></td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>관리자</th>
+                            <td><input type="text" id="" value="" class="winput" style="width:380px; height: 100%;" placeholder="관리자"/></td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>연락처</th>
+                            <td>
+                                <input type="text" id="phone1" value="" class="winput" style="width:80px; height: 100%;" placeholder="010"/> -
+                                <input type="text" id="phone2" value="" class="winput" style="width:80px; height: 100%;" placeholder="1234"/> -
+                                <input type="text" id="phone3" value="" class="winput" style="width:80px; height: 100%;" placeholder="5678"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>등록일</th>
+                            <td><input type="text" class="winput" style="width:380px; height: 100%;" id="datepicker1" placeholder="*설정시 등록일이 변경됩니다." ></td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>조회수</th>
+                            <td><input type="text" class="winput" style="width:380px; height: 100%;" placeholder="*설정시 조회수가 변경됩니다." ></td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>첨부파일</th>
+                            <td><input type="file" style="width:380px; height: 100%; padding: 10px;"  ></td>
                         </tr>
                         <tr>
                             <th scope='row'>답변내용</th>
-                            <td><textarea class="ta6" style="height:180px;width:380px;"></textarea></td>
+                            <td>
+                                <textarea name="editor1" id="editor1" rows="10" cols="80">This is my textarea to be replaced with CKEditor.
+                                </textarea>
+                            </td>
                         </tr>
-                        <!--<tr>-->
-                        <!--<th scope='row'>발송</th>-->
-                        <!--<td><input type="checkbox"/> 답변시 메일발송 <input type="checkbox"/> 답변시 문자발송</td>-->
-                        <!--</tr>-->
+
                         </tbody>
                     </table>
 
@@ -414,7 +507,6 @@ $subNum = 2;
                         <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
                         <th>번호</th>
                         <th>글제목</th>
-                        <th>처리현황</th>
                         <th>글쓴이</th>
                         <th>작성일</th>
                         <th>지점</th>
@@ -423,12 +515,18 @@ $subNum = 2;
                     </thead>
 
                 </table>
-                <button type="button" class="btn btn-primary sharp" id="button">삭제</button>
+                <button type="button" class="btn btn-danger sharp" id="button">삭제</button>
+                <button type="button" class="btn btn-primary sharp" id="button">글쓰기</button>
 				<!--- end : 본문 --->
 			</div>
 		</div><div class="clr"></div>
 	</div>
 	<? include "inc/bottom.php" ?>
 </div>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace( 'editor1' );
+</script>
 </body>
 </html>

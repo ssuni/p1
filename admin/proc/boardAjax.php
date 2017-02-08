@@ -31,6 +31,10 @@ if($type == 'list') {
             $boardType = 'tb_counsel';
             $idxName = 'cno';
             break;
+        case 'notice':
+            $boardType = 'tbl_notice';
+            $idxName = 'tblNumber';
+            break;
     }
 
 
