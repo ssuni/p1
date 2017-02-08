@@ -1,0 +1,363 @@
+			<script language="javascript">
+				function chkId(){
+					var f_oForm	= document.forms['frmMain'];
+
+					f_oForm.action	= "proc/member_write_proc.php";
+					f_oForm.submit();
+				}
+				function iiiidcheck(){
+					var one=$('#strID').val();
+					$('#checking_id').val(one);
+					
+					document.getElementById('form1').submit();
+				}
+			</script>
+			<iframe name="toplog_act" frameborder="0" width="0" height="0" style="display:none;"></iframe>
+			<form method="post" action="/member/memgaip.php" name="form1" target="toplog_act" id="form1">
+				<input type="hidden" name="mode" value="idcheck" id="mode">
+				<input type="hidden" name="checking_id" value="" id="checking_id">
+			</form>			
+			<iframe id="hiddenFrame" style="display:none;"></iframe>
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+			<form name="frmMain" method="post" enctype="multipart/form-data" action="javascript:chkId();">
+			<input type="hidden" name="step" value="next">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5">
+					<!-- 관리자 기본정보 폼 -->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="main_title_01">회원등록</td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="1" colspan="2" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1"></td>
+						</tr>
+						<? if( count( $GPArray ) > 0 ) { ?>
+						<tr>
+							<td width="100" height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">지점</td>
+							<td class="left_8"><select class="selectBox" name="intGP" itemname="지점" required>
+							<? 
+							if( $_SESSION["ss_level"] > 1 ) {
+							?>
+							<option value="<? echo $_SESSION["ss_gp"]; ?>"><? echo $GPArray[$_SESSION["ss_gp"]]; ?></option>
+							<?
+							} else {
+							?>
+							<?
+								for( $i = 1; $i < count( $GPArray ); $i++ ) { 
+							?>
+							<option value="<? echo $i; ?>"><? echo $GPArray[$i]; ?></option>
+							<? 
+								} 
+							}
+							?>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<? } ?>
+						<tr>
+							<td width="100" height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">회원구분</td>
+							<td class="left_8"><select class="selectBox" name="intLevel" style="width:150px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="회원구분" required>
+							<? 
+								for( $m = 2; $m < count( $memberNameArr )+1; $m++ ) { 
+									if( trim( $memberNameArr[$m] ) ) {
+							?>
+								<option value="<? echo $m; ?>"><? echo $memberNameArr[$m]; ?></option>
+							<? 
+									}
+								} 
+							?>
+							</select><!-- &nbsp;&nbsp;<input class="text_basic" style="cursor:pointer;width:100px; height:20px;" name="dtmSdate" id="dtmSdate" type="text"onclick="check_mouse('frmMain.'+this.name)" readonly>
+						~ <input class="text_basic" style="cursor:pointer;width:100px; height:20px;" name="dtmEdate" id="dtmEdate" type="text"onclick="check_mouse('frmMain.'+this.name)" readonly>&nbsp;※교정치료 동영상 기간 설정 --></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">아이디</td>
+							<td class="left_8"><input class="text_basic" style="width:110px; height:20px;" name="strID" id="strID" itemname="아이디" required memberid> <a href="javascript:iiiidcheck();"><img src="./img/btn_id_check.gif" width="84" height="18" align="absmiddle"></a></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">회원이름</td>
+							<td class="left_8"><input class="text_basic" style="width:200px; height:20px; ime-mode:active" name="strName" itemname="회원이름" required hangul> </td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">비밀번호</td>
+							<td class="left_8"><input name="strPass" type="text" class="text_basic" style="width:200px; height:20px;" maxlength="12" itemname="비밀번호" required alphanumeric></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">이메일</td>
+							<td class="left_8"><input class="text_basic" style="width:200px; height:19;" name="strEmail" itemname="이메일" reuired email></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">휴대폰</td>
+							<td class="left_8"><select class="selectBox" name="strMobile1" id="strMobile1" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="휴대전화" required>
+								<option value="">:: 선택 ::</option>
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select> 
+							- <input class="text_basic" style="width:50; height:19" name="strMobile2" type="text" maxlength="4" itemname="휴대폰" required numeric> 
+							- <input class="text_basic" style="width:50; height:19" name="strMobile3" type="text" maxlength="4" itemname="휴대폰" required numeric></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<!-- <tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">전화번호</td>
+							<td class="left_8"><select class="selectBox" name="strPhone1" id="strPhone1" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="전화번호">
+								<option value="">:: 선택 ::</option>
+								<option value="02">02</option>
+								<option value="031">031</option>
+								<option value="032">032</option>
+								<option value="033">033</option>
+								<option value="041">041</option>
+								<option value="042">042</option>
+								<option value="043">043</option>
+								<option value="051">051</option>
+								<option value="052">052</option>
+								<option value="053">053</option>
+								<option value="054">054</option>
+								<option value="055">055</option>
+								<option value="061">061</option>
+								<option value="062">062</option>
+								<option value="063">063</option>
+								<option value="064">064</option>
+							</select> 
+							- <input class="text_basic" style="width:50; height:19" name="strPhone2" type="text" maxlength="4" itemname="전화번호" required numeric> 
+							- <input class="text_basic" style="width:50; height:19" name="strPhone3" type="text" maxlength="4" itemname="전화번호" required numeric></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="70" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">주소</td>
+							<td class="left_8"><input class="text_basic" size="3" name="intZip1" type="text" maxlength="3" readonly itemname="우편번호" required numeric> - <input class="text_basic" size="3" name="intZip2" type="text" maxlength="3" readonly itemname="우편번호" required numeric>
+							<img src="./img/btn_addr_check.gif" align="absmiddle" style="cursor:pointer;" onClick="findZip();"><br />
+							<input class="text_basic" style="width:100%; height:19" name="strAddress1" type="text" itemname="주소" required> <input class="text_basic" style="width:100%; height:19" name="strAddress2" type="text"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">성별</td>
+							<td class="left_8">
+							<input name="gender" type="radio" value="1" /> 남 
+							<input name="gender" type="radio" value="2" /> 여
+							<script>fnSelect("gender", "1");</script>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">생년월일</td>
+							<td class="left_8"><input class="text_basic" style="width:60; height:19" name="birth1" value="" maxlength="4" type="text" /> 년 <input class="text_basic" style="width:30; height:19" name="birth2" value="" type="text" maxlength="2" /> 월 <input class="text_basic" style="width:30; height:19" name="birth3" value="" type="text" maxlength="2" /> 일 </td>
+						</tr> -->
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">메일수신</td>
+							<td class="left_8">
+							<input name="blnEmail" type="radio" value="Y" checked> 수신
+							<input name="blnEmail" type="radio" value="N"> 미수신
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">SMS수신</td>
+							<td class="left_8">
+							<input name="blnSms" type="radio" value="Y" checked> 수신 
+							<input name="blnSms" type="radio" value="N"> 미수신
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<!--
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">방문동기</td>
+							<td class="left_8" style="padding:5px"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+								<tr>
+								<? 
+									for( $i = 1; $i< count( $inflowArr ); $i++ ) { 
+										if( $i != 1 && $i%4 == 1 ) echo "</tr><tr>";
+								?>
+									<td width="25%" align="left" style="padding-left:10px"><input type="checkbox" name="intFlow[]" value="<? echo $i; ?>"><? echo $inflowArr[$i]; ?></td>	
+								<? 
+									} 
+								?>
+								</tr>
+							</table></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">관심진료항목</td>
+							<td class="left_8" style="padding:5px"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+								<tr>
+								<? 
+									for( $i = 1; $i< count( $inflowArr2 ); $i++ ) { 
+										if( $i != 1 && $i%4 == 1 ) echo "</tr><tr>";
+								?>
+									<td width="25%" align="left" style="padding-left:10px"><input type="checkbox" name="filename[]" value="<? echo $i; ?>"><? echo $inflowArr2[$i]; ?></td>	
+								<? 
+									} 
+								?>
+								</tr>
+							</table></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">사진</td>
+							<td class="left_8"><input type="file" name="strSaveFile" class="text_basic" style="width:100%; height:20"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="110" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">자기 소개</td>
+							<td class="left_8"><textarea name="strProfile" style="width:100%; height:100;" class="textarea_basic"></textarea></td>
+						</tr> -->
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">메모</td>
+							<td class="left_8">
+								<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:300px; display:none;"></textarea>
+								<p style="display:none"><textarea name="strComment" id="strComment" style="width:100%; height:150px" itemname="팝업내용"></textarea></p>
+							</td>
+						</tr>		
+						<tr>
+							<td height="1"></td>
+							<td height="1"></td>
+						</tr>
+						<tr>
+							<td height="1" colspan="2" class="board-view_title_line"></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="50" align="right" style="padding-right:5px;"><input type="image" src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;"></td>
+							<td align="left" style="padding-left:5px;"><img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onclick="location.href='admin_03_01.php';"></td>
+						</tr>
+					</table>
+					<!-- 관리자 기본정보 폼 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5" ></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</form>
+			</table>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir1"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	document.getElementById("strComment").value = document.getElementById("ir1").value;
+	try {
+		fnChkForm();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>

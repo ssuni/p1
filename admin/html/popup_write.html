@@ -1,0 +1,261 @@
+<script src="/js/calender.js" language="javascript"></script>
+<script language="javascript">
+function fnChkForm(){
+	/* Jin sung : 폼 네임 document.폼네임으로 설정*/
+	var p_oForm = document.frmMain;
+	if ( p_oForm.intWidth.value == "" ){
+		alert("팝업 크기 가로 사이즈를 입력하세요");
+		p_oForm.intWidth.focus();	/* Jin sung : 폼 네임 document.폼네임.input_name focus() 로 설정*/ 
+		return false;
+	}
+	if ( p_oForm.intHeight.value == "" ){
+		alert("팝업 크기 세로 사이즈를 입력하세요");
+		p_oForm.intHeight.focus();
+		return false;
+	}
+	if ( p_oForm.dtmSdate.value == "" ){
+		alert("기간을 입력하세요");
+		p_oForm.dtmSdate.focus();
+		return false;
+	}
+	if ( p_oForm.dtmEdate.value == "" ){
+		alert("기간을 입력하세요");
+		p_oForm.dtmEdate.focus();
+		return false;
+	}
+	if ( p_oForm.strSubject.value == "" ){
+		alert("제목을 입력하세요");
+		p_oForm.strSubject.focus();
+		return false;
+	}
+	document.frmMain.submit();
+}
+
+
+function hide_popup(p_sID){
+	var f_oLayer	= document.getElementById(p_sID);
+	f_oLayer.style.display	= "none";
+}
+function fnView( p_oForm ){
+	f_oLayer	= document.getElementById('popup');
+	f_oForm		= document.forms['frmMain'];
+	f_oTable	= document.getElementById('popup_table');
+
+	f_oLayer.style.width	= f_oForm.intWidth.value;
+	f_oLayer.style.height	= f_oForm.intHeight.value;
+	f_oTable.style.height	= f_oForm.intHeight.value;
+	f_oLayer.style.top		= f_oForm.intTop.value;
+	f_oLayer.style.left		= f_oForm.intLeft.value;
+	
+	var editContents			= f_oForm.strComment.value;
+
+	/*var oEditor = FCKeditorAPI.GetInstance('content') ;
+
+	var editContents = oEditor.EditorDocument.body.innerHTML.replace("<br>", ""); //파이어폭스에서는 "<BR>"이 들어감.
+
+	 if(editContents == ""){//FCK validation check
+	  alert(getMessage(ALERT_FILLINTHEFILED,COMMON_CONTENTS));
+	  oEditor.EditorDocument.body.focus();
+	  return;
+	 }*/
+	document.getElementById('popup_content').innerHTML	= editContents;
+
+	f_oLayer.style.display	= 'block';
+}
+</script>
+<? /* Jin sung : HuskyEZCreator.js 스크립트 추가*/ ?>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<div id="popup" style="position:absolute;visibility:visible; left:100px; top: 100px; border-style:solid; border-width:1px; display:none;">
+<table id="popup_table" width="100%" height="" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td height="50" colspan="3" bgcolor="#000000" background="/img/popup/bg.gif">
+<div align="center"></div>
+</td>
+</tr>
+<tr valign="top">
+<td bgcolor="#FFFFFF" class="ct_padding"><div id="popup_content">내용</div></td>
+</tr>
+<tr valign="bottom" height="25">
+<td background="/img/popup/bg.gif" bgcolor="#000000" class="ct_padding">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	<td style="color:#FFFFFF"><input type="checkbox" NAME="popupCookie" onclick="hide_popup('popup');">오늘 하루 창을 열지 않습니다.</td>
+	<td align="right" style="color:#FFFFFF"><span style="cursor:pointer;color:#FFFFFF" onClick="hide_popup('popup');">[닫기]</span></td>
+	</table>
+</td>
+</tr>
+</table>
+</div>
+
+<? /* Jin sung : form name="frmMain" id="frmMain" 설정*/  ?>
+<form name="frmMain" id="frmMain" method="post" action="<?=$PHP_SELF?>" style="margin:0px;" onsubmit="return false;">
+<input type="hidden" name="act" value="<?=$Data['act']?>">
+<table width="99%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="12" colspan="3"></td>
+	</tr>
+	<tr>
+		<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+		<td background="./img/ct_box_top.gif"></td>
+		<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+	</tr>
+	<tr>
+		<td background="./img/ct_box_left.gif"></td>
+		<td align="center" bgcolor="#F5F5F5">
+		<!-- 팝업설정 -->
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="main_title_01">팝업 설정</td>
+				</tr>
+			</table>
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="1" colspan="2" class="board-view_title_line"></td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1"></td>
+				</tr>
+				<tr>
+					<td width="100" height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">팝업 크기</td>
+					<td class="left_8">가로 
+						<input class="text_basic" style="width:80; height:20px;" name="intWidth" type="text" itemname="가로" required numeric>
+						px , 세로
+						<input class="text_basic" style="width:80; height:20px;" name="intHeight" type="text" itemname="세로" required numeric> 
+						px </td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1" class="board-view_title_line"></td>
+				</tr>
+				<tr>
+					<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">팝업 위치</td>
+					<td class="left_8">상단 
+						<input class="text_basic" style="width:80; height:20px;" name="intTop" type="text" itemname="상단" required numeric>
+						px , 좌측 
+						<input class="text_basic" style="width:80; height:20px;" name="intLeft" type="text" itemname="좌측" required numeric> 
+						px </td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1" class="board-view_title_line"></td>
+				</tr>
+				<tr>
+					<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">게시 기간</td>
+					<td class="left_8">기간 
+						<input class="text_basic" style="cursor:pointer;width:100px; height:20px;" name="dtmSdate" id="dtmSdate" type="text"onclick="check_mouse('frmMain.'+this.name)" readonly itemname="기간" required>
+						~ <input class="text_basic" style="cursor:pointer;width:100px; height:20px;" name="dtmEdate" id="dtmEdate" type="text"onclick="check_mouse('frmMain.'+this.name)" readonly itemname="기간" required>
+						까지</td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1" class="board-view_title_line"></td>
+				</tr>
+				<tr>
+					<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">설정기기</td>
+					<td class="left_8">
+						<input type="radio" name="strDevice" value="pc" id="strDevice1" checked> <label for="strDevice1">PC</label>
+						<input type="radio" name="strDevice" value="mobile" id="strDevice2"> <label for="strDevice2">모바일</label>
+					</td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1" class="board-view_title_line"></td>
+				</tr>
+				<tr>
+					<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">팝업제목</td>
+					<td class="left_8"><input name="strSubject" type="text" class="text_basic" style="width:90%; height:20px;" itemname="팝업제목" required></td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1" class="board-view_title_line"></td>
+				</tr>
+				<tr>
+					<td height="250" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">팝업내용</td>
+					<td class="left_8">
+					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:300px; display:none;"></textarea>
+					<p style="display:none"><textarea name="strComment" id="strComment" style="width:100%; height:150px" itemname="팝업내용"></textarea></p>					
+					</td>
+				</tr>
+				<tr>
+					<td height="1"></td>
+					<td height="1"></td>
+				</tr>
+				<tr>
+					<td height="1" colspan="2" class="board-view_title_line"></td>
+				</tr>
+			</table>
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30" align="center">
+					<? /* Jin sung : onclick="submitContents(this);" 설정*/  ?>
+					<img src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;" onclick="submitContents(this);"> 
+					<img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onclick="location.href='<?=$PHP_SELF?>';"> 
+					<img src="./img/btn_view.gif" width="60" height="18" style="cursor:pointer;" onclick="fnView(document.forms['frmMain']);">
+					</td>
+				</tr>
+			</table>
+			<!-- 예약 처리 대상자 끝 -->
+		</td>
+		<td background="./img/ct_box_right.gif"></td>
+	</tr>
+	<tr>
+		<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+		<td background="./img/ct_box_bottom.gif"></td>
+		<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+	</tr>
+</table>
+</form>
+<!-- 팝업설정 끝 -->
+<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",		/* Jin sung : textarea name="ir1" 설정 */ 
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir1"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	/* Jin sung : 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다. */ 
+	document.getElementById("strComment").value = document.getElementById("ir1").value;
+	try {
+		fnChkForm();	/* Jin sung : fnChkForm(); document.submit() 설정 */ 
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>

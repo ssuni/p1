@@ -1,0 +1,304 @@
+<?
+	include $_SERVER['DOCUMENT_ROOT']."/include/session_start.php";
+	include $_SERVER['DOCUMENT_ROOT']."/include/dbconfig.php";
+	include $_SERVER['DOCUMENT_ROOT']."/include/function.php";
+
+	echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+
+	if( $act == 'write_ok' ) {
+		$mxQuery = "SELECT MAX(tblNumber) FROM tblSmsField";
+		$mxSql = mysql_query( $mxQuery );
+		$mxArray = mysql_fetch_row( $mxSql );
+
+		$Data["number"]	= ( !$mxArray ) ? 1 : $mxArray[0] + 1;
+		$Data["name"]		= trim( $_POST["strName"] );
+		$Data["order"]	= $Data["number"];
+
+		$Query = "INSERT INTO tblSmsField SET ";
+		$Query .= "tblNumber='".$Data["number"]."',";
+		$Query .= "tblStrName='".$Data["name"]."',";
+		$Query .= "tblIntOrder='".$Data["order"]."'";
+		$Sql = mysql_Query( $Query ) or die ( mysql_error() );
+
+		echo "<script language='javascript'>";
+		echo "	location.href='".$_SERVER["HTTP_REFERER"]."';";
+		echo "</script>";
+	}
+
+	if( $act == 'edit_ok' ) {
+		$Data["number"]	= $_POST["tNum"];
+		$Data["name"]		= trim( $_POST["strName_".$Data["number"]] );
+
+		$Query = "UPDATE tblSmsField SET ";
+		$Query .= "tblStrName='".$Data["name"]."' WHERE tblNumber='".$Data["number"]."'";
+		$Sql = mysql_query( $Query ) or die ( mysql_error() );
+
+		echo "<script language='javascript'>";
+		echo "	location.href='".$_SERVER["HTTP_REFERER"]."';";
+		echo "</script>";
+	}
+
+	if( $act == 'delete' ) {
+		$Data["number"]	= $_POST["tNum"];
+
+		$Query = "DELETE FROM tblSmsField WHERE tblNumber='".$Data["number"]."'";
+		$Sql = mysql_query( $Query ) or die ( mysql_error() );
+
+		echo "<script language='javascript'>";
+		echo "	location.href='".$_SERVER["HTTP_REFERER"]."';";
+		echo "</script>";
+	}
+
+	if( $act == 'up' ) {
+		$Data["number"]	= $_POST["tNum"];
+		$Data["order"]	= $_POST["intOrder"];
+
+		$mxQuery = "SELECT MAX(tblNumber) FROM tblSmsField";
+		$mxSql = mysql_query( $mxQuery );
+		$mxArray = mysql_fetch_row( $mxSql );
+		$mxData["number"]	= $mxArray[0]+1;
+		$mxData["order"]	= $mxData["number"];
+		
+		$chQuery = "SELECT * FROM tblSmsField WHERE tblIntOrder < '".$Data["order"]."' ORDER BY tblIntOrder DESC LIMIT 1";
+		$chSql = mysql_query( $chQuery );
+		$chArray = mysql_fetch_array( $chSql );
+		$chData["number"]	= $chArray["tblNumber"];
+		$chData["order"]	= $chArray["tblIntOrder"];
+
+		$Query = "UPDATE tblSmsField SET tblNumber='".$mxData["number"]."', tblIntOrder='".$mxData["order"]."' WHERE tblNumber='".$chData["number"]."'";
+		$Sql = mysql_query( $Query ) or die( mysql_error() );
+
+		$Query2 = "UPDATE tblSmsField SET tblNumber='".$chData["number"]."', tblIntOrder='".$chData["order"]."' WHERE tblNumber='".$Data["number"]."'";
+		$Sql2 = mysql_query( $Query2 ) or die( mysql_error() );
+
+		$Query3 = "UPDATE tblSmsField SET tblNumber='".$Data["number"]."', tblIntOrder='".$Data["order"]."' WHERE tblNumber='".$mxData["number"]."'";
+		$Sql3 = mysql_query( $Query3 ) or die( mysql_error() );
+
+		echo "<script language='javascript'>";
+		echo "	location.href='".$_SERVER["HTTP_REFERER"]."';";
+		echo "</script>";
+	}
+
+	if( $act == 'down' ) {
+		$Data["number"]	= $_POST["tNum"];
+		$Data["order"]	= $_POST["intOrder"];
+
+		$mxQuery = "SELECT MAX(tblNumber) FROM tblSmsField";
+		$mxSql = mysql_query( $mxQuery );
+		$mxArray = mysql_fetch_row( $mxSql );
+		$mxData["number"]	= $mxArray[0]+1;
+		$mxData["order"]	= $mxData["number"];
+		
+		$chQuery = "SELECT * FROM tblSmsField WHERE tblIntOrder > '".$Data["order"]."' ORDER BY tblIntOrder ASC LIMIT 1";
+		$chSql = mysql_query( $chQuery );
+		$chArray = mysql_fetch_array( $chSql );
+		$chData["number"]	= $chArray["tblNumber"];
+		$chData["order"]	= $chArray["tblIntOrder"];
+
+		$Query = "UPDATE tblSmsField SET tblNumber='".$mxData["number"]."', tblIntOrder='".$mxData["order"]."' WHERE tblNumber='".$chData["number"]."'";
+		$Sql = mysql_query( $Query ) or die( mysql_error() );
+
+		$Query2 = "UPDATE tblSmsField SET tblNumber='".$chData["number"]."', tblIntOrder='".$chData["order"]."' WHERE tblNumber='".$Data["number"]."'";
+		$Sql2 = mysql_query( $Query2 ) or die( mysql_error() );
+
+		$Query3 = "UPDATE tblSmsField SET tblNumber='".$Data["number"]."', tblIntOrder='".$Data["order"]."' WHERE tblNumber='".$mxData["number"]."'";
+		$Sql3 = mysql_query( $Query3 ) or die( mysql_error() );
+
+		echo "<script language='javascript'>";
+		echo "	location.href='".$_SERVER["HTTP_REFERER"]."';";
+		echo "</script>";
+	}
+/*
+	
+	case "field_up" : 
+
+		$field_idx		= trim($_POST["idx"]);
+		$field_order	= trim($_POST["order"]);
+		
+		$sSelQuery	= " SELECT * FROM {$cfg['table']['sms_field']} ";
+		$sSelQuery	.= " WHERE field_order > {$field_order} ";
+		$sSelQuery	.= " ORDER BY field_order ASC LIMIT 1 ";
+		$rSelQuery	= @mysql_query($sSelQuery, $g_rDbConn);
+		$aSelQuery	= @mysql_fetch_array($rSelQuery);
+		
+		$new_idx	= $aSelQuery["field_idx"];
+		$new_order	= $aSelQuery["field_order"];
+
+		$sModQuery	= " UPDATE {$cfg['table']['sms_field']} SET ";
+		$sModQuery	.= " field_order = '{$new_order}' ";
+		$sModQuery	.= " WHERE field_idx = '{$field_idx}' LIMIT 1 ";
+		$rModQuery	= @mysql_query($sModQuery, $g_rDbConn) or die(fnAlert("ERROR")) ;
+
+		$sModQuery	= " UPDATE {$cfg['table']['sms_field']} SET ";
+		$sModQuery	.= " field_order = '{$field_order}' ";
+		$sModQuery	.= " WHERE field_idx = '{$new_idx}' LIMIT 1 ";
+		$rModQuery	= @mysql_query($sModQuery, $g_rDbConn) or die(fnAlert("ERROR")) ;
+
+		fnHref($_SERVER["HTTP_REFERER"]);
+
+		break;
+
+	case "field_dn" : 
+
+		$field_idx		= trim($_POST["idx"]);
+		$field_order	= trim($_POST["order"]);
+		
+		$sSelQuery	= " SELECT * FROM {$cfg['table']['sms_field']} ";
+		$sSelQuery	.= " WHERE field_order < {$field_order} ";
+		$sSelQuery	.= " ORDER BY field_order DESC LIMIT 1 ";
+		$rSelQuery	= @mysql_query($sSelQuery, $g_rDbConn);
+		$aSelQuery	= @mysql_fetch_array($rSelQuery);
+		
+		$new_idx	= $aSelQuery["field_idx"];
+		$new_order	= $aSelQuery["field_order"];
+
+		$sModQuery	= " UPDATE {$cfg['table']['sms_field']} SET ";
+		$sModQuery	.= " field_order = '{$new_order}' ";
+		$sModQuery	.= " WHERE field_idx = '{$field_idx}' LIMIT 1 ";
+		$rModQuery	= @mysql_query($sModQuery, $g_rDbConn) or die(fnAlert("ERROR")) ;
+
+		$sModQuery	= " UPDATE {$cfg['table']['sms_field']} SET ";
+		$sModQuery	.= " field_order = '{$field_order}' ";
+		$sModQuery	.= " WHERE field_idx = '{$new_idx}' LIMIT 1 ";
+		$rModQuery	= @mysql_query($sModQuery, $g_rDbConn) or die(fnAlert("ERROR")) ;
+
+		fnHref($_SERVER["HTTP_REFERER"]);
+
+		break;
+	}
+*/
+
+	if( !$act ) {
+		$Query	= " SELECT * FROM tblSmsField ORDER BY tblIntOrder ASC";
+		$Sql	= mysql_query( $Query );
+		$nTmp	= 0;
+		while ( $Array = mysql_fetch_array( $Sql ) ){
+			$Data[$nTmp]["number"]	= $Array["tblNumber"];
+			$Data[$nTmp]["name"]		= $Array["tblStrName"];
+			$Data[$nTmp]["order"]		= $Array["tblIntOrder"];
+			$nTmp++;
+		}
+	}
+?>
+<head>
+<title>어드민</title>
+<script language="javascript" src="./js/admin.js"></script>
+<link href="./css/admin.css" rel="stylesheet" type="text/css">
+<link href="./css/admin_old.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function fnSetEdit ( p_oForm, p_nIdx  ){
+
+	if ( p_oForm['strName_' + p_nIdx].value == '' ) {
+		alert('분류명을 입력하세요');
+		fnFocus(p_oForm['strName' + p_nIdx]);
+		return;
+	}
+	p_oForm['tNum'].value	= p_nIdx;
+	p_oForm['act'].value	= "edit_ok";
+	p_oForm.submit();
+
+}
+
+function fnSetDel ( p_oForm, p_nIdx ){
+
+	p_oForm['tNum'].value	= p_nIdx;
+	p_oForm['act'].value	= "delete";
+	p_oForm.submit();
+
+}
+
+function fnSetAdd ( p_oForm ){
+	p_oForm['act'].value	= "write_ok";
+	p_oForm.submit();
+}
+
+function fnSetUP ( p_nIdx, p_nOrder ){
+	f_oForm	= document.forms['frmMain'];
+	f_oForm['tNum'].value	= p_nIdx;
+	f_oForm['intOrder'].value	= p_nOrder;
+	f_oForm['act'].value	= "up";
+	f_oForm.submit();
+
+}
+
+function fnSetDN ( p_nIdx, p_nOrder ){
+	f_oForm	= document.forms['frmMain'];
+	f_oForm['tNum'].value	= p_nIdx;
+	f_oForm['intOrder'].value	= p_nOrder;
+	f_oForm['act'].value	= "down";
+	f_oForm.submit();
+}
+</script>
+
+
+<form name="frmMain" method="post" action="<? echo $PHP_SELF; ?>" style="margin:0px;" onsubmit="return false;">
+<input type="hidden" name="act" value="">
+<input type="hidden" name="tNum" value="">
+<input type="hidden" name="intOrder" value="">
+
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="100%" align="center" valign="top" class="center_bg">
+			<table width="98%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="6" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="bottom_5">
+					<!-- -->
+						<table width="99%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td class="main_title_01">SMS분류 설정</td>
+							</tr>
+						</table>
+						<table width="99%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td height="25" align="right">* 저장된 상용구가 있는 필드는 삭제 안됨</td>
+							</tr>
+						</table>
+						<!-- 검색 테이블 입니다. -->
+						<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+							<tr>
+								<td width="50" align="center" class="main_title_02">&nbsp;</td>
+								<td align="center" class="main_title_02">분류 명</td>
+								<td width="140" align="center" class="main_title_02">&nbsp;</td>
+							</tr>
+							<? for ( $i = 0 ; $i < count( $Data ) ; $i++ ) { ?>
+							<tr>
+								<td height="25" align="center" bgcolor="#FFFFFF">
+								<span <? if ( $i != 0 ) { ?>style="cursor:pointer;" onclick="fnSetUP('<?=$Data[$i]["number"]?>', '<?=$Data[$i]["order"]?>');"<? } ?>>▲</span> <span <? if ( $i != $nTmp - 1 ) { ?>style="cursor:pointer;" onclick="fnSetDN( '<?=$Data[$i]["number"]?>', '<?=$Data[$i]["order"]?>');"<? } ?>>▼</span>
+								</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:100%; height:20" name="strName_<?=$Data[$i]["number"]?>" value="<?=$Data[$i]["name"]?>" type="text" /> </td>
+								<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><img src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;" onclick="fnSetEdit(document.forms['frmMain'], '<?=$Data[$i]["number"]?>');"> <img src="./img/btn_del.gif" width="60" height="18" style="cursor:pointer;" onclick="fnSetDel(document.forms['frmMain'], '<?=$Data[$i]["number"]?>');"></td>
+							</tr>
+							<? } ?>
+							<tr>
+								<td height="25" bgcolor="#FFFFFF" class="table_ct_01">&nbsp;</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:100%; height:20" name="strName" type="text" value="" itemname="분류명" required> </td>
+								<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><img src="./img/btn_add.gif" width="124" height="18" style="cursor:pointer;" onclick="fnSetAdd(document.forms['frmMain']);"></td>
+							</tr>
+						</table>
+						<!-- 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+
+		</td>
+	</tr>
+</table>
+</form>
+<script language="javascript" src="/include/wrest.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+<form name="frmMain" method="post" action="<?=$PHP_SELF?>">
+<input type="hidden" name="tNum" value="<?=$Data["number"]?>">
+<input type="hidden" name="act" value="edit_ok">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="bottom_5">
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="main_title_01">카카오톡 상담</td>
+						</tr>
+					</table>
+				<table summary="" class="form_list">
+					<caption></caption>
+					<colgroup>
+						<col width="15%" />
+						<col width="85%" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">성명</th>
+							<td><input name="tblStrName" type="text" style="width:250px;" class="form1" id="strName" itemname="성명" required value="<?=$Data['name'];?>"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">관심부위</th>
+							<td>
+								<select id="tblIntField" name="tblIntField" class="form2" itemname="관심부위" required>
+									<? foreach($counselField as $k => $v) { ?>
+									<option <?=( $Data["field"] == $k ) ? "selected" : ""?> value="<?=$k;?>"><?=$v;?></option>
+									<? } ?>
+								</select>							
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">핸드폰 번호</th>
+							<td><input name="tblStrMobile" type="text" style="width:200px;" class="form1" id="tblStrMobile" itemname="핸드폰 번호" required value="<?=$Data['phone'];?>"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">카톡아이디</th>
+							<td><input name="tblStrKatok" type="text" style="width:200px;" class="form1" id="tblStrId" itemname="아이디" value="<?=$Data['katok'];?>"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">나이</th>
+							<td>
+								<select id="tblStrAge" name="tblStrAge" class="form2" required>
+										<option <?=( $Data["age"] == '1' ) ? "selected" : ""?> value="1">10대</option>
+										<option <?=( $Data["age"] == '2' ) ? "selected" : ""?> value="2">20대</option>
+										<option <?=( $Data["age"] == '3' ) ? "selected" : ""?> value="3">30대</option>
+										<option <?=( $Data["age"] == '4' ) ? "selected" : ""?> value="4">40대</option>
+										<option <?=( $Data["age"] == '5' ) ? "selected" : ""?> value="5">50대</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">성별</th>
+							<td>
+								<select id="tblStrSex" name="tblStrSex" class="form2" required>
+									<option <?=( $Data["sex"] == '1' ) ? "selected" : ""?> value="1">남성</option>
+									<option <?=( $Data["sex"] == '2' ) ? "selected" : ""?> value="2">여성</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">상태</th>
+							<td>
+							<select name="tblIntStatus">
+								<option value="1" <?=( $Data["status"] == '1' ) ? "selected" : ""?>>접수</option>
+								<option value="2" <?=( $Data["status"] == '2' ) ? "selected" : ""?>>완료</option>
+								<option value="3" <?=( $Data["status"] == '3' ) ? "selected" : ""?>>진행중</option>
+							</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr><td height="5"></td></tr>
+						<tr>
+							<td align="right" valign="top"><input type="image" src="./img/btn_ok_01.gif" align="absmiddle">&nbsp;&nbsp;<img src="./img/btn_cancle.gif" style="cursor:pointer" onClick="javascript:history.go(-1)"  align="absmiddle"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+</form>
+			</table>
+<script language="javascript" src="/include/wrest.js"></script>

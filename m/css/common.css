@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin:0; padding:0; border:0;}
+html { }
+body { font-size:20px; overflow-x:hidden; color:#333; word-wrap:break-word; word-break:break-all; -webkit-text-size-adjust:none; font-family:'돋움',Dotum,'굴림',Gulim,Tahoma, Geneva, sans-serif,verdana; - See more at:} /**글자크기 자동조정 방지**/
+div, ul, form, fieldset, td, th, li, h1, h2, h3, h4, p { margin:0; padding:0; border:0;}
+ul, ol, dl { list-style:none;}
+form { display:inline;}
+
+a { color:#333; text-decoration:none;}
+a:link { color:#333; text-decoration:none;}
+a:visited { color:#333; text-decoration:none;}
+a:hover, a:focus, a:active { color:#333; text-decoration:none;}
+
+input { vertical-align:middle;}
+select { vertical-align:middle; border:1px solid #ddd;}
+img, fieldset, iframe { border:0;}
+img { vertical-align:top;}
+
+address, caption, cite, code, dfn, em, strong, th, var { font-weight:normal;}
+h1, h2, h3, h4, h5, h6 { font-weight:normal;}
+abbr, acronym { border:0; font-variant:normal;}
+del, ins { text-decoration:none;}
+
+.displayNone, hr {display:none;}
+table {border-collapse:collapse; border:0;}
+textarea {border:1px solid #ddd; line-height:140%; color:#606060;}
+button {border:0; padding:0; background:transparent; cursor:pointer; *overflow:visible;}
+
+.hand { cursor:pointer;}
+.clr { clear:both; font-size:0; line-height:0; height:0;}
+
+.i_left {text-align:left !important;} /** 가운데정렬 **/
+.i_center {text-align:center !important;} /** 왼쪽정렬 **/
+.i_right {text-align:right !important;} /** 오른쪽정렬 **/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,input,textarea,figure {
+	margin:0;
+	padding:0;
+	border:0;
+	vertical-align:baseline;
+	background:transparent;
+	/**box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;**/
+}
+
+/** 팝업창 기본 class *******************************************************************/
+
+.popStyle { }
+.popStyle { font-size:0;}
+.popStyle img { display:block; vertical-align:top;}
+.notice_bg{ background:#212121; height:25px;}
+.notice_black,
+.notice_black a { font-size:14px; font-weight:normal; color:#fff;}

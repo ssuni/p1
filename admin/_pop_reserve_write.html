@@ -1,0 +1,622 @@
+<?
+	include $_SERVER['DOCUMENT_ROOT']."/include/session_start.php";
+	include $_SERVER['DOCUMENT_ROOT']."/include/dbconfig.php";
+	include $_SERVER['DOCUMENT_ROOT']."/include/function.php";
+
+	echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+
+	if( $act == 'modify' ) {
+		if( !$tNum ) echo "<script language='javascript'>alert('경로가 올바르지 않습니다.'); self.close();</script>";
+
+		$Query = "SELECT * FROM tblReserve WHERE tblNumber='".$tNum."'";
+		$Sql = mysql_query( $Query );
+		$Array = mysql_fetch_array( $Sql );
+		$Data["number"]		= $Array["tblNumber"];
+		$Data["jijem"]				= $Array["jijem"];
+		$Data["gp"]				= $Array["tblIntGP"];
+		$Data["field"]		= $Array["tblIntField"];
+		$Data["crack"]		= $Array["tblIntCrack"];
+		$Data["gubun"]		= $Array["tblIntGubun"];
+		$Data["name"]			= $Array["tblStrName"];
+		$Data["idnum"]		= explode( '-', $Array["tblStrIDnum"] );
+		$Data["phone"]		= explode( '-', $Array["tblStrPhone"] );
+		$Data["email"]		= $Array["tblStrEmail"];
+		$Data["subject"]	= $Array["tblStrSubject"];
+		$Data["comment"]	= stripslashes( $Array["tblStrComment"] );
+		$Data["reply"]		= stripslashes( $Array["tblStrReply"] );
+		$Data["regdate"]	= $Array["tblDtmRegDate"];
+		$rsvdate					= explode( ' ', $Array["tblDtmRsvDate"] );
+		$Data["rsvdate"]	= $rsvdate[0];
+		$Data["rsvtime"]	= substr( $rsvdate[1], 0, 5 );
+		$Data["status"]		= $Array["tblIntStatus"];
+		$Data["act"]			= "edit_ok";
+	}
+
+	if( $act == 'edit_ok' ) {
+		$Data["gp"]				= $intGP;
+		$Data["jijem"]		= $jijem;
+		$Data["field"]		= $intField;
+		$Data["crack"]		= $intCrack;
+		$Data["gubun"]		= $intGubun;
+		$Data["rsvdate"]	= $dtmRsvDate." ".$dtmRsvTime.":00";
+		$Data["name"]		= $strName;
+		$Data["idnumber"]	= $strIDnum1."-".$strIDnum2;
+		$Data["phone"]		= $strPhone1."-".$strPhone2."-".$strPhone3;
+		$Data["email"]		= $strEmail;
+		$Data["subject"]	= $strSubject;
+		$Data["comment"]	= addslashes( $strComment );
+		$Data["reply"]		= addslashes( $strReply );
+		$Data["status"]		= $intStatus;
+		$Data["addrsv"]		= $addRsv;
+		$Data["blnsms"]		= $blnSms;
+		$Data["blnemail"]	= $blnEmail;
+		
+		if( $Data["addrsv"] == 'Y' ) { // 예약추가일때 새로 등록
+			$Query = "INSERT INTO tblReserve SET ";
+			$Query .= "tblIntGP='".$Data["gp"]."',";
+			$Query .= "jijem='".$Data["jijem"]."',";
+			$Query .= "tblIntField='".$Data["field"]."',";
+			$Query .= "tblIntCrack='".$Data["crack"]."',";
+			$Query .= "tblIntGubun='".$Data["gubun"]."',";
+			$Query .= "tblStrName='".$Data["name"]."',";
+			$Query .= "tblStrIDnum='".$Data["idnumber"]."',";
+			$Query .= "tblStrPhone='".$Data["phone"]."',";
+			$Query .= "tblStrEmail='".$Data["email"]."',";
+			$Query .= "tblStrSubject='".$Data["subject"]."',";
+			$Query .= "tblStrComment='".$Data["comment"]."',";
+			$Query .= "tblStrReply='".$Data["reply"]."',";
+			$Query .= "tblDtmRsvDate='".$Data["rsvdate"]."',";
+			$Query .= "tblDtmRegDate=now(),";
+			$Query .= "tblIntStatus='".$Data["status"]."'";
+		} else {
+			$Query = "UPDATE tblReserve SET ";
+			$Query .= "tblIntGP='".$Data["gp"]."',";
+			$Query .= "jijem='".$Data["jijem"]."',";
+			$Query .= "tblIntField='".$Data["field"]."',";
+			$Query .= "tblIntCrack='".$Data["crack"]."',";
+			$Query .= "tblIntGubun='".$Data["gubun"]."',";
+			$Query .= "tblStrName='".$Data["name"]."',";
+			$Query .= "tblStrIDnum='".$Data["idnumber"]."',";
+			$Query .= "tblStrPhone='".$Data["phone"]."',";
+			$Query .= "tblStrEmail='".$Data["email"]."',";
+			$Query .= "tblStrSubject='".$Data["subject"]."',";
+			$Query .= "tblStrComment='".$Data["comment"]."',";
+			$Query .= "tblStrReply='".$Data["reply"]."',";
+			$Query .= "tblDtmRsvDate='".$Data["rsvdate"]."',";
+			$Query .= "tblIntStatus='".$Data["status"]."' WHERE tblNumber='$tNum'";
+		}
+		$Sql = mysql_query( $Query ) or die( mysql_error() );
+
+		$Data["jijem"] == 0 ? $jijem_msg = "강남점" : $jijem_msg = "부산점";
+		$Data["jijem"]="";
+
+		/*메일전송*/
+		$mailData["rsvDate"]	= explode( '-', $dtmRsvDate );
+		$mailData["rsvDate"]	= $mailData["rsvDate"][0]."년 ".$mailData["rsvDate"][1]."월 ".$mailData["rsvDate"][2]."일";
+		$mailData["rsvTime"]	= explode( ':', $dtmRsvTime );
+		$mailData["rsvTime"]	= $mailData["rsvTime"][0]."시 ".$mailData["rsvTime"][1]."분";
+		$Data["reply"]				= str_replace( '"', "", $Data["reply"] );
+		$Data["reply"]				= str_replace( "'", "", $Data["reply"] );
+		if( $Data["blnemail"] == 'Y' && trim( $strReply ) ) {
+			$homeUrl = "http://".$bagData["host"];
+			$fromname = $bagData["siteName"];
+			$fromname='=?UTF-8?B?'.base64_encode($fromname).'?=';
+			$fromaddress = $admData["email"];
+			$server_mail = $admData["email"];
+			$headers = "From: ".$fromname." < ".$fromaddress." > \n"; 
+			$headers .= "X-Sender: < ".$server_mail." >\n"; 
+			$headers .= "X-Mailer: PHP\n"; 
+			$headers .= "Return-Path: < ".$fromaddress." >\n";  
+			$headers .= "Content-Type: text/html; charset=utf-8\n"; 
+			$headers .= "\n"; 
+			$m_contents = sock_url( $bagData["host"], "80", "http://".$bagData["host"]."/mail/letter_reserve.html");
+			$m_contents = str_replace("@HOMEURL@",$homeUrl,$m_contents);
+			$m_contents = str_replace("@FIELD@",$medicalField[$Data["field"]],$m_contents);
+			$m_contents = str_replace("@NAME@",$Data["name"],$m_contents);
+			$m_contents = str_replace("@DATE@",$mailData["rsvDate"],$m_contents);
+			$m_contents = str_replace("@TIME@",$mailData["rsvTime"],$m_contents);
+			$m_contents = str_replace("@SUBJECT@",$Data["subject"],$m_contents);
+			$m_contents = str_replace("@COMMENT@",stripslashes( $Data["comment"] ),$m_contents);
+			$m_contents = str_replace("@REPLY@",$Data["reply"],$m_contents);
+
+			$m_contents = str_replace("@ETC1@"," 회원님의 예약내용 입니다.",$m_contents);
+			$m_contents = str_replace("@ETC2@","",$m_contents);
+
+			$m_contents_arr = explode("\r\n\r\n",$m_contents);
+			$m_contents = $m_contents_arr[1];
+
+			$title = stripslashes( "[".$bagData["siteName"]."] ".$jijem_msg." 예약이 완료되었습니다." );
+			$title='=?UTF-8?B?'.base64_encode($title).'?=';
+			$res = mail($Data["email"],$title,$m_contents,$headers);
+		}
+
+		/*SMS전송*/
+		if( $Data["blnsms"] == 'Y' ) {
+			/******************** 인증정보 ********************/
+			$sms_id		= $bagData["smsid"]; //SMS 아이디.
+			$sms_pw		= $bagData["smspass"];//SMS 패스워드
+			$sms_from = $admData["phone"];
+			$sms_to		= $Data["phone"];
+			if( $aSmsData[3]["use"] == 'Y' && $aSmsData[3]["comment"] ) {
+				$content = str_replace( "@NAME@", $Data["name"], $aSmsData[3]["comment"] );
+				$content = str_replace( "@RESERVE@", substr( $Data["rsvdate"], 0, 16 ), $content );
+				$sms_msg	= $content;
+			} else {
+				$sms_msg	= substr( $Data["rsvdate"], 0, 16 )."에 예약이 접수되었습니다. [".$jijem_msg.$bagData["siteName"]."]";
+			}
+			$sms_ip		= $HTTP_SERVER_VARS["REMOTE_ADDR"];
+				
+			$sms = new EmmaSMS();
+			$sms->login($sms_id, $sms_pw);	// $sms->login( [고객 ID], [고객 패스워드]);
+			$ret = $sms->send($sms_to, $sms_from, $sms_msg, $sms_date);
+				
+			if($ret) {
+				//print_r($ret);
+
+				$smvQuery = "INSERT INTO tblSmsLogs SET ";
+				$smvQuery .= "tblStrSender='".$sms_from."',";
+				$smvQuery .= "tblStrAddressee='".$sms_to."',";
+				$smvQuery .= "tblStrComment='".$sms_msg."',";
+				$smvQuery .= "tblStrIp='".$sms_ip."',";
+				$smvQuery .= "tblStrStatus='Y',";
+				$smvQuery .= "tblIntGP='".$_SESSION["ss_gp"]."',";
+				$smvQuery .= "tblDtmRegDate=now()";
+				$smvSql = mysql_query( $smvQuery ) or die( mysql_error() );
+
+				echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+			} else {
+
+				$smvQuery = "INSERT INTO tblSmsLogs SET ";
+				$smvQuery .= "tblStrSender='".$sms_from."',";
+				$smvQuery .= "tblStrAddressee='".$sms_to."',";
+				$smvQuery .= "tblStrComment='".$sms_msg."',";
+				$smvQuery .= "tblStrIp='".$sms_ip."',";
+				$smvQuery .= "tblStrStatus='N',";
+				$smvQuery .= "tblIntGP='".$_SESSION["ss_gp"]."',";
+				$smvQuery .= "tblDtmRegDate=now()";
+				$smvSql = mysql_query( $smvQuery ) or die( mysql_error() );
+
+				echo $sms->errMsg;
+			}
+		} else {
+			echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+		}
+	}
+
+	if( !$act || $act == 'write' ) {
+		$Data["rsvdate"]	= $revYear; 
+		$Data["rsvtime"]	= $revTime;
+		$Data["act"]			= "write_ok";
+	}
+
+	if( $act == 'write_ok' ) {
+
+		$Data["gp"]				= $intGP;
+		$Data["field"]		= $intField;
+		$Data["jijem"]		= $jijem;
+		$Data["crack"]		= $intCrack;
+		$Data["rsvdate"]	= $dtmRsvDate." ".$dtmRsvTime.":00";
+		$Data["name"]			= $strName;
+		$Data["gubun"]		= $intGubun;
+		$Data["idnum"]		= $strIDnum1."-".$strIDnum2;
+		$Data["phone"]		= $strPhone1."-".$strPhone2."-".$strPhone3;
+		$Data["email"]		= $strEmail;
+		$Data["subject"]	= $strSubject;
+		$Data["comment"]	= addslashes( $strComment );
+		$Data["reply"]		= addslashes( $strReply );
+		$Data["status"]		= $intStatus;
+		$Data["blnemail"]	= $blnEmail;
+		$Data["blnsms"]		= $blnSms;
+
+		$Query = "INSERT INTO tblReserve SET ";
+		$Query .= "tblIntGP='".$Data["gp"]."',";
+		$Query .= "jijem='".$Data["jijem"]."',";
+		$Query .= "tblIntField='".$Data["field"]."',";
+		$Query .= "tblIntCrack='".$Data["crack"]."',";
+		$Query .= "tblIntGubun='".$Data["gubun"]."',";
+		$Query .= "tblStrName='".$Data["name"]."',";
+		$Query .= "tblStrIDnum='".$Data["idnum"]."',";
+		$Query .= "tblStrPhone='".$Data["phone"]."',";
+		$Query .= "tblStrEmail='".$Data["email"]."',";
+		$Query .= "tblStrSubject='".$Data["subject"]."',";
+		$Query .= "tblStrComment='".$Data["comment"]."',";
+		$Query .= "tblStrReply='".$Data["reply"]."',";
+		$Query .= "tblDtmRegDate=now(),";
+		$Query .= "tblDtmRsvDate='".$Data["rsvdate"]."',";
+		$Query .= "tblIntStatus='".$Data["status"]."'";
+		$Sql = mysql_query( $Query ) or die( mysql_error() );
+
+		$Data["jijem"] == 0 ? $jijem_msg = "강남점" : $jijem_msg = "부산점";
+		$Data["jijem"]="";
+		/*메일전송*/
+		$mailData["rsvDate"]	= explode( '-', $dtmRsvDate );
+		$mailData["rsvDate"]	= $mailData["rsvDate"][0]."년 ".$mailData["rsvDate"][1]."월 ".$mailData["rsvDate"][2]."일";
+		$mailData["rsvTime"]	= explode( ':', $dtmRsvTime );
+		$mailData["rsvTime"]	= $mailData["rsvTime"][0]."시 ".$mailData["rsvTime"][1]."분";
+		if( $Data["blnemail"] == 'Y' && trim( $strReply ) ) {
+			$homeUrl = "http://".$bagData["host"];
+			$fromname = $bagData["siteName"];
+			$fromname='=?UTF-8?B?'.base64_encode($fromname).'?=';
+			$fromaddress = $admData["email"];
+			$server_mail = $admData["email"];
+			$headers = "From: ".$fromname." < ".$fromaddress." > \n"; 
+			//$headers .= "X-Sender: < ".$server_mail." >\n"; 
+			//$headers .= "X-Mailer: PHP\n"; 
+			//$headers .= "Return-Path: < ".$fromaddress." >\n";  
+			$headers .= "Content-Type: text/html;\n";
+			$headers .= "charset=utf-8"; 
+			$m_contents = sock_url( $bagData["host"], "80", "http://".$bagData["host"]."/mail/letter_reserve.html");
+			$m_contents = str_replace("@HOMEURL@",$homeUrl,$m_contents);
+			$m_contents = str_replace("@FIELD@",$medicalField[$Data["field"]],$m_contents);
+			$m_contents = str_replace("@NAME@",$Data["name"],$m_contents);
+			$m_contents = str_replace("@DATE@",$mailData["rsvDate"],$m_contents);
+			$m_contents = str_replace("@TIME@",$mailData["rsvTime"],$m_contents);
+			$m_contents = str_replace("@SUBJECT@",$Data["subject"],$m_contents);
+			$m_contents = str_replace("@COMMENT@",stripslashes( $Data["comment"] ),$m_contents);
+			$m_contents = str_replace("@REPLY@",$Data["reply"],$m_contents);
+
+			$m_contents = str_replace("@ETC1@"," 회원님의 예약내용 입니다.",$m_contents);
+			$m_contents = str_replace("@ETC2@","",$m_contents);
+
+			$m_contents_arr = explode("\r\n\r\n",$m_contents);
+			$m_contents = $m_contents_arr[1];
+
+			$title = stripslashes( "[".$bagData["siteName"]."] ".$jijem_msg." 예약이 완료되었습니다." );
+			$title='=?UTF-8?B?'.base64_encode($title).'?=';
+			$res = mail($Data["email"],$title,$m_contents,$headers);
+		}
+
+		/*SMS전송*/
+		//if( $Data["blnsms"] == 'Y' ) {
+			/******************** 인증정보 ********************/
+			/*$sms_id		= $bagData["smsid"]; //SMS 아이디.
+			$sms_pw		= $bagData["smspass"];//SMS 패스워드
+			$sms_from = $admData["phone"];
+			$sms_to		= $Data["phone"];
+			if( $aSmsData[3]["use"] == 'Y' && $aSmsData[3]["comment"] ) {
+				$content = str_replace( "@NAME@", $Data["name"], $aSmsData[3]["comment"] );
+				$content = str_replace( "@RESERVE@", substr( $Data["rsvdate"], 0, 16 ), $content );
+				$sms_msg	= $content;
+			} else {
+				$sms_msg	= substr( $Data["rsvdate"], 0, 16 )."에 예약이 접수되었습니다. [".$jijem_msg.$bagData["siteName"]."]";
+			}
+			$sms_ip		= $HTTP_SERVER_VARS["REMOTE_ADDR"];
+				
+			$sms = new EmmaSMS();
+			$sms->login($sms_id, $sms_pw);	// $sms->login( [고객 ID], [고객 패스워드]);
+			$ret = $sms->send($sms_to, $sms_from, $sms_msg, $sms_date);
+				
+			if($ret) {
+				//print_r($ret);
+
+				$smvQuery = "INSERT INTO tblSmsLogs SET ";
+				$smvQuery .= "tblStrSender='".$sms_from."',";
+				$smvQuery .= "tblStrAddressee='".$sms_to."',";
+				$smvQuery .= "tblStrComment='".$sms_msg."',";
+				$smvQuery .= "tblStrIp='".$sms_ip."',";
+				$smvQuery .= "tblStrStatus='Y',";
+				$smvQuery .= "tblDtmRegDate=now()";
+				$smvSql = mysql_query( $smvQuery ) or die( mysql_error() );
+
+				echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+			} else {
+
+				$smvQuery = "INSERT INTO tblSmsLogs SET ";
+				$smvQuery .= "tblStrSender='".$sms_from."',";
+				$smvQuery .= "tblStrAddressee='".$sms_to."',";
+				$smvQuery .= "tblStrComment='".$sms_msg."',";
+				$smvQuery .= "tblStrIp='".$sms_ip."',";
+				$smvQuery .= "tblStrStatus='N',";
+				$smvQuery .= "tblDtmRegDate=now()";
+				$smvSql = mysql_query( $smvQuery ) or die( mysql_error() );
+
+				echo $sms->errMsg;
+			}
+		} else {*/
+			echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+		//}
+	}
+
+	if( $act == 'delete' ) {
+		$Data["number"]	= $tNum;
+		$Query = "DELETE FROM tblReserve WHERE tblNumber='".$Data["number"]."'";
+		$Sql = mysql_query( $Query ) or die ( mysql_error() );
+		echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+	}
+
+	if( $act == 'cls' ) {
+		echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+	}
+?>
+<head>
+<title>어드민</title>
+<link href="/admin/css/admin.css" rel="stylesheet" type="text/css">
+<link href="./css/admin_old.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="/admin/js/admin.js"></script>
+<script src="/js/calender.js" language="javascript"></script>
+<script language='javascript'>
+	function fnSubmit() {
+		document.frmMain.submit();
+	}
+
+	function fnDel(){
+		var f_oForm	= document.forms['frmMain'];
+		if ( confirm("정말 삭제하시겠습니까?") ){
+			f_oForm.method		= "post";
+			f_oForm.act.value	= "delete";
+			f_oForm.submit();
+		}
+	}
+</script>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+</head>
+
+<body scroll=auto>
+
+
+<form name="frmMain" method="get" action="<? echo $PHP_SELF; ?>" onSubmit="return false;">
+<input type="hidden" name="act" value="<? echo $Data["act"]; ?>">
+<input type="hidden" name="tNum" value="<? echo $Data["number"]; ?>">
+
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="100%" align="center" valign="top" class="center_bg"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="3" colspan="3"></td>
+			</tr>
+			<tr>
+				<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+				<td background="./img/ct_box_top.gif"></td>
+				<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+			</tr>
+			<tr>
+				<td background="./img/ct_box_left.gif"></td>
+				<td align="center" bgcolor="#F5F5F5" class="bottom_5"><table width="99%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="main_title_01">예약 처리</td>
+					</tr>
+				</table>
+				<!-- 검색 테이블 입니다. -->
+				<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+					<!--tr>
+						<td align="center" class="main_title_02">지점선택</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><select class="selectBox" name="jijem" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="지점선택" required>
+									<option value="0" <?if($Data["jijem"]=='0')echo "selected";?>>서울</option>
+									<option value="1" <?if($Data["jijem"]=='1')echo "selected";?>>부산</option>
+								</select></td>
+							</tr>
+						</table></td>
+					</tr-->
+					<tr>
+						<td align="center" class="main_title_02">진료항목</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><select class="selectBox" name="intField" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="진료항목" required>
+								<? 
+									for( $e = 1; $e < count( $medicalField );  $e++ ) { 
+									$selected = ( $e == $Data["field"] ) ? "selected" : "";
+								?>
+									<option value="<? echo $e; ?>" <?=$selected?>><? echo $medicalField[$e]; ?></option>
+								<? } ?>
+								</select></td>
+							</tr>
+						</table></td>
+					</tr>
+					<tr>
+						<td align="center" class="main_title_02">진료구분</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><input type="radio" name="intCrack" value="1" <?=( !$Data["crack"] || $Data["crack"] == 1 ) ? "checked" : "" ?>> 초진&nbsp;&nbsp;<input type="radio" name="intCrack" value="2" <?=( $Data["crack"] == 2 ) ? "checked" : "" ?>> 재진&nbsp;&nbsp;<input type="radio" name="intCrack" value="3" <?=( $Data["crack"] == 3 ) ? "checked" : "" ?>> 수술</td>
+							</tr>
+						</table></td>
+					</tr>
+					<tr>
+						<td align="center" class="main_title_02">진료일시</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><input type="text" name="dtmRsvDate" id="dtmRsvDate" class="text_basic" style="width:80px;height:21px;cursor:pointer;"  onclick="check_mouse('frmMain.'+this.name)" value="<? echo $Data["rsvdate"]; ?>" readonly itemname="진료일시" required>&nbsp;<select class="selectBox" name="dtmRsvTime" style="width:100px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="진료일시" required>
+								<? 
+									for( $j = 540 ; $j < 1230 ; $j+=30 ) { 
+										$reserveTime1 = zero_full(intval($j/60),2);
+										$reserveTime2 = ( $j%60 == 0 ) ? '00' : '30';
+										$reserveTime = $reserveTime1.":".$reserveTime2;
+								?>
+									<option value="<?=$reserveTime?>" <?=( $reserveTime == $Data["rsvtime"] ) ? "selected" : ""?>><? echo $reserveTime1; ?>시 <? echo $reserveTime2; ?>분</option>
+								<? } ?>
+								</select>
+								<? if( $act == 'modify' ) { ?>
+									&nbsp;예약추가 : <input type="checkbox" name="addRsv" value="Y">
+								<? } ?>
+								</td>
+							</tr>
+						</table></td>
+					</tr>
+					<tr>
+						<td width="120" align="center" class="main_title_02">환자명</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:120px; height:20px; ime-mode:active" name="strName" value="<? echo $Data["name"]; ?>" itemname="환자명" required hangul></td>
+					</tr>
+					<tr>
+						<td width="120" align="center" class="main_title_02">환자구분</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><select class="selectBox" name="intGubun" style="width:80px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="환자구분" required>
+						<? 
+							for( $g = 1; $g < count( $mediGubunArr );  $g++ ) { 
+							$selected = ( $g == $Data["gubun"] ) ? "selected" : "";
+						?>
+							<option value="<? echo $g; ?>" <?=$selected?>><? echo $mediGubunArr[$g]; ?></option>
+						<? } ?>
+						</select></td>
+					</tr>
+					<!-- <tr>
+						<td align="center" class="main_title_02">주민번호</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" name="strIDnum1" type="text" id="strIDnum1" value="<? echo $Data["idnum"][0]; ?>" style="width:110px; height:20px" itemname="주민등록번호" numeric onblur="this.form.strIDnum2.focus();"> - <input class="text_basic" name="strIDnum2" type="password" id="strIDnum2" value="<? echo $Data["idnum"][1]; ?>" style="width:110px; height:20px" maxlength="7" itemname="주민등록번호" numeric></td>
+					</tr>	 -->			
+					<tr>
+						<td align="center" class="main_title_02">핸드폰</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><select class="selectBox" name="strPhone1" id="strPhone1" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="핸드폰">
+							<option value="">:: 선택 ::</option>
+							<option value="010" <?=( $Data["phone"][0] == '010' ) ? "selected" : ""?>>010</option>
+							<option value="011" <?=( $Data["phone"][0] == '011' ) ? "selected" : ""?>>011</option>
+							<option value="016" <?=( $Data["phone"][0] == '016' ) ? "selected" : ""?>>016</option>
+							<option value="018" <?=( $Data["phone"][0] == '018' ) ? "selected" : ""?>>018</option>
+							<option value="019" <?=( $Data["phone"][0] == '019' ) ? "selected" : ""?>>019</option>
+						</select> 
+						- <input class="text_basic" style="width:50; height:19" name="strPhone2" value="<? echo $Data["phone"][1]; ?>" type="text" maxlength="4" itemname="연락처" required numeric> 
+						- <input class="text_basic" style="width:50; height:19" name="strPhone3" value="<? echo $Data["phone"][2]; ?>" type="text" maxlength="4" itemname="연락처" required numeric></td>
+					</tr>
+					<tr>
+						<td align="center" class="main_title_02">이메일</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:200px; height:19;" name="strEmail" value="<? echo $Data["email"]; ?>" itemname="이메일" reuired email></td>
+					</tr>
+					<!-- <tr>
+						<td align="center" class="main_title_02">제목</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:400px; height:20px; ime-mode:active" name="strSubject" value="<? echo $Data["subject"]; ?>" itemname="제목" required></td>
+					</tr> -->
+					<tr>
+						<td align="center" class="main_title_02">내용</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01">
+						<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:300px; display:none;"></textarea>
+						<p style="display:none"><textarea name="strComment" id="strComment" style="width:100%; height:150px" itemname="팝업내용"></textarea></p>
+						</td>
+					</tr>
+					<tr>
+						<td width="120" align="center" class="main_title_02">상태</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01"><select class="selectBox" name="intStatus" style="width:80px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="상태" required>
+						<? 
+							for( $g = 1; $g < count( $statusArr );  $g++ ) { 
+								$selected = ( $g == $Data["status"] ) ? "selected" : "";
+						?>
+							<option value="<? echo $g; ?>" <?=$selected?>><? echo $statusArr[$g]; ?></option>
+						<? } ?>
+						</select>&nbsp;SMS 전송 <input type="checkbox" name="blnSms" value="Y">&nbsp;E-mail 전송 <input type="checkbox" name="blnEmail" value="Y"></td>
+					</tr>
+					<tr>
+						<td align="center" class="main_title_02">답변</td>
+						<td bgcolor="#FFFFFF" class="table_ct_01">
+						<textarea name="ir2" id="ir2" rows="10" cols="100" style="width:100%; height:300px; display:none;"></textarea>
+						<p style="display:none"><textarea name="strComment" id="strComment" style="width:100%; height:150px" itemname="팝업내용"></textarea></p>						
+						
+						</td>
+					</tr>
+					<tr height="30" valign="bottom">
+						<td colspan="2" align="center" class="main_title_02"><img src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;" onClick="fnSubmit();"> <img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onClick="self.close();"><? if( $Data["number"] ) { ?> <img src="./img/btn_del.gif" style="cursor:pointer;" onClick="fnDel();"><? } ?></td>
+					</tr>
+				</table></td>
+				<td background="./img/ct_box_right.gif"></td>
+			</tr>
+			<tr>
+				<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+				<td background="./img/ct_box_bottom.gif"></td>
+				<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+			</tr>
+		</table></td>
+	</tr>
+</table>
+</form>
+<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir1"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	document.getElementById("strComment").value = document.getElementById("ir1").value;
+	try {
+		fnChkForm();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>
+<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir2",
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir2"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir2"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	document.getElementById("strComment").value = document.getElementById("ir2").value;
+	try {
+		fnChkForm();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir2"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<?			if( $_SESSION["ss_level"] > 1 ) {
+				echo "<script language='javascript'>";
+				echo "	alert('[".$memberNameArr[$_SESSION["ss_level"]]."] 는 이용이 제한되었습니다.');";
+				echo "	history.go(-1);";
+				echo "</script>";
+			}?>
+<script language="javascript">
+<!--
+	function bbsdel(strURL) {
+		var msg = " 게시판을 삭제하시겠습니까?";
+		if (confirm(msg)){
+			window.location.href= strURL;
+
+		}
+	}
+	-->
+</script>
+<script>
+	function keychk()
+	{
+		key = event.keyCode;
+
+		if ( document.regiform.tbname.value.length == 0 && ( key < 96 || key > 123 ))
+		{
+			event.returnValue = false;
+			return false;
+		}
+		else if ( key > 64 && key < 91)
+		{
+			return key;
+		}
+		else if ( key > 96 && key < 123)
+		{
+			return key;
+		}
+		else if ( key > 47 && key < 58)
+		{
+			return key;
+		}
+		else if ( key == 95 )
+		{
+			return key;
+		}
+		else
+			event.returnValue = false;
+	}
+
+/*function chk_disabled( vv ) {
+	if( vv == 1 || vv == 10 ) {
+		document.regiform.intViewLevel.disabled = true;
+		document.regiform.intWriteLevel.disabled = true;
+		document.regiform.intListLevel.disabled = true;
+		document.regiform.intModifyLevel.disabled = true;
+		document.regiform.intReplyLevel.disabled = true;
+		document.regiform.intDeleteLevel.disabled = true;
+	} else {
+		document.regiform.intViewLevel.disabled = false;
+		document.regiform.intWriteLevel.disabled = false;
+		document.regiform.intListLevel.disabled = false;
+		document.regiform.intModifyLevel.disabled = false;
+		document.regiform.intReplyLevel.disabled = false;
+		document.regiform.intDeleteLevel.disabled = false;
+	}
+}*/
+</script>
+<form method="POST" action="<?php echo $PHP_SELF; ?>" name="regiform" onsubmit="return check_Valid();" style='margin:0px'>
+<input type="hidden" name="act" value="mod_ok">
+<input type="hidden" name="tNum" value="<?php echo $Data["number"]; ?>">
+<input type="hidden" name="strBtable" value="<?php echo $Data["btable"]; ?>">
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" valign="top">
+					<table height="180" width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr valign="top" >
+							<td align="center" class="bottom_5"><table valign="top" width="99%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="28" class="main_title_01">게시판수정</td>
+									<td width="49" align="right"><!-- <a href="community02.html?code=counsel"><img src="./img/btn_more.gif" width="49" height="18" border="0"> --></td>
+								</tr>
+							</table>
+							<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+								<tr>
+									<td width="22%" class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판명</td>
+									<td bgcolor="#FFFFFF" class="left_8" colspan="2"><input class="text_basic" type='text' name='strBname' style="width:200px; height:20px;" value="<? echo $Data["bname"]; ?>" itemname="게시판명" required></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 테이블명</td>
+									<td bgcolor="#FFFFFF" class="left_8" colspan="2">tbl_<? echo $Data["btable"]; ?></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 사용스킨</td>
+									<td bgcolor="#FFFFFF" class="left_8" colspan="2"><select class="selectBox" name='strSkin' setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="사용스킨" required>
+										<option value="">스킨선택</option>
+										<?
+											$pdir = opendir($_SERVER['DOCUMENT_ROOT']."/board/skin");
+											while($sdir = readdir($pdir)) {
+												if(($sdir!=".") && ($sdir!="..")) {
+													echo"<option value='$sdir'";	if( $Data["skin"] == $sdir ){echo" selected";} echo">$sdir</option>\n";	
+												}
+											}
+											closedir($pdir);
+										?>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 읽기권한</td>
+									<td bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intViewLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?	
+										for($i=11;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["viewlevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+									<td width="65%" rowspan="6" bgcolor="#FFFFFF" class="left_8">
+										<font color="#FF6600">※ [1] 등급 : 관리자</font><br>
+									<? 
+										for( $k = 2; $k < count( $memberNameArr )+2; $k++ ) { 
+											$memNm = ( $memberNameArr[$k] ) ? $memberNameArr[$k] : "미지정";
+											$memCl = ( $memberNameColorArr[$k] ) ? $memberNameColorArr[$k] : "#DEDEDE";
+									?>
+										<font color="<?=$memCl?>">※ [<?=$k?>] 등급 : <?=$memNm?></font><br>
+									<? } ?>
+										<font color="#DEDEDE">※ [11] 등급 : 비회원</font><br>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 쓰기권한</td>
+									<td bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intWriteLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?	
+										for($i=11;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["writelevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 리스트권한</td>
+									<td bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intListLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?	
+										for($i=11;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["listlevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 수정권한</td>
+									<td bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intModifyLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?	
+										for($i=11;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["modifylevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 답변권한</td>
+									<td bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intReplyLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?	
+										for($i=11;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["replylevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 삭제권한</td>
+									<td bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intDeleteLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?	
+										for($i=11;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["deletelevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 첨부 파일수</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name='intAddFileNumber' setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+									<?
+										for($i=0; $i<=10; $i++) {
+											echo"<option value=$i";
+											if( $Data["addfilenumber"] == $i ) { echo" selected"; }
+											echo">$i</option>";
+										}
+									?>
+									</select> 개</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 첨부이미지자동출력</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input type="radio" name="strViewImage" value='Y' <?=( $Data["viewimage"] == 'Y' ) ? "checked" : "" ?>>이미지 첨부시 본문자동출력<br><input type="radio" name="strViewImage" value='N' <?=( !$Data["viewimage"] || $Data["viewimage"] == 'N' ) ? "checked" : "" ?>>이미지 보여주지 않기 (택스트 노출) </td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 업로드 크기</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='intUploadSize' style="width:200px;height:19px" value="<? echo $Data["uploadsize"]; ?>"> MB ( 최대 5MB )</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 등록 불가 확장자</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='strNoExt' style="width:66%;height:19px" value="<? echo $Data["noext"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 덧글 쓰기권한</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intCommentLevel" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="">사용안함</option>
+									<?	
+										for($i=10;$i>=1;$i--) {
+											echo"<option value=$i"; if( $Data["commentlevel"] == $i ) { echo" selected"; } echo">$i</option>";
+										}	
+									?>
+									</select> 이상</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 뷰 타입</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="intViewType" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="">타입선택</option>
+										<option value="1" <?=( $Data["viewtype"] == '1' ) ? "selected" : "" ?>>목록노출</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 공지 기능사용</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name='strNotice' setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["notice"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["notice"] || $Data["notice"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 비밀글 기능사용</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name='strSecret' setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["secret"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["secret"] || $Data["secret"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 홈페이지 입력</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name='strHomePage' setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["homepage"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["homepage"] || $Data["homepage"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 프로필 노출</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="strProfileView" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["profileview"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["profileview"] || $Data["profileview"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 프린트 기능사용</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="strPrint" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["print"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["print"] || $Data["print"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 출력 옵션사용</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="strControl" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["control"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["control"] || $Data["control"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 스트리밍 사용</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="strStreaming">
+										<option value="Y" <?=( $Data["streaming"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["streaming"] || $Data["streaming"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 워터마크 사용</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="strWatermark">
+										<option value="Y" <?=( $Data["watermark"] == 'Y' ) ? "selected" : "" ?>>사용함</option>
+										<option value="N" <?=( !$Data["watermark"] || $Data["watermark"] == 'N' ) ? "selected" : "" ?>>사용안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 목록수</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='intLineNumber' style="width:200px;height:19px" value="<? echo $Data["linenumber"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 페이징수</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='intPageNumber' style="width:200px;height:19px" value="<? echo $Data["pagenumber"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 목록수(모바일)</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='intmLineNumber' style="width:200px;height:19px" value="<? echo $Data["mlinenumber"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 페이징수(모바일)</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='intmPageNumber' style="width:200px;height:19px" value="<? echo $Data["mpagenumber"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 테이블사이즈</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='strWidth' style="width:200px;height:19px" value="<? echo $Data["width"]; ?>"> ( 100 이하는 (%) 이상은 수치적용 )</td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 상단 파일명</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='strHead' style="width:200px;height:19px" value="<? echo $Data["head"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 하단 파일명</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='strFoot' style="width:200px;height:19px" value="<? echo $Data["foot"]; ?>"></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 서브노출</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><select class="selectBox" name="strSub" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+										<option value="Y" <?=( $Data["sub"] == 'Y' ) ? "selected" : "" ?>>노출함</option>
+										<option value="N" <?=( !$Data["sub"] || $Data["sub"] == 'N' ) ? "selected" : "" ?>>노출안함</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 카테고리구분</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8">카테고리구분은 [엔터]로 하세요.<br><textarea class="text_basic" name="strCategory" rows="5" cols="50" style="width:98%;"><? echo $Data["category"]; ?></textarea></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 필터</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8">필터구분은 [콤마]로 하세요.<br><textarea class="text_basic" name="strFilter" rows="5" cols="50" style="width:98%;"><? echo $Data["filter"]; ?></textarea></td>
+								</tr>
+								<tr>
+									<td class="main_title_02">&nbsp;&nbsp;<img src='img/icon_orange2.gif'> 게시판 그룹</td>
+									<td colspan="2" bgcolor="#FFFFFF" class="left_8"><input class="text_basic" type='text' name='strGroup' style="width:200px;height:19px" value="<? echo $Data["group"]; ?>"></td>
+								</tr>
+								<tr>
+									<td height="1" colspan="3" class="board-view_title_line"></td>
+								</tr>
+							</table>
+							<table width="99%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="50" align="center"><input type="image" src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;"></td>
+								</tr>
+							</form>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr>
+			</table>
+<script language="javascript" src="/js/wrest.js"></script>

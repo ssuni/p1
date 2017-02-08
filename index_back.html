@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>쁨의원</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/jquery.bxslider.css">
+</head>
+<body>
+<div class="wrap">
+	<div class="section_top">
+		<div class="header_wrap">
+			<ul class="list_sns">
+				<li><a href="https://www.facebook.com/ppeum0/" target="_blank"><span class="blind">페이스북</span></a></li>
+				<li><a href="http://plus.kakao.com/home/nvcno7a6" target="_blank"><span class="blind">옐로우</span></a></li>
+				<li><a href="http://blog.naver.com/ppeum000" target="_blank"><span class="blind">블로그</span></a></li>
+				<li><a href="https://www.instagram.com/ppeum000/" target="_blank"><span class="blind">인스타그램</span></a></li>
+			</ul>
+			<h1 class="logo"><img src="img/logo.png" alt="쁨의원"></h1>
+		</div>
+		<div class="section_contents">
+			<div class="box box_01"><a href="#" data-type="injection"><span class="blind">윤곽주사 매끄럽고 갸름한 꿈의 페이스라인 1회 4,5만원</span></a></div>
+			<div class="box box_02"><a href="#" data-type="quo"><span class="blind">큐오필 탄력과 볼륨, 얼굴형의 완성 cc 8만원</span></a></div>
+			<div class="box box_03"><a href="#" data-type="botox"><span class="blind">보톡스 시간을 거꾸로 되돌리는 마법</span></a></div>
+			<div class="box box_04"><a href="#" data-type="doctor"><span class="blind">서울대출신 의료진 전문적이고 안전하게!</span></a></div>
+			<div class="box box_05"><a href="#" data-type="nose"><span class="blind">하이코 그녀의 콧대 높은 비밀! 14만원</span></a></div>
+			<div class="box box_06"><a href="#" data-type="injection2"><span class="blind">쁨팻주사 청순가련 바디핏의 완성 50cc 9,9만원</span></a></div>
+			<div class="box box_07"><a href="#" data-type="waxing"><span class="blind">제모 완벽함을 플러스하라!</span></a></div>
+		</div>
+	</div>
+	<div class="section_bnr">
+		<ul id="slider1">
+		  <li class="slider_01">
+			  <span class="img"></span>
+			  <span class="bar"></span>
+		  </li>
+		</ul>
+	</div>
+	<div class="section_map">
+		<strong class="blind">강남점 오시는길</strong>
+		<div class="inner"></div>
+	</div>
+	<div class="section_sns">
+		<div class="inner">
+		<ul class="list_sns_l">
+			<li><a href="https://www.facebook.com/ppeum0/" target="_blank"><span class="blind">페이스북</span></a></li>
+			<li><a href="http://plus.kakao.com/home/nvcno7a6" target="_blank"><span class="blind">옐로우</span></a></li>
+			<li><a href="http://blog.naver.com/ppeum000" target="_blank"><span class="blind">블로그</span></a></li>
+			<li><a href="https://www.instagram.com/ppeum000/" target="_blank"><span class="blind">인스타그램</span></a></li>
+		</ul>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="inner">
+			<img src="img/footer.jpg" alt="">
+			<div class="blind">
+			<p>사업자등록번호 : 784-11-00540 상호명: 신논현쁨의원 대표명 : 정형진<br>서울특별시 서초구 강남대로 459 Tel:02-546-3376</p>
+			<p class="copy">copyright 2016 ppeum clinic. ALL RIGHTS RESERVED.</p>
+			</div>
+		</div>
+	</div>
+	<!-- section_top -->
+	<div class="quick">
+	<form action="http://tcation.co.kr/crm/embed.php?m_no=56" method="post" onsubmit="javascript:index_register_db()">
+		<input type="hidden" id="url">
+		<ul>
+			<li><label for="name" class="blind">이름</label><input type="text" name="name" class="name" id="name"></li>
+			<li><label for="phone" class="blind">전화번호</label><input type="text" name="phone" class="phone" id="phone"></li>
+			<li><label for="desc" class="blind">시술부위</label><input type="text" name="say" class="say" id="desc"></li>
+		</ul>
+		<button type="submit"><span class="blind">상담신청하기</span></button>
+	</form>
+	</div>
+</div>
+<div class="layer_detail">
+	<img src="">
+	<a href="#" class="btn_close"><span class="blind">닫기</span></a>
+</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="js/jquery.bxslider.min.js"></script>
+<script>
+	$('#slider1').bxSlider({
+	  mode: 'fade',
+	  auto: false,
+	  autoControls: false,
+	  pause: 2000,
+
+	});
+</script>
+<script>
+function index_register_db()
+{
+   var url = document.getElementById("url");
+   url.value = location.href;
+}
+$(".box>a").on('click',function(e){
+    var img = $(this).data("type");
+	e.preventDefault();
+	$(".layer_detail").show().find('img').attr('src','img/'+img+'.jpg');
+})
+$(".btn_close").on('click',function(){
+	$(this).parent().hide().find('img').attr('src','');
+})
+</script>
+</body>
+</html>

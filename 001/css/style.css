@@ -1,0 +1,125 @@
+@charset "utf-8";
+/* CSS Document */
+@import url("board.css");
+
+
+/*********** Base Style ***********/
+* {font-family: 'Noto Sans KR', 'Malgun Gothic', NanumGothic, sans-serif; font-style: normal; margin: 0; padding: 0; border: 0;}
+body {} /*** min-width:1900px ***/
+body,th,td{ font-size: 14px; color: #666666;}
+a { color: #5b5b5b; text-decoration: none;}
+a:hover { color: #7e5aa1; text-decoration: none; } /* underline */
+/*none : 기본값, 텍스트기본
+/*underline: 앵커 태그와 같은 밑줄 효과
+/*overline: 윗줄 효과
+/* line-through : 중앙에 줄 효과
+
+/* 링크 걸었을때 주위에 테두리 점선 없애기 
+a,img {outline: none; selector-dummy: expression(this.hideFocus=true);}*/
+
+input,textarea,select {
+	vertical-align: middle;
+	font-size:13px;
+	line-height:140%;
+}
+
+
+div, ul, form, fieldset, td, th, li, h1, h2, h3, h4, p { margin:0; padding:0; border: 0;}
+img { border: 0;}
+img .middle { vertical-align:middle; margin-bottom:3px;}
+img .top {vertical-align:top; margin-top: 3px;}
+img .block { display:block;}
+h1 img,h2 img,h3 img { vertical-align: top; }
+h1,h2,h3,h4,h5 { line-height: 1.2;}
+ol,ul,li { list-style: none;}
+fieldset, img { border: none;}
+hr { display:none;}
+form {display:inline;}
+div .hide { display:none;}
+table {border-collapse: collapse;}
+table caption {display:none;}
+table th { text-align:center;}
+legend {display:none;}
+em { font-style: normal;}
+*{box-sizing: border-box; webkit-box-sizing: border-box; moz-box-sizing: border-box;}
+
+a{-webkit-transition: all 0.4s ease; 
+-moz-transition: all 0.4s ease; 
+-ms-transition: all 0.4s ease; 
+-o-transition: all 0.4s ease; 
+transition: all 0.4s ease;}
+
+
+
+/***************************** 설명박스 숨기기 class *******************************/
+
+.hidden_t {font-size:0;line-height:0;margin-left:-1600px;}
+
+/***************************** 기본 class *******************************/
+
+ul li img { vertical-align:top;}
+.tRight {text-align:right;}
+.tLeft {text-align:left;}
+.tCenter {text-align:center;}
+.tCenter2 {margin:0 auto;}
+.fRight {float:right;}
+.fRightw {float:right;padding-right:10px;}
+.fLeft {float:left;}
+
+.btnR {margin-bottom:15px; text-align:right;}
+.btnC {margin-bottom:15px; text-align:center;}
+
+.underLine {text-decoration:underline !important;}
+
+/* img */
+.middle { vertical-align:middle;}
+.middle1 { vertical-align:middle; margin-top:1px;}
+.middle2 { vertical-align:middle; margin-top:2px;}
+.middle3 { vertical-align:middle; margin-bottom:2px;}
+
+.line{height:1px; background:#e7e7e7; font-size:0; line-height:0;}/** 기본 라인 **/
+.b ,b,h1,h2,h3,h4,h5,h6{font-weight:700;}/** 굵은 텍스트 **/
+.hand {cursor: pointer; }/** 이미지에 onClick 처리했을 때 손바닥 모양 만들기 **/
+.clr {clear:both; font-size:0; line-height:0;}/** 플로팅 된 요소를 clear하기 **/
+.clearfix:after { content: "."; display: block; height: 0; overflow: hidden; clear: both;}
+.sound_only{overflow:hidden; position:absolute; top:-500px; left:0px; font-size:0px;}
+
+.space {font-size:1px;line-height:1px;}/** png 상단왼쪽에 생기는 점없에기위한것 **/
+.space0 {font-size:0;line-height:0;}/** 라인영역 잡을 때 기본 공백 없애기 **/
+.space5 {width:5px;height:5px;font-size:1px;line-height:1px;}/** 세로사이즈 5픽셀인 공백 만들기 **/
+.space10 {width:10px;height:10px;font-size:1px;line-height:1px;}/** 세로사이즈 10픽셀인 공백 만들기 **/
+.space15 {width:15px;height:15px;font-size:1px;line-height:1px;}/** 세로사이즈 15픽셀인 공백 만들기 **/
+.space20 {width:15px;height:15px;font-size:1px;line-height:1px;}/** 세로사이즈 20픽셀인 공백 만들기 **/
+.png24 {tmp:expression(setPng24(this));}
+
+.dInput{
+	height: 15px;
+	border:1px solid #dcdcdc;
+	padding:2px 5px 0px;
+	margin-top: 1px;
+	background: #fafafa;
+}
+.dSelect{
+	border:1px solid #dcdcdc;
+	height: 19px;
+	color:#666;
+}
+.imgwrap {margin:0; padding:0; border:0;}
+.imgwrap img { display:block;}
+.svi_info img { display:block;}
+.imgwrap2 { text-align:center;}
+.imgwrap2 img { margin:0 auto; display:block;}
+
+
+.w200{width:200px;}
+
+/* 폼요소 */
+input[type="text"], input[type="password"], input[type="search"], input[type="number"], input[type="date"], input[type="datetime"], input[type="email"], input[type="tel"] {padding:0px; border:0px; height:36px; padding-top:5px; background: #fff; vertical-align: middle; color: #b9b9b9; font-size:15px; line-height:34px;}
+textarea { border: 0px solid #e1e1e1; background: #fff; padding:0px; color: #b9b9b9; font-size:15px; line-height:16px;}
+input[type="checkbox"], input[type="radio"]{ vertical-align: middle; width: 14px; height: 14px; border: 1px solid #707070; margin:0 5px 3px 0; }
+select { padding: 3px 2px 2px; height:36px; border: 1px solid #dedede; vertical-align: middle;white-space:nowrap; font-size:15px}
+button { vertical-align: middle; overflow:visible;-webkit-transition: all 0.4s ease; transition: all 0.4s ease;}
+input[type="submit"]{line-height:1;}
+
+
+h1,h2,h3,h4,h5,h6,th,strong,b{font-weight:500 !important;}

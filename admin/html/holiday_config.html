@@ -1,0 +1,59 @@
+<script src="/admin/js/reservation.js"></script>
+<script>
+function getholidayList() {
+	$.post("/board/skin/reservation/ajax.holiday_list.php", {
+		date: $('.month').html()
+	}, function(data,status){
+		var j=0;
+		for(var i=0; i<data.state.length; i++) {
+			j++;
+			if (data.state[i]==true) {
+				$('.day_'+j+' :button').val('취소');
+			}		
+		}
+	});
+}
+
+function setHoliday() {
+	$('#calendar :button').each(function() {
+		$(this).click(function() {
+			var Tid = $(this).attr('id');
+			if ($(this).val() == '취소') {
+				$.post("./html/ajax.holiday.php", {
+					mode:'delete',
+					date: Tid
+				}, function(data,status){
+					if (data.state == true) {
+						$('#'+Tid).val('설정');
+					} else {
+						alert('취소에 실패하였습니다. 문의');
+					}
+				});
+			} else {
+				$.post("./html/ajax.holiday.php", {
+					mode:'insert',
+					date: Tid
+				}, function(data,status){
+					if (data.state == true) {
+						$('#'+Tid).val('취소');
+					} else {
+						alert('등록에 실패하였습니다. 문의');
+					}
+				});
+			}
+		});
+	});
+}
+</script>
+<style>
+.headBox { text-align:center;}
+#calendar { width:100%; }
+#calendar th { height:50px; text-align:center;}
+#calendar td { height:50px; text-align:center;}
+#calendar td { border:1px solid #ccc; line-height:200%;}
+</style>
+<div id="zeze">
+	<script type="text/javascript">
+		calendarr('<?=date("m")?>','<?=date("Y")?>','<?=date("d")?>');
+	</script>	
+</div>

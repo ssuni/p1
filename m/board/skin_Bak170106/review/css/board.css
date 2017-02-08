@@ -1,0 +1,115 @@
+@charset "utf-8";
+/* CSS Document */
+
+#boardSkin { width:100%;}
+#boardSkin input { vertical-align:middle;}
+#boardSkin img { vertical-align:middle;}
+#boardSkin select { background:#ffffff; border:1px solid #e0e0e0; padding:2px; vertical-align:middle; height:38px; font-size:15pt;}
+#boardSkin .textForm { background:#ffffff; border:1px solid #e0e0e0; padding:3px; height:36px; font-size:15pt;}
+#boardSkin textarea { background:#ffffff; border:1px solid #e0e0e0;  resize:none; font-size:15pt;}
+#boardSkin .middleCon { vertical-align:middle;}
+#boardSkin a { color:#333333; }
+#boardSkin a:hover { color:#465daa; text-decoration:underline;}
+#boardSkin .clr { clear:both;}
+
+
+
+/*############################################################# 리스트 #############################################################*/
+
+#boardSkin .best_wrap { border:10px solid #e2e5f1; width:600px; margin-bottom:35px;}
+#boardSkin .t_wrap { padding:10px 20px 20px 20px;}
+#boardSkin #bestList { width:100%; border-top:1px solid #6fa6e5;}
+#boardSkin #bestList thead { }
+#boardSkin #bestList tbody td { padding:10px 0; border-bottom:1px solid #e8e8e8;}
+#boardSkin #bestList tbody td.td1 { text-align:center; color:#666666;}
+#boardSkin #bestList tbody td.td2 { font-weight:bold; text-align:center; color:#333333;}
+#boardSkin #bestList tbody td.td3 { text-align:left; color:#333333; padding-left:15px;}
+#boardSkin #bestList tbody td.td3,
+#boardSkin #bestList tbody td.td3 a { font-weight:bold; color:#619ee3;}
+#boardSkin #bestList tbody td.td3 a:hover { font-weight:bold; color:#619ee3; text-decoration:underline;}
+#boardSkin #bestList tbody td.td3 .info {font-size:16px; font-weight:normal; color:#999999; padding-top:7px;}
+#boardSkin #bestList tbody td.td8 { font-size:16px; font-weight:normal; color:#f6648d;}
+
+#boardSkin #boardList { width:100%;}
+#boardSkin #boardList thead { }
+#boardSkin #boardList thead th { text-align:center; border-top:2px solid #555555; border-bottom:1px solid #d7d7d7; padding:8px 0; color:#888888;}
+#boardSkin #boardList tbody td { padding:8px 0; border-bottom:1px solid #e8e8e8;}
+#boardSkin #boardList tbody td.td1 { text-align:center; color:#666666;}
+#boardSkin #boardList tbody td.td2 { text-align:center; color:#333333;}
+#boardSkin #boardList tbody td.td3 { text-align:left;}
+#boardSkin #boardList tbody td.td3 a { font-weight:bold; color:#333333;}
+#boardSkin #boardList tbody td.td3 a:hover { font-weight:bold; color:#619ee3; text-decoration:underline;}
+#boardSkin #boardList tbody td.td3 .info {font-size:16px; font-weight:normal; color:#999999; padding-top:7px;}
+#boardSkin #boardList tbody td.td8 { font-size:16px; text-align:center; color:#f6648d;}
+#boardSkin #boardList tbody tr.notice { background:#f8f8f8;}
+#boardSkin #boardList tbody tr.notice td.td1 { color:#000000; font-weight:bold;}
+#boardSkin #boardList tbody tr.notice td.td3 { font-weight:bold;}
+
+
+/*############################################################# 검색 #############################################################*/
+
+#boardSkin #searchBox { padding-bottom:20px; text-align:right; position:relative;}
+
+/*############################################################# 카테고리 #############################################################*/
+
+#boardSkin #categoryBox { padding-bottom:20px; margin-bottom:20px;}
+#boardSkin #categoryBox .category2 { width:100%;}
+#boardSkin #categoryBox .category2 li { width:33.3%; float:left; display:inline-block; .display:inline; zoom:1; vertical-align:middle; }
+#boardSkin #categoryBox .category2 li a { width:100%; padding:10px 0 10px 0; display:block; text-align:center; border:1px solid #e0e0e0; background:#f5f5f5; font-weight:normal; color:#333; font-size:14pt;}
+#boardSkin #categoryBox .category2 li.select a { color:#333; background:#fff; font-weight:bold;}
+#boardSkin #categoryBox .category2 li.bg { }
+
+/*############################################################# 버튼영역 #############################################################*/
+
+#boardSkin .btnArea { text-align:center;}
+#boardSkin .btnArea2 { text-align:right; padding-top:20px;}
+#boardSkin .btnArea3 { text-align:center; padding-top:20px;}
+
+/*############################################################# 페이징 #############################################################*/
+
+#boardSkin .pageArea { text-align:center; padding:15px 0;}
+#boardSkin .pageArea .pagingList { text-align:center; display:inline-block; .display:inline; zoom:1;}
+#boardSkin .pageArea .pagingList li { text-align:center; display: inline; float:left; padding:7px;}
+#boardSkin .pageArea .paging { text-align:center; display:inline-block; .display:inline; zoom:1;}
+#boardSkin .pageArea .paging li { text-align:center; display: inline; float:left;}
+#boardSkin .pageArea .paging li, 
+#boardSkin .pageArea .paging li a { font-size:22pt; font-weight:bold;}
+#boardSkin .pageArea .paging .over { color:#465daa; font-weight:bold;}
+
+/*################################# view #################################*/
+
+#boardSkin .subjectBox { text-align:center; border-top:2px solid #555555; border-bottom:1px solid #d7d7d7; padding:8px 0; color:#333333; font-weight:bold;}
+#boardSkin .infor { border-bottom:1px solid #dfdfdf; padding:8px 0;}
+#boardSkin .infor ul { text-align:left; display:inline-block; .display:inline; zoom:1; padding-left:10px;}
+#boardSkin .infor ul li { text-align:left; display: inline; float:left; color:#999999;}
+#boardSkin .infor ul li.bg { background:url(../images/icon_gubun.gif) no-repeat right 0; padding-right:20px;}
+#boardSkin .file { background:#f8f8f8; border-bottom:1px solid #dfdfdf; padding:6px 0;}
+#boardSkin .file ul { text-align:left; display:inline-block; .display:inline; zoom:1; padding-left:10px;}
+#boardSkin .file li { text-align:left; color:#333333; padding:2px 0 2px 15px; background:url(../images/icon_file.gif) no-repeat left 2px;}
+#boardSkin .file li a { color:#a3a29f; font-weight:bold; text-decoration:underline;}
+#boardSkin .contents { padding:20px 10px 40px 10px; border-bottom:1px solid #dfdfdf; line-height:150%; }
+#boardSkin .contents .imgWrap { margin-bottom:7px; text-align:center;}
+
+/*############################################################# 글쓰기 #############################################################*/
+
+#boardSkin .agreeBox { background:#f8f8f8; border:1px solid #dddddd; padding:20px;}
+#boardSkin .agreeBox .agreeText { }
+#boardSkin .agreeBox p { font-size:15pt; text-align:center; padding-top:15px;}
+#boardSkin .agreeBox table { width:100%; border-top:2px solid #000; background:#FFF;}
+#boardSkin .agreeBox table th, 
+#boardSkin .agreeBox table td { font-size:15pt; border:1px solid #d4dadd; padding:10px; text-align:center;}
+#boardSkin .agreeBox table th { color:#000; background:#ececec;}
+
+
+#boardSkin #writeForm { border-top:2px solid #000000; margin-top:20px;}
+#boardSkin #writeForm th,
+#boardSkin #writeForm td { font-size:15pt; border-bottom:1px solid #dfdfdf; padding:10px 0; text-align:left;}
+#boardSkin #writeForm th { font-weight:normal; padding-left:15px;}
+#boardSkin #writeForm td .tt { color:#999; letter-spacing:-1px; margin-left:10px;}
+#boardSkin #writeForm span.red { color:#F00;}
+
+
+
+
+
+

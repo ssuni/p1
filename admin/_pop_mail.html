@@ -1,0 +1,122 @@
+<?	include $_SERVER['DOCUMENT_ROOT']."/include/session_start.php";
+	include $_SERVER['DOCUMENT_ROOT']."/include/dbconfig.php";
+	include $_SERVER['DOCUMENT_ROOT']."/include/function.php";
+
+	echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+
+	if( $act == 'send' ) {
+		$mailData["name"]		= $mArray["tblStrName"];
+		$mailData["sender"]		= $_POST["sender"];
+		$mailData["receiver"]	= $_POST["receiver"];
+		$mailData["subject"]	= stripslashes( $_POST["strSubject"] );
+		$mailData["comment"]	= stripslashes( $_POST["strComment"] );
+
+		$homeUrl = "http://".$bagData["host"];
+		$fromname = $bagData["siteName"];
+		$fromname='=?UTF-8?B?'.base64_encode($fromname).'?=';
+		$fromaddress = $mailData["sender"];
+		$server_mail = $mailData["sender"];
+		$headers = "From:".$fromname."<".$fromaddress.">\n";
+		$headers .= "X-Sender:<".$server_mail.">\n";
+		$headers .= "X-Mailer:PHP\n";
+		$headers .= "Return-Path:<".$fromaddress.">\n";
+		$headers .= "Content-Type:text/html;charset=utf-8\n";
+		$headers .= "\n";
+		/*$fp = fopen($_SERVER['DOCUMENT_ROOT']."/mail/mail_join.html","r");
+		$m_content = fread($fp,"100000");
+		fclose($fp);*/
+		$m_contents = sock_url( $bagData["host"], "80", "http://".$bagData["host"]."/mail/letter_webmail.html");
+		$m_contents = str_replace("@HOMEURL@",$homeUrl,$m_contents);
+		$m_contents = str_replace("@COMMENT@",$mailData["comment"],$m_contents);
+		$m_contents_arr = explode("\r\n\r\n",$m_contents);
+		$m_contents = $m_contents_arr[1];
+
+		$title = $mailData["subject"];
+		$title='=?UTF-8?B?'.base64_encode($title).'?=';
+		$res = mail($mailData["receiver"],$title,$m_contents,$headers);
+		echo "<script>window.opener.document.location.href = window.opener.document.URL;self.close();</script>";
+	}	?>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>어드민</title>
+<script language="javascript" src="./js/admin.js"></script>
+<link href="./css/admin.css" rel="stylesheet" type="text/css">
+<link href="./css/admin_old.css" rel="stylesheet" type="text/css">
+<body>
+<form name="frmMain" method="post" enctype="multipart/form-data" action="<? echo $PHP_SELF; ?>">
+<input type="hidden" name="act" value="send">
+
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="100%" align="center" valign="top" class="center_bg">
+			<table width="98%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="6" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="bottom_5">
+					<!-- -->
+						<table width="99%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td class="main_title_01">이메일 발송</td>
+							</tr>
+						</table>
+						<!-- 검색 테이블 입니다. -->
+						<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+							<tr>
+								<td width="120" align="center" class="main_title_02">보내는 이름</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01">
+								<input class="text_basic" style="width:100%; height:20px;" name="strName" type="text" value="<?=$bagData["siteName"]?>" itemname="보내는이름" required>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" class="main_title_02">보내는 메일</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:100%; height:20px;" name="sender" type="text" value="<?=$admData["email"]?>" itemname="보내는메일" required email></td>
+							</tr>
+							<tr>
+								<td align="center" class="main_title_02">받는 사람</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:100%; height:20px;" name="receiver" type="text" value="<?=$receiver?>" itemname="받는사람" required email></td>
+							</tr>
+							<!-- <tr>
+								<td align="center" class="main_title_02">첨부 파일</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:100%; height:20px;" name="file" type="file"/></td>
+							</tr> -->
+							<tr>
+								<td align="center" class="main_title_02">제목</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><input class="text_basic" style="width:100%; height:20px;" name="strSubject" type="text" itemname="제목" required></td>
+							</tr>
+							<tr>
+								<td align="center" class="main_title_02">내용</td>
+								<td bgcolor="#FFFFFF" class="table_ct_01"><textarea name="strComment" style="width:100%; height:150px" itemname="내용" required geditor></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center" class="main_title_02">
+								<input type="image" src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;"> <img src="./img/btn_cancle.gif" width="60" height="18" border="0" style="cursor:pointer;" onclick="self.close();">
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+
+		</td>
+	</tr>
+</table>
+</form>
+<script language="javascript" src="/geditor/geditor.js"></script>
+<script language="javascript" src="/include/wrest.js"></script>
+</body>
+</html>

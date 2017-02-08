@@ -1,0 +1,136 @@
+			<script language="javascript">
+				function fnReserve(year,time) {
+					window.open("/admin/_pop_reserve_write.html?revYear="+year+"&revTime="+time,"reserve","width=600, height=700, scrollbars=auto");
+				}
+
+				function fnEdit(num, act) {
+					window.open("/admin/_pop_reserve_write.html?act="+act+"&&tNum="+num,"reserve","width=600, height=700, scrollbars=auto");
+				}
+
+				function fnSearch(){
+					var f_oForm	= document.forms["fnMain"];
+					if ( f_oForm.date.value == "" ){
+						alert("시작일을 지정하십시오");
+						return;
+					}
+					var Dday1 = f_oForm.date.value;
+					var Dday2 = Dday1.replace(/-/g,'');
+					location.href = '<?=$PHP_SELF?>?act=calendar&s_ji=<?=$s_ji?>&week='+Dday2+'&date='+Dday1;
+				}
+				function fnChange() {
+					var s_ji_v = document.fnMain.s_ji.value;
+					location.href = '<?=$PHP_SELF?>?act=calendar&s_ji='+s_ji_v+'&week=<?=$week?>&date=<?=$date?>'
+				}
+
+			</script>
+			<script src="/js/calender.js" language="javascript"></script>
+			<form name="fnMain" method="post" action="<? echo $PHP_SELF; ?>">
+			<input type="hidden" name="setp" value="next">
+			<input type="hidden" name="act" value="">
+			<input type="hidden" name="revYear" value="">
+			<input type="hidden" name="revTime" value="">
+			<table width="1025" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td bgcolor="#F5F5F5" style="padding:5px 0px 0px 5px;">
+					<!-- 검색 시작 -->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="main_title_01">예약현황<br><br>
+								날짜 검색 : 
+								<input type="text" name="date" id="date" value="<? echo $date; ?>" onclick="check_mouse('fnMain.'+this.name)" class="text_basic" style="width:80px;height:20px;cursor:pointer;" readonly> <img src="./img/btn_search.gif" width="49" height="19" align="absmiddle" style="cursor:pointer;" onclick="fnSearch();"></td>
+							<td align="right"><a href="./inc/reserve_mytoex.php"><img src="./img/bt_excel.gif" border="0"></a></td>
+						</tr>
+					</table>
+
+					<table width="99%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td height="35"><img src="./img/btn_prev.gif" style="cursor:pointer;" onclick="location.href='?act=calendar&s_ji=<?=$s_ji?>&week=<?=$prev_week?>';" align="absmiddle"> </td>
+								<td align="right"><img src="./img/btn_next.gif" style="cursor:pointer;" onclick="location.href='?act=calendar&s_ji=<?=$s_ji?>&week=<?=$next_week?>';" align="absmiddle"></td>
+							</tr>
+						</table>
+						<table width="99%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td height="6" colspan="3" background="./img/calendar_bg_01.gif" ></td>
+							</tr>
+							<tr>
+								<td width="6" background="./img/calendar_bg_01.gif"></td>
+								<td bgcolor="#F7F7F7" style="padding:2px;"><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D4D3D1">
+									<tr>
+										<td width="102" height="50" align="center" background="./img/calendar_bg_02.gif">&nbsp;</td>
+										<? for ( $i = 0 ; $i < 7 ; $i++ ) { ?>
+										<? //if($i==4) { continue; }?>
+										<? $font_color	= ( $i == 6 ) ? "#237C93" : "#666666" ;?>
+										<? 
+										switch ( $i ){
+											case 6 : 
+												 $font_color	= "#237C93";
+											break;
+											case 0 : 
+												 $font_color	= "#cb1010";
+											break;
+											default : 
+												 $font_color	= "#666666";
+											break;
+										}
+										$tdColor[$i] = ( mktime( 0, 0, 0, date('m'), date('d'), date('Y') ) == mktime( 0, 0, 0, date("m", $thisweek[$i]), date("d", $thisweek[$i]), date('Y') ) ) ? "#F5F5F5" : "#FFFFFF";
+										?>
+										<td align="center" background="./img/calendar_bg_02.gif"><div><img src="./img/calendar_0<?=$i?>.gif" ></div><div><b style="color:<?=$font_color?>"> ( <?=intval(date("m", $thisweek[$i]))?> / <?=intval(date("d", $thisweek[$i]))?> ) </b></div></td>
+										<? } ?>
+									</tr>
+									<? for( $j = 540 ; $j < 1230 ; $j+=30 ) { ?>
+									<tr>
+										<td height="40" background="./img/calendar_bg_03.gif" class="left_20"><?=zero_full(intval($j/60),2)?> 시 <?=(($j%60) == 0)? '00' : '30'?> 분</td>
+										<? 
+											for ( $i = 0 ; $i < 7 ; $i++ ) { 
+											$reserveDate = intval(date("Y", $thisweek[$i]))."-".zero_full( intval(date("m", $thisweek[$i])), 2 )."-".zero_full( intval(date("d", $thisweek[$i])), 2 );
+											$reserveTime1 = zero_full(intval($j/60),2);
+											$reserveTime2 = ( $j%60 == 0 ) ? '00' : '30';
+											$reserveTime = $reserveTime1.":".$reserveTime2;
+											$hereDate = mktime($reserveTime1,$reserveTime2,0,intval(date("m", $thisweek[$i])),intval(date("d", $thisweek[$i])),intval(date("Y", $thisweek[$i])));
+										?>
+										<? if( count( $Data[$hereDate]["name"] ) > 0 ) { ?>
+										<td align="left" style="padding-left:3px" bgcolor="<?=$tdColor[$i]?>">
+											<? 
+											for( $m = 0; $m < count( $Data[$hereDate]["name"] ); $m++ ) { 
+											if( $m > 0 ) echo "<br>";
+											?>
+											<a href="javascript:" onClick="fnEdit('<? echo $Data[$hereDate]["number"][$m]; ?>','modify');"><? echo $Data[$hereDate]["name"][$m]; ?></a> <? echo $Data[$hereDate]["guimg"][$m]; ?> <? echo $Data[$hereDate]["img"][$m]; ?>
+											<? } ?> <img src="/admin/img/menu_icon2_01_over.gif" onClick="fnReserve('<?=$reserveDate?>','<?=$reserveTime?>');">
+										</td>
+										<? } else { ?>
+										<td align="center" bgcolor="<?=$tdColor[$i]?>" style="cursor:hand" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$tdColor[$i]?>'" style="cursor:hand" onClick="fnReserve('<?=$reserveDate?>','<?=$reserveTime?>');">&nbsp;
+										</td>
+										<? } ?>
+										<? 
+											} 
+										?>
+									</tr>
+									<? } ?>
+								</table></td>
+								<td width="6" background="./img/calendar_bg_01.gif"></td>
+							</tr>
+							<tr>
+								<td height="6" colspan="3" background="./img/calendar_bg_01.gif"></td>
+							</tr>
+						</table>
+					<!-- 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			</form>
+<script language="javascript" src="/geditor/geditor.js"></script>

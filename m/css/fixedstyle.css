@@ -1,0 +1,10 @@
+      .hs_menu {
+        text-align: center;
+        width: 720px;
+      }
+
+      .jbFixed {
+        position: fixed;
+        top: 0px;
+	z-index:100
+      }

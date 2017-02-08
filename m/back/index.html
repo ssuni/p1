@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>신논현쁨의원</title>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <div class="ppeum_top">
+        <h1 class="ppeum_logo"><a href="#"><img src="img/logo.png" alt="" width="90" class="img_g"></a></h1>
+        <span class="img_kakao">
+			<a href="http://plus.kakao.com/home/nvcno7a6" target="_blank"><img src="img/talk.png" alt="" width="31" class="img_g"></a>
+		</span>
+        <span class="img_call">
+			<a href="tel:02-593-3344"><img src="img/phone.png" alt="" width="20" class="img_g"></a>
+		</span>
+    </div>
+    <div>
+        <img src="img/landing.jpg" class="img_c" alt="">
+    </div>
+    <div class="ppeum_info">
+        <div style="background:#000;overflow:hidden;width:320px;margin:0 auto">
+        <form action="" method="post" id="box_db">
+            <fieldset class="screen_out">상담신청하기</fieldset>
+            <div class="info_left">
+                <div class="info_date">
+                    <label for="name">이름</label>
+                    <input type="input" id="name" name="name" class="inp_comm">
+                </div>
+                <div class="info_date">
+                    <label for="phone">연락처</label>
+                    <input type="input" id="phone" name="phone" class="">
+                </div>
+                <div class="info_date info_select">
+                    <label for="area">지점선택</label>
+                    <select name="kakao" id="area" onchange="dbDomain_box(this.value);">
+                        <option value="56">지점을 선택해주세요</option>
+                        <option value="56">강남점</option>
+                        <option value="58">신논현점</option>
+                        <option value="57">청담점</option>
+                    </select>
+                </div>
+                <div class="info_date info_cont">
+                    <label for="say">상담내용</label>
+                    <textarea id="say" name="say" rows="8" cols="16"></textarea>
+                </div>
+            </div>
+            <div class="info_right">
+                <div class="info_txt">
+                    <input type="checkbox" id="" name="txt" class="" checked>
+                    <label for="txt">개인정보 수집 및<br/> 이용에 동의 합니다.</label><br/>
+                    <a href="http://crm.btdot.com/agreement2.php?id=" class="link_more" target="_blank">자세히보기</a>
+                </div>
+                <input type="image" src="img/btn_counsel.png" style="width:102px;margin-top:17px">
+            </div>
+
+        </form>
+        </div>
+    </div>
+    <div class="ppeum_cont">
+        <img src="img/contents.jpg" alt="" class="img_c">
+    </div>
+    <div class="ppeum_foot">
+        <img src="img/road.jpg" alt="" class="img_c">
+    </div>
+    <div class="counsel_db_btn" id="counsel_db_btn"><a href="#non" onclick="javascript: counsel_db_show();"><img src="img/counsel_db_btn2.png" alt=""></a></div>
+    <!-- db -->
+    <div class="com_pop pop_register" id="pop_register_db" style="display: none;">
+    		<div class=""><img src="img/db_title.jpg" alt=""></div>
+            <form action="" method="post" id="register_db" onsubmit="javascript: return pop_register_db();">
+    		<input type="hidden" name="url" value="" id="url2">
+                <div class="clear">
+                    <span class="left"><label for="register_db_name">이름</label></span>
+                    <span class="right"><input type="text" name="name" class="form-control" id="register_db_name"></span>
+                </div>
+    			<div class="clear">
+                    <span class="left"><label for="register_db_phone">전화번호</label></span>
+                    <span class="right"><input type="text" name="phone" placeholder="ex)010-0000-0000" value="" class="form-control" id="register_db_phone"></span>
+                </div>
+    			<div class="clear">
+                    <span class="left"><label for="register_db_time">상담가능시간</label></span>
+                    <span class="right"><select name="time" id="choiceSel">
+                        <option value="noChoice">시간을 선택해주세요.</option>
+                        <option value="10시~11시">10시~11시</option>
+                        <option value="11시~12시">11시~12시</option>
+                        <option value="12시~13시">12시~13시</option>
+                        <option value="13시~14시">13시~14시</option>
+                        <option value="14시~15시">14시~15시</option>
+                        <option value="15시~16시">15시~16시</option>
+                        <option value="16시~17시">16시~17시</option>
+                        <option value="17시~18시">17시~18시</option>
+                        <option value="18시~19시">18시~19시</option>
+                        <option value="19시~20시">19시~20시</option>
+                    </select></span>
+                </div>
+                <div class="clear">
+                	<span class="left"><label for="area">지점선택</label></span>
+                	<span class="right">
+                		<select name="kakao" id="area" onchange="dbDomain(this.value);">
+                			<option value="56">지점선택</option>
+                			<option value="56">강남점</option>
+                			<option value="57">청담</option>
+                			<option value="58">신논현점</option>
+                		</select>
+                	</span>
+                </div>
+    			<div class="clear">
+                    <span class="left" style="vertical-align: top !important;"><label for="register_db_say">상담내용</label></span>
+                    <span class="right"><textarea class="form-control" id="register_db_say" name="say"></textarea></span>
+                </div>
+                <div class="chk"><input type="checkbox" name="chk2" value="" checked="checked">개인정보 사용동의<a target="_blank" href="http://crm.btdot.com/agreement2.php?id=">자세히보기</a></div>
+                <div><button class="btn1">저장</button><button type="button" class="head_btn c_btn" onclick="javascript: counsel_db_hide()">취소 </button></div>
+            </form>
+        </div>
+    <!-- db -->
+    <script>
+    function dbDomain(val){
+    	document.getElementById('register_db').action = "http://tcation.co.kr/crm/embed.php?m_no="+val;
+    }
+    function dbDomain_box(val){
+    	document.getElementById('box_db').action = "http://tcation.co.kr/crm/embed.php?m_no="+val;
+    }
+    	function submitFunc(form)
+    {
+	var phone2 = document.getElementById("phone2");
+	var phone3 = document.getElementById("phone3");
+	if(!form.name.value)
+	{
+		alert("이름을 입력해주세요.");
+		return false;
+	}
+
+	if(form.clinic2.value == "noChoice")
+	{
+		alert("시간을 선택해주세요.");
+		return false;
+	}
+	if(!form.chk1.checked)
+	{
+		alert("개인정보 사용동의에 동의해주세요.");
+		return false;
+	}
+	return true;
+}
+	function counsel_db_show()
+	{
+		var db = document.getElementById('pop_register_db')
+		var bg = document.getElementById('bg')
+		db.style.display = "block";
+		bg.style.display = "block";
+
+	}
+	function counsel_db_hide()
+	{
+		var db = document.getElementById('pop_register_db')
+		var bg = document.getElementById('bg')
+		db.style.display = "none";
+		bg.style.display = "none";
+
+	}
+	function submitFunc(form)
+	{
+		var phone2 = document.getElementById("phone2");
+		var phone3 = document.getElementById("phone3");
+		if(!form.name.value)
+		{
+			alert("이름을 입력해주세요.");
+			return false;
+		}
+		if(form.clinic2.value == "noChoice")
+		{
+			alert("시간을 선택해주세요.");
+			return false;
+		}
+		if(!form.chk1.checked)
+		{
+			alert("개인정보 사용동의에 동의해주세요.");
+			return false;
+		}
+		if(form.recive.checked)
+		{
+			form.sms_recive.value = "수신동의";
+		}
+		return true;
+	}
+	function submitFunc2(form)
+	{
+        var url = document.getElementById("url");
+        url.value = location.href;
+		if(!form.name.value)
+		{
+			alert("이름을 입력해주세요.");
+			form.name.focus();
+			return false;
+		}
+		if(!form.phone2.value)
+		{
+			alert("전화번호를 입력해주세요.");
+			phone2.focus();
+			return false;
+		}
+		if(!form.phone3.value)
+		{
+			alert("전화번호를 입력해주세요.");
+			phone3.focus();
+			return false;
+		}
+		if(!form.chk1.checked)
+		{
+			alert("개인정보 사용에 동의해주세요.");
+			form.chk1.focus();
+			return false;
+		}
+		return true;
+	}
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+
+.top_line { height:3px; background:#333333; font-size:1px; line-height:1px;}
+.memberForm { height:22px; line-height:22px; border:1px solid #bababa;}
+.joinform {  height:19px; line-height:19px; border:1px solid #bababa; background:#f6f6f6; color:#888888;}
+.joinform2 {  height:19px; line-height:19px; border:1px solid #bababa; background:#d8d8d8; color:#888888;}
+.joinTextarea { border:1px solid #bababa; background:#f6f6f6; color:#888888;}
+.clear { clear:both;}
+
+/********************************** 우편번호찾기 ************************************/
+#searchZipcode { width:420px; height:350px;}
+#searchZipcode .formArea { text-align:center; padding:20px 0;}
+#searchZipcode .formArea .color { color:#39b8c7;}
+#searchZipcode .formArea2 { text-align:center; padding-bottom:25px;}
+#searchZipcode .ttArea { padding:10px 0; border-top:1px solid #dbdbdb; border-bottom:1px solid #dbdbdb; text-align:center;}
+#searchZipcode .resultBox { background:#ececec; padding:15px; width:390px; height:102px; overflow:auto;}
+#searchZipcode .resultBox ul li { line-height:18px; height:18px;}
+
+
+/********************************** 로그인 ************************************/
+#memberLoginBox { width:600px; background:#FFFFFF; margin:0 auto; text-align:left;}
+#memberLoginBox .imgArea { height:113px; position:relative;}
+#memberLoginBox .imgArea .text { position:absolute; left:39px; top:28px;}
+#memberLoginBox .imgArea .img { position:absolute; right:29px; top:15px;}
+
+#memberLoginBox .loginArea { height:87px; padding-top:28px; border-top:1px solid #d8d8d8; border-bottom:1px solid #d8d8d8; background:#ececec; text-align:center;}
+#memberLoginBox .loginArea .formBox { text-align:left; margin:0 auto;}
+#memberLoginBox .loginArea .formBox .pd { padding:0 12px 7px 0;}
+#memberLoginBox ul { width:496px; height:60px; margin:17px 0 0 39px; float:left;}
+#memberLoginBox ul li { float:left;}
+
+
+/********************************** 회원가입1 ************************************/
+#memberJoin1Box { width:100%; margin:0 auto; text-align:left;}
+#memberJoin1Box .agreeArea { height:429px; padding:30px 0;}
+#memberJoin1Box .agreeArea .tt {margin-bottom:5px;}
+#memberJoin1Box .agreeArea .agreeBox { overflow:auto; width:765px; height:128px; padding:20px; border:1px solid #d8d8d8; background:#ececec;}
+#memberJoin1Box .agreeArea .check { padding:5px 0 7px 0; text-align:right;}
+#memberJoin1Box .sttBox { margin-top:7px; height:50px; border-top:1px solid #d8d8d8; border-bottom:1px solid #d8d8d8;}
+#memberJoin1Box .sttBox img { margin-top:13px; margin-left:30px;}
+#memberJoin1Box .formArea { padding-top:22px; text-align:center;}
+#memberJoin1Box .formArea .formBox { text-align:left; margin:0 auto;}
+#memberJoin1Box .formArea .formBox .pd { padding:0 12px 7px 0;}
+#memberJoin1Box .formArea .formBox .pd2 { padding:0 0 7px 0;}
+
+
+/********************************** 회원가입2 ************************************/
+#memberJoin2Box { width:100%; margin:0 auto; text-align:left;}
+#memberJoin2Box .formArea { padding:30px 0 17px 0; }
+#memberJoin2Box .formArea .stt { padding-bottom:6px; border-bottom:1px solid #d8d8d8;}
+#memberJoin2Box .formArea .formBox {}
+#memberJoin2Box .formArea .formBox th,
+#memberJoin2Box .formArea .formBox td { text-align:left; padding:5px; border-bottom:1px solid #d8d8d8;}
+#memberJoin2Box .formArea .tt { display:inline-block; padding-left:15px; font-size:11px; color:#999999;}
+#memberJoin2Box .formArea .pd1 { padding-bottom:5px; }
+#memberJoin2Box .formArea .checkList { width:520px;}
+#memberJoin2Box .formArea .checkList li { width:130px; float:left; font-size:11px;}
+#memberJoin2Box .formArea .color { color:#39b8c7;}
+#memberJoin2Box .btnArea { text-align:center;}
+
+
+/********************************** 회원가입완료 ************************************/
+#memberJoinConfirm { width:600px; margin:0 auto; text-align:left;}
+#memberJoinConfirm .imgArea { padding:36px 0 18px 0; text-align:center;}
+#memberJoinConfirm .btnArea { padding-bottom:33px; text-align:center;}
+#memberJoinConfirm .textArea { height:110px; background:#ececec; border-top:1px solid #d8d8d8; position:relative;}
+#memberJoinConfirm .textArea img { position:absolute; left:30px; top:20px;}
+
+
+/********************************** 회원정보수정 ************************************/
+#memberModifyBox { width:100%; margin:0 auto; text-align:left;}
+#memberModifyBox .formArea { padding:30px 0 17px 0; }
+#memberModifyBox .formArea .stt { padding-bottom:6px; border-bottom:1px solid #d8d8d8;}
+#memberModifyBox .formArea .formBox {}
+#memberModifyBox .formArea .formBox th,
+#memberModifyBox .formArea .formBox td { text-align:left; padding:5px; border-bottom:1px solid #d8d8d8;}
+#memberModifyBox .formArea .tt { display:inline-block; padding-left:15px; font-size:11px; color:#999999;}
+#memberModifyBox .formArea .pd1 { padding-bottom:5px; }
+#memberModifyBox .formArea .checkList { width:520px;}
+#memberModifyBox .formArea .checkList li { width:130px; float:left; font-size:11px;}
+#memberModifyBox .formArea .color { color:#39b8c7;}
+#memberModifyBox .btnArea { text-align:center;}
+
+
+/********************************** 회원탈퇴 ************************************/
+#memberOutBox { width:100%; margin:0 auto; text-align:left;}
+#memberOutBox .formArea { padding:30px 0 17px 0; }
+#memberOutBox .formArea .stt { padding-bottom:6px; border-bottom:1px solid #d8d8d8;}
+#memberOutBox .formArea .formBox {}
+#memberOutBox .formArea .formBox th,
+#memberOutBox .formArea .formBox td { text-align:left; padding:5px; border-bottom:1px solid #d8d8d8;}
+#memberOutBox .btnArea { text-align:center;}
+
+
+/********************************** 아이디/패스워드 찾기 ************************************/
+#memberIdpwBox { width:100%; margin:0 auto; text-align:left;}
+#memberIdpwBox .formArea { height:275px;}
+#memberIdpwBox .formArea .agree1Box { float:left; width:48%; margin-top:30px;}
+#memberIdpwBox .formArea .agree2Box { float:right; width:48%; margin-top:30px;}
+#memberIdpwBox .formArea .title { padding-bottom:19px;}
+#memberIdpwBox .formArea .formBox { width:100%; height:155px; border-top:1px solid #dbdbdb; border-bottom:1px solid #dbdbdb; background:#ececec; position:relative;}
+#memberIdpwBox .formArea .formBox .formTable { position:absolute; left:45px; top:25px;}
+#memberIdpwBox .formArea .formBox .formTable .pd { padding:0 9px 7px 0;}
+#memberIdpwBox .formArea .formBox .formTable .pd2 { padding:5px 10px 0 0;}
+#memberIdpwBox .btnArea { text-align:center;}
+
+
+
+
+

@@ -1,0 +1,73 @@
+@charset "utf-8";
+/* CSS Document */
+
+/***********************************************************************************************/
+/********************************** index 페이지 ***********************************************/
+/***********************************************************************************************/
+.indexBg { background:url(/admin/images/index/bg.gif) repeat;}
+.indexWrap { background:url(/admin/images/index/body_bg.gif) repeat-x top left; text-align:center;}
+.loginWrap { background:url(/admin/images/index/body_center_bg.jpg) no-repeat top center; height:1000px;}
+.loginWrap .formTable { position:absolute; left:50%; top:443px; margin-left:-35px; width:275px; height:55px;}
+.formBg { padding-right:6px;}
+
+input.indexInput { background:#43464b; border:1px solid #000000; height:25px; line-height:25px; color:#FFFFFF; font-weight:bold;}
+
+/***********************************************************************************************/
+/********************************** common 페이지 **********************************************/
+/***********************************************************************************************/
+.commonBg { background:url(/admin/images/common/top_bg.gif) repeat-x top left;}
+#topArea { position:relative; height:67px; width:1000px;}
+#topArea h1 { position:absolute; left:0; top:0; width:300px; height:67px;}
+#topArea .info { position:absolute; right:10px; top:37px; width:400px; height:19px; text-align:right; color:#000000;}
+#topArea .info strong { color:#0188c0; font-weight:bold;}
+#topArea .info img { margin-top:-4px;}
+
+#menuArea { width:990px; height:40px; position:relative;}
+#menuArea ul { position:absolute; left:56px; top:7px; width:885px; height:26px; float:left;}
+#menuArea ul li { float:left; display:inline-block; .display:inline; zoom:1;}
+
+#contentsWrap { position:relative; width:1000px; background:url(/admin/images/common/left_bg.gif) repeat-y left; text-align:left;}
+#contentsWrap .leftArea { width:210px; float:left; background:url(/admin/images/common/left_top_bg.gif) no-repeat top left; text-align:center; padding-bottom:30px;}
+#contentsWrap .leftArea .titleBar { color:#ffffff; font-size:14px; font-weight:bold; height:44px; line-height:44px;}
+#contentsWrap .leftArea .titleBar strong { color:#1d9bf4;}
+#contentsWrap .leftArea .leftBar { width:190px; margin:0 auto; text-align:left;}
+#contentsWrap .leftArea ul.navi { width:190px; margin:10px auto 0 auto; text-align:left;}
+#contentsWrap .leftArea ul.navi li { vertical-align:top; color:#89b3e5; font-weight:bold; background:url(../images/common/left_bg_down.gif) no-repeat; height:28px; line-height:28px;}
+#contentsWrap .leftArea ul.navi li a { padding-left:25px; display:block; width:190px; height:28px; color:#89b3e5; font-weight:bold; }
+#contentsWrap .leftArea ul.navi li.on a, 
+#contentsWrap .leftArea ul.navi li a:hover { padding-left:25px; background:url(../images/common/left_bg_over.gif) no-repeat; color:#ffffff; text-decoration:none;}
+
+.left_tt { background:url(/admin/images/common/tt_bg.gif) repeat-y top left; color:#666666; margin-top:10px; text-align:center;}
+.left_tt .bottom { font-size:0; line-height:0; height:8px; background:url(/admin/images/common/tt_box_bottom.gif) no-repeat;}
+.left_tt table.infoBox { width:165px; margin:0 auto;}
+.left_tt table.infoBox td { padding:2px 0; color:#666666; font-size:9pt; font-weight:normal; }
+.left_tt table.infoBox td.tt1 { text-align:left; font-weight:bold; color:#1d9bf4;}
+.left_tt table.infoBox td.tt2 { text-align:left; font-weight:bold; color:#000000;}
+.left_tt table.infoBox td.tt3 { text-align:left; font-weight:bold; color:#ff00ff;}
+.left_tt table.infoBox td.info { text-align:right;}
+.left_tt table.infoBox td.info strong { color:#ff0000; font-weight:bold; }
+.left_tt table.calendar { width:165px; margin:0 auto;}
+
+#contentsWrap .rightArea { width:790px; float:left; padding-bottom:30px;}
+#contentsWrap .rightArea #locationBar { position:relative; height:44px;}
+#contentsWrap .rightArea #locationBar h2 { display:inline-block; .display:inline; zoom:1; position:absolute; left:0; top:12px; width:200px; height:21px; background:url(/admin/images/icon/icon_bl.gif) no-repeat top left; padding-left:25px; margin-left:40px; line-height:21px; color:#000000; font-weight:bold;}
+#contentsWrap .rightArea #locationBar p.location { display:inline-block; .display:inline; zoom:1; position:absolute; right:10px; top:17px; background:url(/admin/images/icon/icon_home.gif) no-repeat top left; padding-left:16px; font-size:11px; color:#9d9d9d;}
+#contentsWrap .rightArea #locationBar p.location strong { color:#5a5a5a;}
+#contentsWrap .rightArea .contentsArea { padding:22px 10px 0 40px; width:740px; text-align:left;}
+
+.commonBox { padding-bottom:20px;  background:url(/admin/images/common/title_box_bg.gif) repeat-x top left; position:relative;}
+.commonBox .title { background:url(/admin/images/common/title_box_left.gif) no-repeat top left; height:35px; color:#000000; font-weight:bold; line-height:35px; padding-left:28px;}
+.commonBox p.more { position:absolute; right:0; top:0; height:35px; padding:8px 9px 0 0; background:url(/admin/images/common/title_box_right.gif) no-repeat top right; text-align:right;}
+.commonBox table.commonTable1 { width:100%; border-collapse: collapse; border:1px solid #e6e6e6; margin-top:10px;}
+.commonBox table.commonTable1 thead th { padding:5px; border:1px solid #e6e6e6; text-align:center; color:#525252; font-weight:bold; background-color:#f7f7f7;}
+.commonBox table.commonTable1 tbody td { padding:5px; border:1px solid #e6e6e6; color:#666666;}
+.commonBox table.commonTable1 tbody td.left { color:#666666; text-align:left;}
+.commonBox table.commonTable1 tbody td.right { color:#666666; text-align:right;}
+.commonBox table.commonTable1 tbody td.center { color:#666666; text-align:center;}
+.commonBox table.commonTable1 tbody td.color1 { color:#1d9bf4;}
+.commonBox div.info { padding-top:13px; text-align:right; color:#525252; padding-right:5px;}
+.commonBox div.info strong { color:#b20101;}
+
+#bottomArea { background-color:#efefef; border-top:1px solid #e3e3e3; padding:15px 0 25px; color:#9d9d9d; font-size:11px; text-align:center;}
+
+

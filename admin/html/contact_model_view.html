@@ -1,0 +1,141 @@
+<link rel="stylesheet" href="/css/contact_model.css" type="text/css" />
+
+				<table class="fd-table">
+					<caption>성형모델 신청서</caption>
+					<colgroup>
+						<col width="200">
+						<col width="">
+					</colgroup>
+					<tbody>
+					<tr>
+						<th scope="row">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>
+						<td>
+							<label for="name" class="label-hidden">이름 입력</label>
+							<?=$row['wr_name'];?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">생년월일</th>
+						<td>
+							<label for="birth" class="label-hidden">생년월일 입력</label>
+							<?=$row['wr_birth'];?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</th>
+						<td>
+							<div><?=($row['wr_gender'] == "male")?'남자':'여자';?></div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">직&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업</th>
+						<td>
+							<?=$row['wr_job'];?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">키</th>
+						<td>
+							<?=$row['wr_height'];?> cm
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">몸&nbsp;&nbsp;무&nbsp;&nbsp;게</th>
+						<td>
+							<?=$row['wr_weight'];?> kg
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">휴대전화</th>
+						<td>
+							<?=$row['wr_phone1'];?>-<?=$row['wr_phone2'];?>-<?=$row['wr_phone3'];?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">거&nbsp;&nbsp;주&nbsp;&nbsp;지</th>
+						<td>
+							<?=$row['wr_address'];?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이&nbsp;&nbsp;메&nbsp;&nbsp;일</th>
+						<td>
+							<?=$row['wr_email'];?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">결혼여부</th>
+						<td>
+							<div>
+								<?=($row['wr_married']=="no")?'미혼':'기혼';?>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">군필사항</th>
+						<td>
+							<div>
+							<?=($row['wr_army']=="no")?'미필':'';?>
+							<?=($row['wr_army']=="yes")?'제대':'';?>
+							<?=($row['wr_army']=="none")?'해당없음':'';?>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">과거수술부위</th>
+						<td>
+							<div>
+							<?=(strpos($row['wr_exp'], "face") !== false)?'&nbsp;안면윤곽&nbsp;':'';?>
+							<?=(strpos($row['wr_exp'], "breast") !== false)?'&nbsp;가슴&nbsp;':'';?>
+							<?=(strpos($row['wr_exp'], "eyes") !== false)?'&nbsp;눈&nbsp;':'';?>
+							<?=(strpos($row['wr_exp'], "nose") !== false)?'&nbsp;코&nbsp;':'';?>
+							<?=(strpos($row['wr_exp'], "fat") !== false)?'&nbsp;지방이식&nbsp;':'';?>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">신청분야</th>
+						<td>
+							<div>
+							<?=(strpos($row['wr_apply'], "face") !== false)?'&nbsp;안면윤곽&nbsp;':'';?>
+							<?=(strpos($row['wr_apply'], "breast") !== false)?'&nbsp;가슴&nbsp;':'';?>
+							<?=(strpos($row['wr_apply'], "eyes") !== false)?'&nbsp;눈&nbsp;':'';?>
+							<?=(strpos($row['wr_apply'], "nose") !== false)?'&nbsp;코&nbsp;':'';?>
+							<?=(strpos($row['wr_apply'], "fat") !== false)?'&nbsp;지방이식&nbsp;':'';?>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2" scope="col" class="fd-table-th">지원동기</th>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<?=nl2br($row['wr_text']);?>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2" scope="col" class="fd-table-th">사진첨부</th>
+					</tr>
+					<?php 
+					$j=0; for($i=0; $i<10; $i++) {
+						$j++;
+						if ($row['wr_file'.$j]) {
+					?>
+					<tr>
+						<td>사진 <?=$j;?></td>
+						<td><a href="<?=$row['wr_file'.$j]?>" target="_blank"><img src="<?=$row['wr_file'.$j]?>" width="100"></a></td>
+					</tr>
+					<?php
+						}
+					}
+					?>
+					</tbody>
+				</table>
+
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="50" align="center" colspan="2">
+								<img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onclick="javascript:history.go(-1)" align="absmiddle">
+							</td>
+						</tr>
+					</table>

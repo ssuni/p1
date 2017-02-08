@@ -1,0 +1,383 @@
+<script language="javascript">
+				function fnEdit(p_nIdx){
+					var f_oForm	= document.forms["frmMain"];
+					f_oForm.tNum.value	= p_nIdx;
+					f_oForm.act.value	= "modify";
+					f_oForm.action			= "<?=$PHP_SELF?>";
+					f_oForm.submit();
+				}
+
+				function fnChkVal(p_oForm){
+					p_oForm.method		= "post";
+					p_oForm.proc.value	= "search";
+					p_oForm.submit();
+				}
+				function fnChkAll(p_oBox) {
+					var f_oBox	= document.getElementsByName("chk[]");
+					var f_nCnt	= f_oBox.length;
+					var f_bChk	= false;
+					if (p_oBox.checked==true)
+					{
+						f_bChk	= true;
+					}
+					for (i=0; i < f_nCnt; i++)
+					{
+						f_oBox[i].checked	= f_bChk;
+					}
+				}
+				function fnChkItem(p_oBox) {
+					var f_oBox	= document.getElementsByName("chk[]");
+					var f_nCnt	= f_oBox.length;
+					var f_bChk	= true;
+					for ( i = 0; i < f_nCnt ; i++)
+					{
+						if ( f_oBox[i].checked == false ){
+							f_bChk	= false;
+						}
+					}
+					p_oBox.checked	= f_bChk;
+				}
+				function fnChkBox() {
+					var f_oBox	= document.getElementsByName("chk[]");
+					var f_nCnt	= f_oBox.length;
+					var f_nChk	= 0;
+					var f_bChk	= false;
+					for ( i = 0; i < f_nCnt ; i++)
+					{
+						if ( f_oBox[i].checked == true ){
+							f_bChk	= true;
+							f_nChk++;
+						}
+					}
+					return f_nChk;
+				}
+
+				function fnDelData(){
+					var f_oForm	= document.forms['frmMain'];
+					var f_nCnt	= fnChkBox();
+					if ( f_nCnt == 0 ){
+						alert('선택된 목록이 없습니다.');
+						return;
+					}
+					if ( confirm("삭제한 목록은 복구가 불가능합니다.. \n총 " + f_nCnt + " 개의 목록을 삭제합니다.") ) { 
+						f_oForm.act.value = "del_ok";
+						f_oForm.submit();
+					}
+				}
+
+				function fnSendMail(p_sNum){
+					window.open("_pop_mail.html?receiver="+p_sNum,"sendmail","width=600,height=490");
+				}
+
+				function fnSendSMS(p_sNum){
+					window.open("_pop_sms.html?receiver="+p_sNum,"sendsms","width=146,height=287");
+				}
+			</script>
+
+<style>
+	/**************************
+  DEFAULT BOOTSTRAP STYLES
+**************************/
+
+	.btn {
+		display: inline-block;
+		/*padding: 6px 12px;*/
+		margin-bottom: 0;
+		font-size: 12px;
+		font-weight: normal;
+		line-height: 1.42857143;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: middle;
+		cursor: pointer;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		background-image: none;
+		border: 1px solid transparent;
+		border-radius: 4px;
+		/*padding: 1px 16px;*/
+	}
+
+	.btn-lg {
+		font-size: 10px;
+		line-height: 1.33;
+		border-radius: 6px;
+	}
+
+	.btn-primary {
+		color: #fff;
+		background-color: #428bca;
+		border-color: #357ebd;
+	}
+
+	.btn-primary:hover,
+	.btn-primary:focus,
+	.btn-primary:active,
+	.btn-primary.active,
+	.open .dropdown-toggle.btn-primary {
+		color: #fff;
+		background-color: #3276b1;
+		border-color: #285e8e;
+	}
+
+	/***********************
+      SHARP BUTTONS
+    ************************/
+	.sharp {
+		border-radius:0;
+	}
+
+	/***********************
+      CUSTON BTN VALUES
+    ************************/
+
+	.btn {
+		padding: 10px 24px;
+		border: 0 none;
+		font-weight: 700;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+	.btn:focus, .btn:active:focus, .btn.active:focus {
+		outline: 0 none;
+	}
+
+	.btn-primary {
+		background: #0099cc;
+		color: #ffffff;
+	}
+	.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+		background: #33a6cc;
+	}
+	.btn-primary:active, .btn-primary.active {
+		background: #007299;
+		box-shadow: none;
+	}
+
+
+</style>
+
+<script>
+$(document).ready(function() {
+
+	var table = $('#example').DataTable({
+		fixedHeader: {
+			header: false,
+			footer: true
+		},
+
+//		scrollY:     300,
+		scroller:    true,
+//		iDisplayLength: 15,
+		language: {
+			"search": "검색",
+			"lengthMenu": "정렬수 _MENU_ ",
+			"zeroRecords": "검색 결과가 없습니다.",
+			"info": "현재페이지: _START_ ~ _END_  전체결과:_TOTAL_ 개",
+			"infoEmpty":      "검색결과: 0 개",
+			"infoFiltered": " 총 데이터 _MAX_ 개"
+	       },
+		pagingType: "full_numbers",
+		lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		columnDefs: [ {
+			orderable: false,
+			className: 'select-checkbox',
+			targets:   0
+		} ],
+		select: {
+			style:    'os',
+			selector: 'td:first-child'
+		},
+
+		'columnDefs': [{
+			'targets': 0,
+			'searchable':false,
+			'orderable':false,
+			'className': 'dt-body-center',
+			'render': function (data, type, full, meta){
+				return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+			}
+		}],
+		order: [[ 1, 'asc' ]]
+
+	});
+
+	table
+			.order( [ 3, 'desc' ] )
+			.draw();
+
+//	$('#example tbody').on('click', 'tr', function () {
+//		var data = table.row( this ).data();
+//		alert( 'You clicked on '+data[0]+'\'s row' );
+//	} );
+
+	$('#example tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			table.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+//			console.log($(this).data('value'))
+//			console.log($(this)[0])
+			var obj =$(this).find('input');
+			console.log(obj.is(':checked'))
+//			obj.prop('checked', !obj.is(':checked'));
+			if(obj.is(':checked') == false) {
+//				$(location).attr('href','<?=$PHP_SELF?>?act=modify&tNum='+$(this).data('value'))
+			}
+		}
+	} );
+
+	$('#example tbody').on('dblclick', 'tr', function () {
+		var data = table.row( this ).data();
+//		alert( 'You clicked on '+data[0]+'\'s row' );
+		$(location).attr('href','<?=$PHP_SELF?>?act=modify&tNum='+$(this).data('value'))
+	} );
+	// Handle click on "Select all" control
+	$('#example-select-all').on('click', function(){
+		// Check/uncheck all checkboxes in the table
+		var rows = table.rows({ page: 'current'}).nodes();
+		console.log(rows.length)
+		$('input[type="checkbox"]', rows).prop('checked', this.checked);
+	});
+	$('#example tbody').on('change', 'input[type="checkbox"]', function(){
+		// If checkbox is not checked
+		if(!this.checked){
+			var el = $('#example-select-all').get(0);
+			// If "Select all" control is checked and has 'indeterminate' property
+			if(el && el.checked && ('indeterminate' in el)){
+				// Set visual state of "Select all" control
+				// as 'indeterminate'
+				el.indeterminate = true;
+			}
+		}
+	});
+	$('#button').click( function () {
+		table.$('input[type="checkbox"]').each(function(){
+			// If checkbox doesn't exist in DOM
+
+				// If checkbox is checked
+				if(this.checked){
+					// Create a hidden element
+					console.log(this.value)
+
+				}
+
+		});
+
+//		var data = table
+//				.rows()
+//				.data();
+//		console.log(data)
+//
+//		alert( 'The table has '+data.length+' records' );
+//		table.row('.selected').remove().draw( false );
+	} );
+	$('#example').on( 'page.dt',   function () {
+		if($('#example-select-all').is(":checked") == true){
+			$('#example-select-all').prop('checked',false)
+		}
+			alert('paging click')
+	}).DataTable();
+
+} );
+</script>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+	<thead>
+	<tr>
+		<th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
+		<th>이름</th>
+		<th>전화번호</th>
+		<th>등록일</th>
+		<th>상태</th>
+		<th>지점</th>
+	</tr>
+	</thead>
+	<tbody>
+	<? for( $i = 0; $i < $tmp; $i++ ) { ?>
+	<tr data-value='<?=$Data[$i]["number"]?>'>
+		<td><?=$Data[$i]["number"]?></td>
+		<td><a href="<?=$PHP_SELF?>?act=modify&tNum=<?=$Data[$i]['number']?>"><?=$Data[$i]["name"]?></a></td>
+		<td><?=$Data[$i]["phone"]?></td>
+		<td><?=substr( $Data[$i]["regdate"], 0, 4 )?>-<?=substr( $Data[$i]["regdate"], 4, 2 )?>-<?=substr( $Data[$i]["regdate"], 6, 2 )?> <?=substr( $Data[$i]["regdate"], 8, 2 )?>:<?=substr( $Data[$i]["regdate"], 10, 2 )?></td>
+
+		<td><?=$Data[$i]["status"]?></td>
+		<td><?=$Data[$i]["division"]?></td>
+	</tr>
+	<? } ?>
+	</tbody>
+</table>
+<button type="button" class="btn btn-primary sharp" id="button">삭제</button>
+
+			<!--<table width="99%" border="0" cellspacing="0" cellpadding="0">-->
+<!--<form name="frmMain" method="post" action="<?=$PHP_SELF?>">-->
+<!--<input type="hidden" name="step" value="next">-->
+<!--<input type="hidden" name="act" value="">-->
+<!--<input type="hidden" name="tNum" value="">-->
+				<!--<tr>-->
+					<!--<td height="12" colspan="3"></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>-->
+					<!--<td background="./img/ct_box_top.gif"></td>-->
+					<!--<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td background="./img/ct_box_left.gif"></td>-->
+					<!--<td align="center" bgcolor="#F5F5F5" class="bottom_5">-->
+					<!--<table width="99%" border="0" cellspacing="0" cellpadding="0">-->
+						<!--<tr>-->
+							<!--<td class="main_title_01">카카오톡 상담</td>-->
+						<!--</tr>-->
+					<!--</table>-->
+					<!--<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">-->
+						<!--<tr>-->
+							<!--<td width="40" align="center" class="main_title_02"><input type="checkbox" name="chkall" value="chkall" onclick="fnChkAll(this);" class="check_basic"></td>-->
+							<!--&lt;!&ndash;<td width="*" align="center" class="main_title_02">진료과목</td>&ndash;&gt;-->
+							<!--<td width="*" align="center" class="main_title_02">이름</td>-->
+							<!--<td width="200" align="center" class="main_title_02">전화번호</td>-->
+							<!--<td width="*" align="center"class="main_title_02">등록일</td>-->
+							<!--<td width="70" align="center" class="main_title_02">상태</td>-->
+							<!--<td width="70" align="center" class="main_title_02">지점</td>-->
+						<!--</tr>-->
+						<!--<? for( $i = 0; $i < $tmp; $i++ ) { ?>-->
+						<!--<tr>-->
+							<!--<td height="25" align="center" bgcolor="#FFFFFF"><INPUT type="checkbox" name="chk[]" value="<?=$Data[$i]["number"]?>" onClick="fnChkItem(this.form['chkall']);" class="check_basic"></td>-->
+							<!--&lt;!&ndash;<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><?=$Data[$i]["field"]?></td>&ndash;&gt;-->
+							<!--<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><A HREF="<?=$PHP_SELF?>?act=modify&tNum=<?=$Data[$i]["number"]?>"><?=$Data[$i]["name"]?></A></td>-->
+							<!--<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><A HREF="<?=$PHP_SELF?>?act=modify&tNum=<?=$Data[$i]["number"]?>"><?=$Data[$i]["phone"]?></a></td>-->
+							<!--&lt;!&ndash; <td align="center" bgcolor="#FFFFFF" class="table_ct_01"><?=$Data[$i]["time"]?></td> &ndash;&gt;-->
+							<!--<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><?=substr( $Data[$i]["regdate"], 0, 4 )?>-<?=substr( $Data[$i]["regdate"], 4, 2 )?>-<?=substr( $Data[$i]["regdate"], 6, 2 )?> <?=substr( $Data[$i]["regdate"], 8, 2 )?>:<?=substr( $Data[$i]["regdate"], 10, 2 )?></td>-->
+							<!--<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><?=$Data[$i]["status"]?></td>-->
+							<!--<td align="center" bgcolor="#FFFFFF" class="table_ct_01"><?=$Data[$i]["division"]?></td>-->
+
+						<!--</tr>-->
+						<!--<? } ?>-->
+					<!--</table>-->
+					<!--&lt;!&ndash; 페이징 시작 &ndash;&gt;-->
+					<!--<table width="99%" border="0" cellspacing="0" cellpadding="0">-->
+						<!--<tr>-->
+							<!--<td height="50" align="center">-->
+
+							<!--</td>-->
+						<!--</tr>-->
+					<!--</table>&lt;!&ndash; 페이징 끝 &ndash;&gt;-->
+					<!--<table width="99%" border="0" cellspacing="0" cellpadding="0">-->
+						<!--<tr>-->
+							<!--<td height="30" valign="top"></td>-->
+							<!--<td align="right" valign="top"> <? /*<a href="./inc/ex_call.php"><img align="absmiddle" src="./img/btn_member_down.gif" border="0"></a> */ ?><img src="./img/btn_del.gif" width="60" height="18" align="absmiddle" style="cursor:pointer;" onClick="fnDelData();"></td>-->
+						<!--</tr>-->
+					<!--</table></td>-->
+					<!--<td background="./img/ct_box_right.gif"></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>-->
+					<!--<td background="./img/ct_box_bottom.gif"></td>-->
+					<!--<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>-->
+				<!--</tr>-->
+<!--</form>-->
+			<!--</table>-->

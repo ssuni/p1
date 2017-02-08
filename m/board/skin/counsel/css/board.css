@@ -1,0 +1,114 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/*############################################################# 기본 #############################################################*/
+
+#boardSkin { width:100%; font-size: 17pt; color: #333333; font-family:'Nanum Gothic',monospace; - See more at:}
+#boardSkin,
+#boardSkin a { color:#333; font-weight:normal; text-decoration:none;}
+
+#boardSkin input, #boardSkin textarea, #boardSkin button { outline:none; vertical-align:middle;}
+/** #boardSkin input, #boardSkin input, #boardSkin textarea, #boardSkin button { -webkit-appearance:none; -moz-appearance:none; appearance:none; vertical-align:middle;} **/ <!-- 폼요소 디바이스의 디자인 초기화 -->
+/** #boardSkin input, #boardSkin input, #boardSkin textarea, #boardSkin button, #boardSkin select { -webkit-border-radius:0; -moz-border-radius:0; -o-border-radius:0; border-radius:0;} **/ <!-- 둥근모서리 제거 -->
+#boardSkin img { vertical-align:middle;}
+#boardSkin select { background:#ffffff; border:1px solid #e0e0e0; padding:2px; vertical-align:middle; height:38px; font-size:15pt;}
+#boardSkin .textForm { background:#ffffff; border:1px solid #e0e0e0; padding:3px; height:36px; font-size:15pt;}
+#boardSkin textarea { background:#ffffff; border:1px solid #e0e0e0;  resize:none; font-size:15pt;}
+#boardSkin .clr { clear:both;}
+#boardSkin .middle { vertical-align:middle;}
+
+/*############################################################# 검색 #############################################################*/
+
+#boardSkin #searchBox { padding-bottom:20px; text-align:right; position:relative;}
+
+/*############################################################# 카테고리 #############################################################*/
+
+#boardSkin #categoryBox { padding-bottom:20px; margin-bottom:20px;}
+#boardSkin #categoryBox .category2 { width:100%;}
+#boardSkin #categoryBox .category2 li { width:33.3%; float:left; display:inline-block; .display:inline; zoom:1; vertical-align:middle; }
+#boardSkin #categoryBox .category2 li a { width:100%; padding:10px 0 10px 0; display:block; text-align:center; border:1px solid #e0e0e0; background:#f5f5f5; font-weight:normal; color:#333; font-size:14pt;}
+#boardSkin #categoryBox .category2 li.select a { color:#333; background:#fff; font-weight:bold;}
+#boardSkin #categoryBox .category2 li.bg { }
+
+/*############################################################# 리스트 #############################################################*/
+
+#boardSkin #boardList { width:100%;}
+#boardSkin #boardList thead { }
+#boardSkin #boardList thead th, #boardSkin #boardList thead td { vertical-align:middle;}
+#boardSkin #boardList thead th { text-align:center; border-top:2px solid #555555; border-bottom:1px solid #d7d7d7; padding:8px 0; color:#111111;}
+#boardSkin #boardList tbody td { padding:12px 0; border-bottom:1px solid #e8e8e8;}
+#boardSkin #boardList tbody td.td1 { text-align:center; color:#999999;}
+#boardSkin #boardList tbody td.td2 { text-align:left; color:#000000;}
+#boardSkin #boardList tbody td .t_category { color:#465daa; font-size:15pt;}
+#boardSkin #boardList tbody td .t_subject,
+#boardSkin #boardList tbody td .t_subject a { color:#000; font-weight:bold;}
+#boardSkin #boardList tbody td .t_info { color:#999; font-size:15pt;}
+#boardSkin #boardList tbody td.counsel { text-align:center;}
+#boardSkin #boardList tbody td.counsel span.ing { color:#000; font-weight:bold;}
+#boardSkin #boardList tbody td.counsel span.end { color:#465daa; font-weight:bold;}
+#boardSkin #boardList tbody tr.notice { background:#f8f8f8;}
+#boardSkin #boardList tbody tr.notice td.td1 { color:#000000; font-weight:bold;}
+#boardSkin #boardList tbody tr.notice td.td3 { font-weight:bold;}
+
+/*############################################################# 버튼영역 #############################################################*/
+
+#boardSkin .btnArea { text-align:center;}
+#boardSkin .btnArea2 { text-align:right; padding-top:20px;}
+#boardSkin .btnArea3 { text-align:center; padding-top:20px;}
+
+/*############################################################# 페이징 #############################################################*/
+
+#boardSkin .pageArea { text-align:center; padding:15px 0;}
+#boardSkin .pageArea .pagingList { text-align:center; display:inline-block; .display:inline; zoom:1;}
+#boardSkin .pageArea .pagingList li { text-align:center; display: inline; float:left; padding:7px;}
+#boardSkin .pageArea .paging { text-align:center; display:inline-block; .display:inline; zoom:1;}
+#boardSkin .pageArea .paging li { text-align:center; display: inline; float:left;}
+#boardSkin .pageArea .paging li, 
+#boardSkin .pageArea .paging li a { font-size:22pt; font-weight:bold;}
+#boardSkin .pageArea .paging .over { color:#465daa; font-weight:bold;}
+
+/*############################################################# 글보기 #############################################################*/
+
+#boardSkin .subjectBox { font-size:20pt; text-align:center; border-top:2px solid #555555; border-bottom:1px solid #d7d7d7; padding:8px 0; color:#333333; font-weight:bold;}
+
+#boardSkin .infor { border-bottom:1px solid #dfdfdf; padding:8px 0;}
+#boardSkin .infor ul { text-align:left;}
+#boardSkin .infor ul li { width:50%; float:left; display:inline-block; .display:inline; zoom:1; text-align:left; color:#999999;}
+
+#boardSkin .file { border-bottom:1px solid #dfdfdf; padding:8px 0;}
+#boardSkin .file ul { text-align:left;}
+#boardSkin .file li { color:#666; padding:5px 5px 5px 30px; background:url(../images/icon_file.gif) no-repeat 3px 12px;}
+#boardSkin .file li a { color:#465daa; text-decoration:underline;}
+
+#boardSkin .contents { padding:20px 0 40px 0; border-bottom:1px solid #dfdfdf; line-height:150%; }
+#boardSkin .contents .imgWrap { margin-bottom:15px; text-align:center;}
+
+#boardSkin .contents .counselQ { color:#000; font-weight:bold; padding-bottom:5px;}
+#boardSkin .contents .counselA { color:#465daa; font-weight:bold; padding-bottom:5px;}
+
+/*############################################################# 글쓰기 #############################################################*/
+
+#boardSkin .agreeBox { background:#f8f8f8; border:1px solid #dddddd; padding:20px;}
+#boardSkin .agreeBox .agreeText { }
+#boardSkin .agreeBox p { font-size:15pt; text-align:center; padding-top:15px;}
+#boardSkin .agreeBox table { width:100%; border-top:2px solid #000; background:#FFF;}
+#boardSkin .agreeBox table th, 
+#boardSkin .agreeBox table td { font-size:15pt; border:1px solid #d4dadd; padding:10px; text-align:center;}
+#boardSkin .agreeBox table th { color:#000; background:#ececec;}
+
+#boardSkin #categoryBox .category { width:100%; display:block;}
+#boardSkin #categoryBox .category li { margin:2px; width:30%;float:left; display:inline-block; .display:inline; zoom:1; vertical-align:middle; border:1px solid #e0e0e0;}
+#boardSkin #categoryBox .category li a { width:100%; padding:12px 0; display:block; text-align:center; background:#f5f5f5; font-weight:normal; color:#333;}
+#boardSkin #categoryBox .category li a:hover { background:#ffffff; color:#000; font-weight:bold; text-decoration:none;}
+#boardSkin #categoryBox .category li.select a { background:#465daa; color:#ffffff; font-weight:bold;}
+#boardSkin #categoryBox .category li.select a:hover { background:#465daa; color:#ffffff; font-weight:bold; text-decoration:none;}
+#boardSkin #categoryBox .category li.bg { }
+
+
+#boardSkin #writeForm { border-top:2px solid #000000; margin-top:20px;}
+#boardSkin #writeForm th,
+#boardSkin #writeForm td { font-size:15pt; border-bottom:1px solid #dfdfdf; padding:10px 0; text-align:left;}
+#boardSkin #writeForm th { font-weight:normal; padding-left:15px;}
+#boardSkin #writeForm td .tt { color:#999; letter-spacing:-1px; margin-left:10px;}
+#boardSkin #writeForm span.red { color:#F00;}

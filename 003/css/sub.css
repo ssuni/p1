@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+#container.sub{width:1146px; margin:80px auto;}
+#container.sub.mt0{margin-top:0px;}
+
+#container.sub_wide{width:100%; margin-bottom:80px;}
+
+
+#prod_info{overflow:hidden;}
+#prod_info .pimg{float:left; margin-right:100px;}
+#prod_info .info{float:left; width:400px;}
+#prod_info .info h2{font-size:42px; color:#f78399; font-weight:500;}
+#prod_info .info p{padding:10px 0px 20px; font-size:17px; color:#1d1d1d; line-height:24px;}
+#prod_info .info dl{display:block; overflow:hidden; padding:20px 0px 15px; border-top:1px solid #989898; border-bottom:1px solid #989898;}
+#prod_info .info dt,#prod_info .info dd{float:left; min-height:28px; padding:5px 0px; margin-bottom:0px; line-height:28px;}
+#prod_info .info dt{width:100px; padding-left:5px; font-size:15px; color:#1d1d1d; font-weight:500; line-height:28px;}
+#prod_info .info dd{width:300px; font-size:15px; color:#1d1d1d; font-weight:400;}
+#prod_info .info dt.row2,#prod_info .info dd.row2{padding:5px 0px; line-height:18px;}
+#prod_info .info select{}
+#prod_info .info *{vertical-align:middle;}
+
+
+#daum_map{width:1100px; height:415px; margin:0 auto; border:1px solid #e1e1e1;}
+
+
+
+#intro_gallery{}
+#intro_gallery .tcont{position:relative; height:628px;}
+#intro_gallery .btn{display:block; overflow:hidden; position:absolute; top:290px; left:50%; width:25px; height:46px; text-indent:-999px;}
+#intro_gallery .btn.btn_prev{margin-left:-500px; background:url('../images/cont/intro/btn_prev.png') no-repeat;}
+#intro_gallery .btn.btn_next{margin-left:472px; background:url('../images/cont/intro/btn_next.png') no-repeat;}
+#intro_gallery .timg{position:absolute; top:0px; left:50%; margin-left:-960px;}
+#intro_gallery .timg li{display:none; position:absolute; top:0px; left:0px;}
+#intro_gallery .timg li:first-child{display:block;}
+#intro_gallery .btn_list{overflow:hidden; position:absolute; left:50%; bottom:3px; width:1100px; margin-left:-550px;}
+#intro_gallery .btn_list li{float:left; width:365px; height:50px; margin-right:1px; margin-bottom:1px; font-size:17px; color:#ffffff; line-height:50px; text-align:center; background:url('../images/cont/intro/bg01.png'); cursor:pointer;}
+#intro_gallery .btn_list li.on{background-image:url('../images/cont/intro/bg02.png');}
+#intro_gallery .btn_list li.w02{width:219px;}
+#intro_gallery .btn_list li.w03{width:217px;}
+#intro_gallery .bcont{position:relative; height:740px;}
+#intro_gallery .bcont li{display:none; position:absolute; top:0px; left:0px; right:0px; text-align:center;}
+#intro_gallery .bcont li:first-child{display:block;}
+#intro_gallery .bcont li p{height:160px; padding-top:70px; text-align:center;}
+#intro_gallery .bcont li .ico{display:block; width:27px; height:13px; margin:0 auto 10px; background:url('../images/cont/intro/intro_arrow01.jpg') no-repeat;}
+#intro_gallery .bcont li strong{display:block; font-size:28px; color:#000000; font-weight:500; line-height:1;}
+
+
+.btn_set{padding-top:25px; text-align:center;}
+.btn_set p{display:inline-block; overflow:hidden;}
+.btn_set a{float:left; margin:4px;}
+.btn_t01{display:inline-block; width:392px; border:1px solid #cecece; font-size:16px; color:#ffffff !important; text-decoration:none !important; line-height:50px; text-align:center; background:#f7aabc;}
+.btn_t02{display:inline-block; width:192px; border:3px solid #cecece; font-size:15px; color:#858585 !important; text-decoration:none !important; line-height:46px; text-align:center;}
+
+
+#prod_detail{margin-top:110px; border-top:1px solid #989898;}
+.prod_wrap, .img_wrap{position:relative;}
+.prod_wrap .pos_abs, .img_wrap .pos_abs{padding-left:50%; width:1920px; margin-left:-960px; text-align:center;}
+.prod_wrap img, .img_wrap img{display:block;}
+
+
+
+.cont_wrap01{text-align:center;}
+.cont_wrap01 img{display:block;}
+
+.onOverCont_g{display:inline-block; overflow:hidden;}
+.onOverCont_g .onOverCont{float:left; width:536px; margin:0px 9px;}
+
+.onOverCont{display:inline-block; width:1091px; cursor:pointer;}
+.onOverCont img.on{display:none;}
+.onOverCont img.off{display:block;}
+.onOverCont:hover img.on{display:block;}
+.onOverCont:hover img.off{display:none;}
+
+
+.img_full{width:100%;}
+.img_full img{display:block; max-width:100%;}
+
+
+.title01{font-size:38px; color:#000000; text-align:center; font-weight:500;}
+.top_txt{padding-bottom:90px; font-size:16px; color:#000000; text-align:center;}
+
+.mt15{margin-top:15px;}

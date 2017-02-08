@@ -1,0 +1,142 @@
+<? if ($_GET['tblType']=='main') { ?>
+<script type="text/javascript">
+function loading_field(field2) {
+	//var field2  = '<?=$Data['tblIntField2'];?>';
+	$.post("/loading_counselField.php", { tblIntField1:$('#tblIntField1').val() },function(data,state) {
+		var optionHtml = '';
+		for(var i=0; i<data.field.length; i++) {
+			if (field2 == data.field[i]) {
+				var selected = 'selected';
+			} else {
+				var selected = '';
+			}
+			optionHtml += '<option '+ selected +' value="'+ data.field[i] +'">'+ data.field_name[i] +'</option>';
+		}
+		title = '<option value="">선택하여 주세요</option>';
+		$("#tblIntField2 option").remove();
+		$('#tblIntField2').append(title+optionHtml);
+	});
+}
+$(function() {
+	loading_field('<?=$Data['tblIntField2'];?>');
+});
+</script>
+<? } ?>
+				<form name="frmMain" method="post" action="<?=$PHP_SELF?>">
+				<input type="hidden" name="idx" value="<?=$Data["idx"]?>">
+				<input type="hidden" name="act" value="edit_ok">
+				<input type="hidden" name="tblType" value="<?=$_GET['tblType'];?>">
+				<input type="hidden" name="referer" value="<?=$_SERVER['HTTP_REFERER'];?>" size="100">
+				<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="bottom_5">
+
+				<table summary="" class="form_list">
+					<caption></caption>
+					<colgroup>
+						<col width="15%" />
+						<col width="85%" />
+					</colgroup>
+					<tbody>
+						<? if ($Data['subject']) { ?>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">이벤트 게시판명</th>
+							<td><?=$Data['subject'];?></td>
+						</tr>
+						<? } ?>
+
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">성명</th>
+							<td><input name="tblStrName" type="text" style="width:250px;" class="form1" id="strName" itemname="성명" required value="<?=$Data['tblStrName'];?>"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">핸드폰 번호</th>
+							<td><input name="tblStrMobile" type="text" style="width:350px;" class="form1" id="tblStrMobile" itemname="핸드폰 번호" required value="<?=$Data['tblStrMobile'];?>"></td>
+						</tr>
+
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">상담부위</th>
+									<td>
+										<select class="select01 size01" name="tblIntField1" id="tblIntField1" required <? if ($_GET['tblType']=='main') { ?>onchange="loading_field();"<? } ?>>
+										  <option value="" selected="selected">상담부위을 선택하세요.</option>
+											<? foreach($m_counselField1 as $k => $v) { ?>
+											<option <?=($Data['tblIntField1']==$k)?'selected':'';?> value="<?=$k;?>"><?=$v;?></option>
+											<? } ?>
+										</select>
+
+										<select class="select01 size01" name="tblIntField2" id="tblIntField2" required>
+										  <option value="" selected="selected">상담부위을 선택하세요.</option>
+										</select>
+									</td>
+						</tr>
+
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">메모</th>
+							<td>
+								<textarea rows="5" style="width:100%;" class="form3" name="tblStrComment"><?=$Data['tblStrComment'];?></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<th width="140" height="30" class="board-write_content_name">상태</th>
+							<td>
+							<select name="tblIntStatus">
+								<option value="1" <?=( $Data["tblIntStatus"] == '1' ) ? "selected" : ""?>>접수</option>
+								<option value="2" <?=( $Data["tblIntStatus"] == '2' ) ? "selected" : ""?>>완료</option>
+								<option value="3" <?=( $Data["tblIntStatus"] == '3' ) ? "selected" : ""?>>대기</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+					</tbody>
+				</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr><td height="5"></td></tr>
+						<tr>
+							<td align="right" valign="top"><input type="image" src="./img/btn_ok_01.gif" align="absmiddle">&nbsp;&nbsp;<img src="./img/btn_cancle.gif" style="cursor:pointer" onClick="javascript:history.go(-1)"  align="absmiddle"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			</form> 

@@ -1,0 +1,291 @@
+			<script src="/js/calender.js" language="javascript"></script>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>			
+<script language="javascript">
+<!--
+function chkAgree() {
+	if( !document.getElementById("intCrack1").checked && !document.getElementById("intCrack2").checked  && !document.getElementById("intCrack3").checked) {
+		alert('진료구분을 선택하셔야 합니다.');
+		document.getElementById("intCrack1").focus();
+		return false;
+	}
+	return true;
+}
+-->
+</script>
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+			<!--iframe name="hfrm" style="width:1000px;height:500px" src="about:blank"></iframe-->
+			<form name="frmMain" method="post" enctype="multipart/form-data" action="<? echo $PHP_SELF; ?>" onsubmit="return chkAgree()">
+			<input type="hidden" name="step" value="next">
+			<input type="hidden" name="act" value="write_ok">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5">
+					<!-- 관리자 기본정보 폼 -->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="main_title_01">예약등록</td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="1" colspan="2" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1"></td>
+						</tr>
+						<tr>
+							<td width="100" height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">진료항목</td>
+							<td class="left_8"><select class="selectBox" name="intField" style="width:150px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="진료항목" required>
+								<option value=""></option>
+							<? for( $e = 1; $e < count( $medicalField );  $e++ ) { ?>
+								<option value="<? echo $e; ?>"><? echo $medicalField[$e]; ?></option>
+							<? } ?>
+							</select></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td width="100" height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">진료구분</td>
+							<td class="left_8"><input type="radio" name="intCrack" id="intCrack1" value="1"> 초진&nbsp;&nbsp;<input type="radio" name="intCrack" id="intCrack2" value="2"> 재진&nbsp;&nbsp;<input type="radio" name="intCrack" id="intCrack3" value="3"> 수술</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">진료일시</td>
+							<td class="left_8">
+								<input type="text" name="dtmRsvDate" id="dtmRsvDate" class="text_basic" style="width:80px;height:21px;cursor:pointer;"  onclick="check_mouse('frmMain.'+this.name)" value="<? echo $revYear; ?>" readonly itemname="진료일시" required>&nbsp;
+								<select class="selectBox" name="dtmRsvTime" style="width:100px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="진료일시" required>
+									<option value=""></option>
+							<? 
+								for( $j = 540 ; $j < 1230 ; $j+=30 ) { 
+									$reserveTime1 = zero_full(intval($j/60),2);
+									$reserveTime2 = ( $j%60 == 0 ) ? '00' : '30';
+									$reserveTime = $reserveTime1.":".$reserveTime2;
+							?>
+								<option value="<?=$reserveTime?>" <?=( $reserveTime == $revTime ) ? "selected" : ""?>><? echo $reserveTime1; ?>시 <? echo $reserveTime2; ?>분</option>
+							<? } ?>
+							</select></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">이름</td>
+							<td class="left_8"><input class="text_basic" style="width:200px; height:20px; ime-mode:active" name="strName" itemname="이름" required hangul> </td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">환자구분</td>
+							<td class="left_8"><select class="selectBox" name="intGubun" style="width:100px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="환자구분" required>
+							<? 
+							for( $g = 1; $g < count( $mediGubunArr );  $g++ ) { 
+								$selected = ( $g == $Data["gubun"] ) ? "selected" : "";
+							?>
+								<option value="<? echo $g; ?>" <?=$selected?>><? echo $mediGubunArr[$g]; ?></option>
+							<? } ?>
+							</select></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">핸드폰</td>
+							<td class="left_8"><input class="text_basic" style="width:50; height:19" name="strPhone1" type="text" maxlength="3" itemname="핸드폰" required numeric> 
+							- <input class="text_basic" style="width:50; height:19" name="strPhone2" type="text" maxlength="4" itemname="핸드폰" required numeric> 
+							- <input class="text_basic" style="width:50; height:19" name="strPhone3" type="text" maxlength="4" itemname="핸드폰" required numeric></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">이메일</td>
+							<td class="left_8"><input class="text_basic" style="width:200px; height:19;" name="strEmail" id="strEmail" itemname="이메일" required email></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="110" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">내용</td>
+							<td class="left_8">
+									<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:300px; display:none;"></textarea>
+									<p style="display:none"><textarea name="strComment" id="strComment" style="width:100%; height:150px" itemname="내용"></textarea></p>							
+							</td>
+						</tr>		
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">상태</td>
+							<td class="left_8"><select class="selectBox" name="intStatus" style="width:100px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="상태" required>
+							<? 
+								for( $g = 1; $g < count( $statusArr );  $g++ ) { 
+									$selected = ( $g == $Data["status"] ) ? "selected" : "";
+							?>
+								<option value="<? echo $g; ?>" <?=$selected?>><? echo $statusArr[$g]; ?></option>
+							<? } ?>
+							</select>&nbsp;SMS 전송 <input type="checkbox" name="blnSms" value="Y">&nbsp;E-mail 전송 <input type="checkbox" name="blnEmail" value="Y"></td>
+						</tr>			
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="110" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">답변</td>
+							<td class="left_8">
+								   <textarea name="ir2" id="ir2" rows="10" cols="100" style="width:100%; height:300px; display:none;"></textarea>
+									<p style="display:none"><textarea name="strReply" id="strReply" style="width:100%; height:150px" itemname="답변"></textarea></p>
+							</td>
+						</tr>		
+						<tr>
+							<td height="1"></td>
+							<td height="1"></td>
+						</tr>
+						<tr>
+							<td height="1" colspan="2" class="board-view_title_line"></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="50" align="center"><input type="image" src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;"> <img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onclick="location.href='<?=$PHP_SELF?>';"></td>
+						</tr>
+					</table>
+					<!-- 관리자 기본정보 폼 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5" ></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</form>
+			</table>
+<script type="text/javascript">
+function doSubmit() {
+	document.getElementById("strComment").value = document.getElementById("ir1").value;
+}
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir1"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	document.getElementById("strComment").value = document.getElementById("ir1").value;
+	try {
+		fnChkForm();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>
+
+<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir2",
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir2"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir2"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	document.getElementById("strComment").value = document.getElementById("ir2").value;
+	try {
+		chkAgree();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir2"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>

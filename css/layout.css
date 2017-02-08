@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+#footer{max-width:1460px; margin:0 auto; padding:47px 0px; border-top:1px solid #1d1d1d;}
+#footer .footer_inner{overflow:hidden;}
+#footer .b_logo{float:left; margin:0px 82px;}
+#footer .footer_cont{float:left; width:800px;}
+#footer_menu{display:inline-block; overflow:hidden; margin-left:-18px;}
+#footer_menu li{float:left; position:relative;}
+#footer_menu li:after{position:absolute; top:2px; left:-1px; width:1px; height:15px; background:#404040; content:'';}
+#footer_menu a{display:block; padding:0px 19px; font-size:16px; color:#000000; line-height:18px; text-decoration:none;}
+#footer p{padding-top:15px; font-size:16px; color:#000000; line-height:21px;}
+#footer .space{display:inline-block; width:50px; height:20px;}
+
+
+
+/* etc */
+.after:after{display:block;clear:both;content:''}
+.sound_only, .hidden_title{overflow:hidden; position:absolute; top:-500px; left:0px; font-size:0px;}
+
+.cont_size01{width:1140px; margin:0 auto;}

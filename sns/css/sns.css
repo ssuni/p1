@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/**************************************************** 네이버 회원동의 팝업 *********************************************************/
+
+body,th,td,div,p,span { font-size: 11pt; color: #333333; font-family:'Nanum Gothic',monospace; - See more at:} /**나눔고딕체**/
+.n_popup { background:#f0f1f3;}
+
+#naver_popup { width:840px; overflow:auto;}
+#naver_popup .wrap1 { width:790px; padding:30px 25px;}
+#naver_popup .wrap1 .agree_box { color:#ec1da0; font-weight:bold; padding:35px 5px;}
+#naver_popup .wrap1 .text_box { background:#FFF; color: #888888; width:748px; height:158px; border:1px solid #dfdfdf; padding:20px; font-size:10pt; line-height:130%; overflow:scroll; overflow-x:hidden;}
+#naver_popup .wrap1 h3 { padding-bottom:10px;}
+#naver_popup .wrap1 .form_area { padding:15px 0 25px 0; text-align:center;}
+#naver_popup .line { background:#ffffff; height:2px; font-size:2px; line-height:2px;}
+#naver_popup .wrap2 { width:790px; padding:30px 25px;}
+#naver_popup .wrap2 table.form_list { width:790px; border-top:2px solid #43368d; border-bottom:2px solid #43368d; background:#ffffff;}
+#naver_popup .wrap2 table.form_list th, 
+#naver_popup .wrap2 table.form_list td { padding:9px; border-bottom:1px solid #c4c7ca;}
+#naver_popup .wrap2 table.form_list .last { border:none;}
+#naver_popup .wrap2 table.form_list strong { font-size:10pt;}
+
+#naver_popup .text_form1 { border:1px solid #c4c7ca; height:20px; color:#333;}
+#naver_popup .text_form2 { border:1px solid #c4c7ca; height:22px; color:#333;}
+#naver_popup .btn_area { padding-top:40px; text-align:center;}

@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="/css/contact_model.css" type="text/css" />
+
+<div class="fd-wrap">
+<form method="post" name="event_form" id="event_frm" enctype="multipart/form-data" action="<?=$PHP_SELF?>" onsubmit="return writeCheck(this);">	
+<input type="hidden" name="act" value="edit_ok" />
+<input type="hidden" name="uid" value="<?=$row['uid'];?>" />
+<input type="hidden" name="num_upfile" value="10" />
+
+<div class="content">
+	<div class="fd-br-2"></div>
+	<div class="form-bottom">
+		<div class="form-tag">
+			<b>성형모델</b> 신청하기
+		</div>
+		<div class="pink-bg">
+			<div class="white-bg">
+				<table class="fd-table">
+					<caption>성형모델 신청서</caption>
+					<colgroup>
+						<col width="16%">
+						<col width="">
+						<col width="16%">
+						<col width="">
+					</colgroup>
+					<tbody>
+					<tr>
+						<th scope="row">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>
+						<td>
+							<label for="name" class="label-hidden">이름 입력</label>
+							<input name="wr_name" id="name" class="order-input-1" title="이름 입력" value="<?=$row['wr_name'];?>" type="text">
+						</td>
+						<th scope="row">생년월일</th>
+						<td>
+							<label for="birth" class="label-hidden">생년월일 입력</label>
+							<input name="wr_birth" id="birth" class="order-input-1" title="생년월일 입력" value="<?=$row['wr_birth'];?>" type="text">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</th>
+						<td>
+							<div>
+								<label for="gen-girl" class="label-hidden">여자</label>
+								<input type="radio" name="wr_gender" value="female" id="gen-girl" <?=(strpos($row['wr_gender'], "female") !== false)?'checked':'';?>>&nbsp;여자
+								&nbsp;&nbsp;&nbsp;
+								<label for="gen-man" class="label-hidden">남자</label>
+								<input type="radio" name="wr_gender" value="male" id="gen-man" <?=(strpos($row['wr_gender'], "male") !== false)?'checked':'';?>>&nbsp;남자
+							</div>
+						</td>
+						<th scope="row">직&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업</th>
+						<td>
+							<label for="job" class="label-hidden">직업 입력</label>
+							<input name="wr_job" id="job" class="order-input-1" title="직업 입력" value="<?=$row['wr_job'];?>" type="text">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">키</th>
+						<td>
+							<label for="tall" class="label-hidden">키 입력</label>
+							<input name="wr_height" id="tall" class="order-input-1" title="키 입력" value="<?=$row['wr_height'];?>" type="text"> cm
+						</td>
+						<th scope="row">몸&nbsp;&nbsp;무&nbsp;&nbsp;게</th>
+						<td>
+							<label for="weight" class="label-hidden">몸무게 입력</label>
+							<input name="wr_weight" id="weight" class="order-input-1" title="몸무게 입력" value="<?=$row['wr_weight'];?>" type="text"> kg
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">휴대전화</th>
+						<td colspan="3">
+							<label for="phone1" class="label-hidden">휴대전화 입력</label>
+							<input name="wr_phone1" id="phone1" class="order-input-2" maxlength="4" title="휴대전화 입력" value="<?=$row['wr_phone1'];?>" type="text"> - 
+							<label for="phone2" class="label-hidden">휴대전화 입력</label>
+							<input name="wr_phone2" id="phone2" class="order-input-2" maxlength="4" title="휴대전화 입력" value="<?=$row['wr_phone2'];?>" type="text"> - 
+							<label for="phone3" class="label-hidden">휴대전화 입력</label>
+							<input name="wr_phone3" id="phone3" class="order-input-2" maxlength="4" title="휴대전화 입력" value="<?=$row['wr_phone3'];?>" type="text">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">거&nbsp;&nbsp;주&nbsp;&nbsp;지</th>
+						<td colspan="3">
+							<label for="adress" class="label-hidden">거주지 입력</label>
+							<input name="wr_address" id="adress" class="order-input-3" title="거주지 입력" value="<?=$row['wr_address'];?>" type="text">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이&nbsp;&nbsp;메&nbsp;&nbsp;일</th>
+						<td colspan="3">
+							<label for="e-mail" class="label-hidden">이메일 입력</label>
+							<input name="wr_email" id="e-mail" class="order-input-3" title="이메일 입력" value="<?=$row['wr_email'];?>" type="text">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">결혼여부</th>
+						<td colspan="3">
+							<div>
+								<label for="single" class="label-hidden">미혼</label>
+								<input type="radio" name="wr_married" value="no" id="single" <?=($row['wr_married']=="no")?'checked':'';?>>&nbsp;미혼
+								&nbsp;&nbsp;&nbsp;
+								<label for="married" class="label-hidden">기혼</label>
+								<input type="radio" name="wr_married" value="yes" id="married" <?=($row['wr_married']=="yes")?'checked':'';?>>&nbsp;기혼
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">군필사항</th>
+						<td colspan="3">
+							<div>
+								<label for="had" class="label-hidden">미필</label>
+								<input type="radio" name="wr_army" value="no" id="had" <?=($row['wr_army']=="no")?'checked':'';?>>&nbsp;미필
+								&nbsp;&nbsp;&nbsp;
+								<label for="not" class="label-hidden">제대</label>
+								<input type="radio" name="wr_army" value="yes" id="not" <?=($row['wr_army']=="yes")?'checked':'';?>>&nbsp;제대
+								&nbsp;&nbsp;&nbsp;
+								<label for="nothing" class="label-hidden">해당없음</label>
+								<input type="radio" name="wr_army" value="none" id="nothing" <?=($row['wr_army']=="none")?'checked':'';?>>&nbsp;해당없음
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">과거수술부위</th>
+						<td colspan="3">
+							<div>
+								<label for="hoping-face" class="label-hidden">안면윤곽</label>
+								<input type="checkbox" name="wr_exp[]" value="face" id="hoping-face" <?=(strpos($row['wr_exp'], "face") !== false)?'checked':'';?>>&nbsp;안면윤곽
+								&nbsp;&nbsp;&nbsp;
+								<label for="hoping-breast" class="label-hidden">가슴</label>
+								<input type="checkbox" name="wr_exp[]" value="breast" id="hoping-breast" <?=(strpos($row['wr_exp'], "breast") !== false)?'checked':'';?>>&nbsp;가슴
+								&nbsp;&nbsp;&nbsp;
+								<label for="hoping-eyes" class="label-hidden">눈</label>
+								<input type="checkbox" name="wr_exp[]" value="eyes" id="hoping-eyes" <?=(strpos($row['wr_exp'], "eyes") !== false)?'checked':'';?>>&nbsp;눈
+								&nbsp;&nbsp;&nbsp;
+								<label for="hoping-nose" class="label-hidden">코</label>
+								<input type="checkbox" name="wr_exp[]" value="nose" id="hoping-nose" <?=(strpos($row['wr_exp'], "nose") !== false)?'checked':'';?>>&nbsp;코
+								&nbsp;&nbsp;&nbsp;
+								<label for="hoping-fat" class="label-hidden">지방이식</label>
+								<input type="checkbox" name="wr_exp[]" value="fat" id="hoping-fat" <?=(strpos($row['wr_exp'], "fat") !== false)?'checked':'';?>>&nbsp;지방이식
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">신청분야</th>
+						<td colspan="3">
+							<div>
+								<label for="face" class="label-hidden">안면윤곽</label>
+								<input type="checkbox" name="wr_apply[]" value="face" id="face" <?=(strpos($row['wr_apply'], "face") !== false)?'checked':'';?>>&nbsp;안면윤곽
+								&nbsp;&nbsp;&nbsp;
+								<label for="breast" class="label-hidden">가슴</label>
+								<input type="checkbox" name="wr_apply[]" value="breast" id="breast" <?=(strpos($row['wr_apply'], "breast") !== false)?'checked':'';?>>&nbsp;가슴
+								&nbsp;&nbsp;&nbsp;
+								<label for="eyes" class="label-hidden">눈</label>
+								<input type="checkbox" name="wr_apply[]" value="eyes" id="eyes" <?=(strpos($row['wr_apply'], "eyes") !== false)?'checked':'';?>>&nbsp;눈
+								&nbsp;&nbsp;&nbsp;
+								<label for="nose" class="label-hidden">코</label>
+								<input type="checkbox" name="wr_apply[]" value="nose" id="nose" <?=(strpos($row['wr_apply'], "nose") !== false)?'checked':'';?>>&nbsp;코
+								&nbsp;&nbsp;&nbsp;
+								<label for="fat" class="label-hidden">지방이식</label>
+								<input type="checkbox" name="wr_apply[]" value="fat" id="fat" <?=(strpos($row['wr_apply'], "fat") !== false)?'checked':'';?>>&nbsp;지방이식
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="4" scope="col" class="fd-table-th">지원동기 <span class="fd-table-sub">( 과거 수술이력 상세히 기재 )</span></th>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="desire-message" class="label-hidden">지원동기</label>
+							<textarea name="wr_text" id="desire-message" class="desire-message" maxlength="100" title="지원동기"><?=$row['wr_text'];?></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="4" scope="col" class="fd-table-th">사진첨부</th>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<?php $j=0; for($i=0; $i<10; $i++): $j++;?>
+								<label for="fd-form-data<?php echo $i?>" class="label-hidden">사진첨부</label>
+								<input type="file" name="upfile[]" title="사진첨부 <?php echo $i?>" id="fd-form-data<?php echo $i?>" class="fd-form-data">
+								<?=($row['wr_file'.$j])?'<a href="'.$row['wr_file'.$j].'" target="_blank"><img src="'.$row['wr_file'.$j].'" width="100"></a>':'';?>
+							<?php endfor; ?>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div><!-- //form-bottom -->
+</div>
+<div class="form-btn">
+	<input type="image" src="/images/09_customer/form-btn.png" value="모델신청하기" class="form-btn-img" />
+</div>
+</form>
+</div><!-- //fd-wrap -->

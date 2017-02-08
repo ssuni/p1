@@ -1,0 +1,273 @@
+			<script src="/js/calender.js" language="javascript"></script>
+			<script language="javascript">
+				function chkId(){
+					var f_oForm	= document.frmMain;
+					f_oForm.action	= "proc/member_edit_proc.php";
+					f_oForm.submit();
+				}
+				
+				function fnDelMember(){
+					var f_oForm	= document.frmMain;
+					if ( confirm("삭제한 회원은 복구가 불가능합니다. 이 회원을 삭제하시겠습니까?") ) { 
+						f_oForm.action	= "proc/member_delete_proc.php";
+						f_oForm.submit();
+					}
+				}
+			</script>
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+			<form name="frmMain" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="step" value="next">
+			<input type="hidden" name="tNum" value="<? echo $tNum; ?>">
+			<input type="hidden" name="chk[]" value="<? echo $tNum; ?>">
+			<input type="hidden" name="userid" value="<?=$Data['id']?>">
+			<input type="hidden" name="tblPassType" value="<?=$Data['tblPassType']?>">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5">
+					<!-- 관리자 기본정보 폼 -->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="main_title_01">회원수정</td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="1" colspan="2" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td width="140" height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">회원구분</td>
+							<td class="left_8"><select class="selectBox" name="intLevel" style="width:100px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="회원구분" required>
+							<? 
+								for( $m = 2; $m < count( $memberNameArr )+2; $m++ ) { 
+									if( trim( $memberNameArr[$m] ) ) {
+									$selected = ( $Data["level"] == $m ) ? "selected" : "";
+							?>
+								<option value="<? echo $m; ?>" <? echo $selected; ?>><? echo $memberNameArr[$m]; ?></option>
+							<? 
+									}
+								} 
+							?>
+							</select>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">회원이름</td>
+							<td class="left_8"><input class="text_basic" style="width:200px; height:20px; ime-mode:active" name="strName" value="<? echo $Data["name"]; ?>" itemname="회원이름" required hangul> </td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">아이디</td>
+							<td class="left_8" style="padding-left:10px"><strong><? echo $Data["id"]; ?></strong></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">비밀번호</td>
+							<td class="left_8"><input name="strPass" type="password" class="text_basic" style="width:200px; height:20px;" maxlength="12" value="<?// echo $Data["pass"]; ?>" itemname="비밀번호" > <br>※ 비밀번호는 암호화 되어있습니다.<br> 만약 비밀번호를 변경하고자 하신다면 새로운 비밀번호를 입력해 주십시오.</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">이메일</td>
+							<td class="left_8"><input class="text_basic" style="width:200px; height:19;" name="strEmail" value="<? echo $Data["email"]; ?>" itemname="이메일" reuired email></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">휴대폰</td>
+							<td class="left_8"><select class="selectBox" name="strMobile1" id="strMobile1" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif" itemname="휴대전화" required>
+								<option value="">:: 선택 ::</option>
+								<option value="010" <?=( $Data["mobile"][0] == '010' ) ? "selected" : ""?>>010</option>
+								<option value="011" <?=( $Data["mobile"][0] == '011' ) ? "selected" : ""?>>011</option>
+								<option value="016" <?=( $Data["mobile"][0] == '016' ) ? "selected" : ""?>>016</option>
+								<option value="017" <?=( $Data["mobile"][0] == '017' ) ? "selected" : ""?>>017</option>
+								<option value="018" <?=( $Data["mobile"][0] == '018' ) ? "selected" : ""?>>018</option>
+								<option value="019" <?=( $Data["mobile"][0] == '019' ) ? "selected" : ""?>>019</option>
+							</select>
+							- <input class="text_basic" style="width:50; height:19" name="strMobile2" type="text" maxlength="4" value="<? echo $Data["mobile"][1]; ?>" itemname="휴대폰" required numeric> 
+							- <input class="text_basic" style="width:50; height:19" name="strMobile3" type="text" maxlength="4" value="<? echo $Data["mobile"][2]; ?>" itemname="휴대폰" required numeric></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">메일수신</td>
+							<td class="left_8">
+							<input name="blnEmail" type="radio" value="Y" <?=( $Data["blnemail"] == 'Y' ) ? "checked" : ""?>> 수신
+							<input name="blnEmail" type="radio" value="N" <?=( !$Data["blnemail"] || $Data["blnemail"] == 'N' ) ? "checked" : ""?>> 미수신
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">SMS수신</td>
+							<td class="left_8">
+							<input name="blnSms" type="radio" value="Y" <?=( $Data["blnsms"] == 'Y' ) ? "checked" : ""?>> 수신 
+							<input name="blnSms" type="radio" value="N" <?=( !$Data["blnsms"] || $Data["blnsms"] == 'N' ) ? "checked" : ""?>> 미수신
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle">메모</td>
+							<td class="left_8">
+								<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:300px; display:none;"><? echo $Data["memo"]; ?></textarea>
+								<p style="display:none"><textarea name="strComment" id="strComment" style="width:100%; height:150px" itemname="팝업내용"></textarea></p>
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle"><font color='red'>탈퇴신청</font></td>
+							<td class="left_8">
+							<input name="memDel" type="radio" value="Y" <?=( $Data["memDel"] == 'Y' ) ? "checked" : ""?>> 신청대기
+							<input name="memDel" type="radio" value="N" <?=( !$Data["memDel"] || $Data["memDel"] == 'N' ) ? "checked" : ""?>> 미신청
+							</td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle"><font color='red'>탈퇴사유</font></td>
+							<td class="left_8"><?if($Data["memDel_reason"]=='1'){
+							echo "시스템 에러/속도 등 불만";
+						 }else if($Data["memDel_reason"]=='2'){
+							echo "개인정보 유출 우려";
+						 }else if($Data["memDel_reason"]=='3'){
+							echo "회원특혜 부족";
+						 }else if($Data["memDel_reason"]=='4'){
+							echo "홈페이지를 자주 사용하지 않음";
+						 }else if($Data["memDel_reason"]=='5'){
+							echo "이벤트 및 컨텐츠 부족";
+						 }else if($Data["memDel_reason"]=='6'){
+							echo "기타사유";
+						 }
+
+						 echo " [".$Data["memDel_date"]."]"; ?><input type="hidden" name="memDel_date" value="<?=$Data["memDel_date"]?>">
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1" class="board-view_title_line"></td>
+						</tr>
+						<tr>
+							<td height="30" class="board-write_content_name"><img src="./img/sub_dot.gif"align="absmiddle"><font color='red'>바라는점</font></td>
+							<td class="left_8"><?=nl2br($Data["memDel_hope"])?></td>
+						</tr>
+						<tr>
+							<td height="1"></td>
+							<td height="1"></td>
+						</tr>
+						<tr>
+							<td height="1" colspan="2" class="board-view_title_line"></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="50" align="center" colspan="2">
+								<img src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;" onclick="submitContents(this);">
+								<img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onclick="location.href='admin_03_01.php';" align="absmiddle">
+								<img src="./img/btn_mem_del.gif" width="60" height="18" style="cursor:pointer;" onClick="fnDelMember();" align="absmiddle">
+							</td>
+						</tr>
+					</table>
+					<!-- 관리자 기본정보 폼 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5" ></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</form>
+			</table>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+var oEditors = [];
+
+// 추가 글꼴 목록
+//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "/editor/SmartEditor2Skin.html",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["ir1"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+	document.getElementById("strComment").value = document.getElementById("ir1").value;
+	try {
+		chkId();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>

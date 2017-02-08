@@ -1,0 +1,60 @@
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+			<form name="frmMain" method="post" action="proc/member_auth_proc.php">
+			<input type="hidden" name="mb_id" value="<?=$Array['tblStrID'];?>"> 
+			<input type="hidden" name="tNum" value="<?=$Array['tblNumber'];?>">
+			<input type="hidden" name="step" value="next">
+			<input type="hidden" name="act" value="<?=$act;?>">
+			<input type="hidden" name="level" value="<?=$level;?>">
+			<input type="hidden" name="blnemail" value="<?=$blnemail;?>">
+			<input type="hidden" name="blnsms" value="<?=$blnsms;?>">
+			<input type="hidden" name="search" value="<?=$search;?>">
+			<input type="hidden" name="tblStrName" value="<?=$tblStrName;?>">
+			<input type="hidden" name="keyword" value="<?=$keyword;?>">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5">
+					<!-- 관리자 기본정보 폼 -->
+<?
+$Query = "SELECT * FROM auth_list WHERE length(auth_key) = '3' and view_state = '1'";
+$Sql = mysql_query( $Query );
+while($list = mysql_fetch_array( $Sql )) {
+?>
+<div class="auth_div">
+	<h3><?=$list['auth_menu'];?></h3>
+	<ul>
+		<?
+		$sub_Sql = mysql_query("SELECT * FROM auth_list WHERE length(auth_key) = '6' and view_state = '1' and auth_key like '".substr($list['auth_key'],0,3)."%' order by auth_key asc");
+		while($sub_list = mysql_fetch_array( $sub_Sql )) {
+		?>
+		<li><input type="checkbox" name="auth_key[]" value="<?=$sub_list['auth_key'];?>" <?=(strpos($menu['auth_key'], $sub_list['auth_key']) !== false)?'checked':''; ?> id="auth_<?=$sub_list['auth_key'];?>"/> <label for="auth_<?=$sub_list['auth_key'];?>"><?=$sub_list['auth_menu'];?></label></li>
+		<? } ?>
+	</ul>
+</div>
+<? } ?>
+
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="50" align="right" style="padding-right:5px;"><input type="image" src="./img/btn_ok_01.gif" width="60" height="18" border="0" style="cursor:pointer;"></td>
+							<td align="left" style="padding-left:5px;"><img src="./img/btn_cancle.gif" width="60" height="18" style="cursor:pointer;" onclick="location.href='admin_03_01.php';"></td>
+						</tr>
+					</table>
+
+					<!-- 관리자 기본정보 폼 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5" ></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</form>
+			</table>

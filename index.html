@@ -1,0 +1,37 @@
+<?
+include "./include/session_start.php";
+
+//스마트폰으로 접속시 모바일웹으로 접속
+if ($_SERVER['QUERY_STRING'] != 'pc') {
+	if ($_SESSION['pc'] != 'pc') {
+		$arr_browser = array ("iPhone","iPod","IEMobile","Mobile","lgtelecom","PPC");
+		for($indexi = 0 ; $indexi < count($arr_browser) ; $indexi++) {
+			if(strpos($_SERVER['HTTP_USER_AGENT'],$arr_browser[$indexi]) == true){
+				header("Location: http://www.ppeum1.com/m/");
+				exit;
+			} 
+		}
+	}
+} else {
+	$_SESSION['pc'] = 'pc';
+}
+
+?>
+<!-- 공통 스크립트 -->
+<? include $_SERVER['DOCUMENT_ROOT']."/include/common_script.php"; ?>
+<?php
+if($_SERVER['HTTP_HOST'] == 'localhost8'){
+?>
+<meta http-equiv="refresh" content="0; url=/001/?<?=$_SERVER['QUERY_STRING'];?>">
+<?
+}else if($_SERVER['HTTP_HOST'] == 'localhost9'){
+?>
+<meta http-equiv="refresh" content="0; url=/002/?<?=$_SERVER['QUERY_STRING'];?>">
+<?
+}else if($_SERVER['HTTP_HOST'] == 'localhost10'){
+?>
+<meta http-equiv="refresh" content="0; url=/001/?<?=$_SERVER['QUERY_STRING'];?>">
+<?
+}?>
+
+<!--<meta http-equiv="refresh" content="0; url=/new/?<?=$_SERVER['QUERY_STRING'];?>">-->

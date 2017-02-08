@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0}
+fieldset,img{border:0 none}
+dl,ul,ol,menu,li{list-style:none}
+blockquote, q{quotes: none}
+blockquote:before, blockquote:after,q:before, q:after{content:'';content:none}
+input,select,textarea,button{vertical-align:middle}
+input::-ms-clear{display:none}
+button{}
+body{background:#fff}
+body,th,td,input,select,textarea,button{font-size:12px;line-height:1.5;font-family:Apple SD Gothic Neo,"AppleHelvetica Neue","돋움",dotum,Malgun Gothic,'맑은 고딕',Helvetica, Arial,sans-serif;color:#333} /* color값은 디자인가이드에 맞게사용 */
+a{color:#333;text-decoration:none}
+a:active, a:hover{text-decoration:underline}
+a:active{background-color:transparent}
+address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
+.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+
+/* ppeum */
+.img_g{display:block}
+.img_c{display:block;width:100%}
+.ppeum_top{position:relative;padding:19px 0 24px 0}
+.ppeum_top .ppeum_logo{width:90px;margin:0 auto}
+.ppeum_top .img_kakao{position:absolute;top:17px;left:22px}
+.ppeum_top .img_call{position:absolute;top:22px;right:22px}
+
+.ppeum_info{overflow:hidden;background:#000;padding:23px 0 20px 0}
+.info_left{float:left}
+.info_right{float:right}
+.info_date{width:200px;margin-bottom:7px}
+.info_date input{width:111px}
+.info_date label{display:inline-block;width:63px;font-size:12px;padding-right:14px;text-align:right;color:#f5a6b0;box-sizing:border-box}
+.info_select select{background:#fff}
+.info_cont textarea{width:117px;height:34px}
+.info_txt label{color:#f5a6b0}
+.info_txt .link_more{display:inline-block;width:61px;background:#282828;border:1px solid #5e5e5e;color:#fff;text-align:center}
+
+.com_pop { display: none;  position: fixed; top: 50%; left: 50%; width: 290px; padding: 10px; background: #fff; border: 1px solid #ddd; z-index: 10; }
+.com_pop input,
+.com_pop select,
+.com_pop label,
+.com_pop textarea { vertical-align: middle; }
+.com_pop span.left { display: inline-block; width: 80px; height: 28px; line-height: 28px; background: #f5f5f5; border: 1px solid #ddd; text-align: center; }
+.com_pop span.left label { color: #545454; font-size: 12px; }
+.com_pop span.right { display: inline-block; border: 1px solid #ddd; }
+.com_pop div { padding-top: 10px; text-align: center; }
+.com_pop div button { width: 50px; height: 25px; line-height: 25px; margin-left: 10px; }
+.com_pop div button:first-child { margin-left: 0; font-size: 12px; }
+
+.pop_register span.left { height: 28px; line-height: 28px; }
+.pop_register span.right input { width: 190px; height: 18px; line-height: 18px; padding: 5px; background: #fff !important; border: 0; }
+.pop_register .chk { font-size: 12px; }
+.pop_register .chk input { vertical-align: top !important; }
+.pop_register .chk a { padding: 2px 5px; color: #545454; text-decoration: none; font-size: 11px; }
+#pop_register_db { margin: -189px 0 0 -155px; }
+#pop_register_db span.right select { width: 200px; height: 28px; line-height: 19px; padding: 5px; background: #fff !important; border: 0; color: #666; font-size: 12px; }
+#pop_register_db span.right textarea {  width: 190px; height: 100px; padding: 5px;border: 0; background: #fff !important; }
+.counsel_db_btn { position: fixed;  bottom: 50px; right: 20px; z-index: 9; }
+.counsel_db_btn img { width: 70px; height: 70px; }

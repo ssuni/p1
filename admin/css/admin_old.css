@@ -1,0 +1,328 @@
+/**********************************************************************/
+/*11폰트 관련 스타일 **************************************************/
+/**********************************************************************/
+
+.font_11						{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:0; text-decoration:none; }
+.font_11	A:link				{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; text-decoration:none; }
+.font_11	A:visited			{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; text-decoration:none; }
+.font_11	A:active			{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; text-decoration:none; }
+.font_11	A:hover				{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; text-decoration:underline; }
+
+/**********************************************************************/
+
+.font_11_bold					{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:0; text-decoration:none;  font-weight:bold; }
+
+/**********************************************************************/
+/* navi 11폰트 (예 HOME > 회사소개 > 인사말) **************************/
+/**********************************************************************/
+
+.navi_11						{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:0; text-decoration:none; }
+.navi_11	A:link				{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; }
+.navi_11	A:visited			{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; }
+.navi_11	A:active			{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; }
+.navi_11	A:hover				{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#626262; text-decoration:underline; }
+.navi_11	{ padding-right:10px; }
+
+.white							{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#ffffff;}
+.font_w  { font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#ffffff;  letter-spacing:0; text-decoration:none;   }
+
+/**********************************************************************/
+/* 컬러색 강조 두껍게쓰기 (추가해서 쓰세요) ***************************/
+/**********************************************************************/
+
+.blue_bold11					{ font-size: 11px; font-family: 돋움,돋움체,tahoma; line-height:160%; color: #5E7386; font-weight:bold; }
+.blue_bold12					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; line-height:160%; color: #5E7386; font-weight:bold; }
+
+.white_bold						{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#ffffff; font-weight:bold; }
+.white_bold   A:link			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#ffffff; font-weight:bold; text-decoration:none; }
+.white_bold   A:visited			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#ffffff; font-weight:bold; text-decoration:none; }
+.white_bold   A:active			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#ffffff; font-weight:bold; text-decoration:none; }
+.white_bold   A:hover			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#ffffff; font-weight:bold; text-decoration:none; }
+
+.tab_list                       { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#454545; }
+.tab_list   A:link			    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#454545; text-decoration:none; }
+.tab_list   A:visited		    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#454545; text-decoration:none; }
+.tab_list   A:active		    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#454545; text-decoration:none; }
+.tab_list   A:hover		        { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#5E7386; text-decoration:underline; }
+
+/**********************************************************************/
+/*PADDING STYLE 코딩 간단하게 한번해봅시다..^^(게시판에 필요) *********/
+/**********************************************************************/
+
+.top_5					{ padding:5px 0 0 0;text-align:left;}
+.top_10					{ padding:10px 0 0 0;text-align:left;}
+.top_15					{ padding:15px 0 0 0;text-align:left;}
+.top_20					{ padding:20px 0 0 0;text-align:left;}
+.top_25					{ padding:25px 0 0 0;text-align:left;}
+
+/**********************************************************************/
+
+.bottom_5				{ padding:0 0 5px 0;text-align:left;}
+.bottom_10				{ padding:0 0 10px 0;text-align:left;}
+.bottom_15				{ padding:0 0 15px 0;text-align:left;}
+.bottom_20				{ padding:0 0 20px 0;text-align:left;}
+.bottom_25				{ padding:0 0 25px 0;text-align:left;}
+
+/**********************************************************************/
+
+.left_5					{ padding:0 0 0 5px;text-align:left;}
+.left_8					{ padding:0 0 0 8px;text-align:left;}
+.left_10				{ padding:0 0 0 10px;text-align:left;}
+.left_15				{ padding:0 0 0 15px;text-align:left;}
+.left_20				{ padding:0 0 0 20px;text-align:left;}
+.left_25				{ padding:0 0 0 25px;text-align:left;}
+
+
+/**********************************************************************/
+
+.right_5				{ padding:0 5px 0 0;text-align:left;}
+.right_10				{ padding:0 10px 0 0;text-align:left;}
+.right_15				{ padding:0 15px 0 0;text-align:left;}
+.right_20				{ padding:0 20px 0 0;text-align:left;}
+
+/**********************************************************************/
+/*PADDING STYLE 패딩 동시에 준거에요 추가해서 쓰세요. *****************/
+/*형식은 위아래 좌우 이런식으로 쓰세요. (밑에꺼 예)  ******************/
+
+.top_5_bottom_5			{ padding:5px 0 5px 0;text-align:left;}
+
+
+
+/**********************************************************************/
+/* SELECT BOX STYLE 드롭다운매뉴(스타일입니다.이뽀이뽀) ***************/
+/**********************************************************************/
+
+.selectBoxSelectedArea {color:#808080; background-color:#FFFFFF; font-size:12px; font-family:Dotum,Dotumche,verdana; padding-top:1px; line-height:15px; padding-left:4px;}
+.selectBoxSelectedAreaFocus {color:#333333; background-color:#F3F3F3; font-size:12px; font-family:Dotum,Dotumche,verdana; padding-top:1px; line-height:15px; padding-left:4px;}
+.selectBoxOption {color:#808080; background-color:#FFFFFF; font-size:12px; font-family:Dotum,Dotumche,verdana; padding-top:2px; line-height:15px; padding-left:4px;}
+.selectBoxOptionOver {color:#333333; background-color:#F3F3F3; font-size:12px; font-family:Dotum,Dotumche,verdana; padding-top:2px; line-height:15px; padding-left:4px;}
+.selectBoxOptionInnerLayer {overflow:auto;background-color:#FFFFFF;
+	scrollbar-face-color:#FFFFFF;
+	scrollbar-shadow-color:#CBCBCB;
+	scrollbar-highlight-color:#CBCBCB;
+	scrollbar-3dlight-color:#FFFFFF;
+	scrollbar-darkshadow-color:#FFFFFF;
+	scrollbar-track-color:#F5F5F5;
+	scrollbar-arrow-color:#CBCBCB;
+	scrollbar-BaseC-olor : #7391A2;
+}
+
+
+/**********************************************************************/
+/* 1팀 게시판 스킨 스타일 입니다..^^(list) ****************************/
+/**********************************************************************/
+
+.bgcolor							{ background-color:#E6E6E6; }
+.board_title						{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#666666; line-height:160%; letter-spacing:0 ; text-decoration:none; font-weight:bold; padding-top:3px; }
+
+.board_s_title                      { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; padding-left:5; }
+.board_s_title   A:link			    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; padding-left:5; }
+.board_s_title   A:visited		    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; padding-left:5; }
+.board_s_title   A:active		    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none; padding-left:5; }
+.board_s_title   A:hover		    { font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; text-decoration:none; padding-left:5; }
+
+.board_bottom_bg					{ background-color:#F6F6F6; }
+.board_notice_bg					{ background-color:#f2f2f2; }
+.board_notice						{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#ff0000; line-height:160%; letter-spacing:0 ; text-decoration:none; font-weight:bold; }
+.INPUT.input_search					{ font-family: 돋움,돋움체,tahoma; font-size: 12px; line-height: 130%; border:solid #E2E2E2 1px; padding:0 0 0 5px; background-color:#ffffff; color:#323232; width:120; height:19; }
+
+/**********************************************************************/
+/* 1팀 게시판 스킨 스타일 입니다..^^ (view) ***************************/
+/**********************************************************************/
+
+.board-view_title					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; line-height:160%; letter-spacing:0 ; text-decoration:none; font-weight:bold; padding-top:3px; }
+.board-view_title_s					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; line-height:160%; letter-spacing:0 ; text-decoration:none; font-weight:bold; padding-top:3px; padding-left:10px; }
+.board-view_content_name			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; line-height:160%; letter-spacing:0 ; text-decoration:none; padding-top:3px; }
+.board-view_title_line				{ background-color:#E6E6E6; }
+.board-view_content					{ text-align:justify; padding:10px 10px 10px 10px;}
+.textarea_meno						{ width:100%; height:80px; font: 9pt 돋움;color:#7C7769; background-color: #ffffff; border: #EEEEEE 1px solid; padding: 10px; margin: 3px 0px 0px 0px; overflow:auto}
+.coment								{ text-align:justify; padding:5px 5px 5px 5px; }
+.coment_name						{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:0; text-decoration:none;  font-weight:bold; padding:5px 5px 5px 5px; }
+
+/**********************************************************************/
+/* 1팀 게시판 스킨 스타일 입니다..^^ (write) ***************************/
+/**********************************************************************/
+
+.board-write_content_name			{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#525252; line-height:160%; letter-spacing:0 ; text-decoration:none; font-weight:bold; padding-left:10px; background-color:#E6E6E6; }
+.TEXTAREA.textarea_board			{ font-family: 돋움,돋움체,tahoma; font-size: 12px; line-height: 160%; border:solid #e6e6e6 1px; padding:5px 0 0 5px; background-color:#ffffff; color:#000000; }
+.INPUT.input_board					{ font-family: 돋움,돋움체,tahoma; font-size: 12px; line-height: 130%; border:solid #E6E6E6 1px; padding:0 0 0 5px; background-color:#ffffff; color:#333333; }
+
+
+/**********************************************************************/
+/* 시술전후사진 게시판 스타일 (list) **********************************/
+/**********************************************************************/
+.img_bgcolor						{ background-color:#EBEBEB; }
+.img_tb								{ background:#D9BC54; }
+.img_list_title                     { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_list_title   A:link			{ font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_list_title   A:visited		    { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_list_title   A:active		    { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_list_title   A:hover		    { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#000000; text-decoration:none; font-weight:bold; }
+
+/**********************************************************************/
+/* 시술전후사진 게시판 스타일 (view) **********************************/
+/**********************************************************************/
+
+.img_view_title                     { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_view_title   A:link			{ font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_view_title   A:visited		    { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_view_title   A:active		    { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#A3751D; text-decoration:none; font-weight:bold; }
+.img_view_title   A:hover		    { font-size: 15px; font-family: 돋움,돋움체,tahoma; color:#000000; text-decoration:none; font-weight:bold; }
+
+
+/**********************************************************************/
+/* 닥터애드컴 어드민 스타일 skin_01 ***********************************/
+/**********************************************************************/
+
+.navi_bg							{ background-image:url(/admin/img/navi_bg_skin_01.gif); height:30px; }
+.center_bg							{ background-image:url(/admin/img/center_bg_skin_01.gif); }
+
+.menu_box_left						{ background-image:url(/admin/img/menu_box_left_skin_01.gif); height:29px; width:3px; cursor:hand; }
+.menu_box_left_over					{ background-image:url(/admin/img/menu_box_left_over_skin_01.gif); height:29px; width:3px; cursor:hand; }
+.menu_box_right						{ background-image:url(/admin/img/menu_box_right_skin_01.gif); height:29px; width:3px; cursor:hand; }
+.menu_box_right_over				{ background-image:url(/admin/img/menu_box_right_over_skin_01.gif); height:29px; width:3px; cursor:hand; }
+.menu_box_bg						{ background-image:url(/admin/img/menu_box_bg_skin_01.gif); padding:0 8px 0 5px; font-size: 12px; font-family: 돋움,돋움체,tahoma; line-height:160%; color: #323232; cursor:hand; }
+.menu_box_bg_over					{ background-image:url(/admin/img/menu_box_bg_over_skin_01.gif); padding:0 8px 0 5px; font-size: 12px; font-family: 돋움,돋움체,tahoma; line-height:160%; color: #000000; font-weight:bold; letter-spacing:-1px; cursor:hand; }
+
+
+.menu_box2_left						{ background-image:url(/admin/img/menu_box_left_skin_02.gif); height:29px; width:3px; cursor:hand; }
+.menu_box2_left_over					{ background-image:url(/admin/img/menu_box_left_over_skin_02.gif); height:29px; width:3px; cursor:hand; }
+.menu_box2_right						{ background-image:url(/admin/img/menu_box_right_skin_02.gif); height:29px; width:3px; cursor:hand; }
+.menu_box2_right_over				{ background-image:url(/admin/img/menu_box_right_over_skin_02.gif); height:29px; width:3px; cursor:hand; }
+.menu_box2_bg						{ background-image:url(/admin/img/menu_box_bg_skin_02.gif); padding:0 8px 0 5px; font-size: 12px; font-family: 돋움,돋움체,tahoma; line-height:160%; color: #323232; cursor:hand; }
+.menu_box2_bg_over					{ background-image:url(/admin/img/menu_box_bg_over_skin_02.gif); padding:0 8px 0 5px; font-size: 12px; font-family: 돋움,돋움체,tahoma; line-height:160%; color: #000000; font-weight:bold; letter-spacing:-1px; cursor:hand; }
+
+
+.main_title_01						{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; line-height:160%; letter-spacing:-1; text-decoration:none; font-weight:bold; height:28px; padding:0 0 0 2px; }
+.main_title_02						{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#525252; line-height:160%; letter-spacing:-1; text-decoration:none; font-weight:bold; height:27px; background-color:#BDF4FC; }
+.main_title_03						{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#525252; line-height:160%; letter-spacing:-0; text-decoration:none; height:40px; padding:0 2px 0 0; }
+
+.left_menu_title_01					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; font-weight:bold; padding:3px 0 0 24px;text-align:left;}
+.left_menu_title_011				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; font-weight:bold; padding:0 0 0 24px;text-align:left;}
+.left_menu_ct_01					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:0 0 0 5px;text-align:left;}
+.left_menu_ct_01	A:link			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:0 0 0 5px;text-align:left;}
+.left_menu_ct_01	A:visited		{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:0 0 0 5px;text-align:left;}
+.left_menu_ct_01	A:active		{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:0 0 0 5px;text-align:left;}
+.left_menu_ct_01	A:hover			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:0 0 0 5px; text-decoration:underline;text-align:left;}
+
+.table_ct_01						{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:3px 3px 3px 3px; }
+.table_ct_01	A:link				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:3px 3px 3px 3px; }
+.table_ct_01	A:visited			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:3px 3px 3px 3px; }
+.table_ct_01	A:active			{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#626262; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:3px 3px 3px 3px; }
+.table_ct_01	A:hover				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; line-height:160%; letter-spacing:-0; text-decoration:none; height:25px; padding:3px 3px 3px 3px; text-decoration:underline; }
+
+.mail_ct							{ font-size: 11px; font-family: 돋움,돋움체,tahoma; color:#525252; line-height:160%; letter-spacing:0 ; text-decoration:none; font-weight:bold; padding-left:10px; background-color:#F7F7F7; }
+
+/**********************************************************************/
+/* 닥터애드컴 어드민 스타일 인풋박스 스타일 ***************************/
+/**********************************************************************/
+
+.title_ment_01						{ font-family: 돋움,돋움체,tahoma; font-size: 12px; border:solid #E6E6E6 1px; padding:3px 5px 1px 5px; background-color:#F7F7F7; color:#DC6D00; width:100%; height:20px; font-weight:bold; }
+.check_basic						{ border:solid #E2E2E2 0px; width:12px; height:12px; }
+.text_mobile						{ font-family: 굴림; font-size:12px ;color:#7C7769; background-color:#ffffff; border: #EEEEEE 1px solid;margin:0px; border-style:none;   }
+.textarea_basic						{ font-family: 돋움,돋움체,tahoma; font-size: 12px; border:solid #E6E6E6 1px; padding:3px 5px 1px 5px; background-color:#ffffff; color:#000000; }
+.text_basic							{ font-family: 돋움,돋움체,tahoma; font-size: 12px; border:solid #E6E6E6 1px; padding:3px 5px 1px 5px; background-color:#ffffff; color:#333333; }
+.hand_ct							{ width:102px; height:80px; font: 8pt 돋움;color:#7C7769; background-color: #ffffff; border: #EEEEEE 1px solid; padding: 5px; margin: 3px 0px 0px 0px; overflow:auto; }
+
+
+/**********************************************************************/
+/* 닥터애드컴 어드민 로그인 스타일 ************************************/
+/**********************************************************************/
+
+.member_login						{ font-family: 돋움,돋움체,tahoma; font-size: 12px; line-height:140%; border:solid #E6E6E6 1px; padding:0px 5px 0px 5px; background-color:#ffffff; color:#333333; width:200px; height:20px; }
+
+/*달력*/
+.blue_day							{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#0064DA; line-height:160%; letter-spacing:0; text-decoration:none; }
+.blue_day	A:link					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#0064DA; text-decoration:none;  }
+.blue_day	A:visited				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#0064DA; text-decoration:none;  }
+.blue_day	A:active				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#0064DA; text-decoration:none;  }
+.blue_day	A:hover					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; text-decoration:underline;  }
+
+.red_day							{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#FF0000; line-height:160%; letter-spacing:0; text-decoration:none; }
+.red_day	A:link					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#FF0000; text-decoration:none;  }
+.red_day	A:visited				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#FF0000; text-decoration:none;  }
+.red_day	A:active				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#FF0000; text-decoration:none;  }
+.red_day	A:hover					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#FF0000; text-decoration:underline;  }
+
+.normal_day							{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; line-height:160%; letter-spacing:0; text-decoration:none; }
+.normal_day	A:link					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none;  }
+.normal_day	A:visited				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none;  }
+.normal_day	A:active				{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#666666; text-decoration:none;  }
+.normal_day	A:hover					{ font-size: 12px; font-family: 돋움,돋움체,tahoma; color:#000000; text-decoration:underline;  }
+
+
+
+.textfield{
+	scrollbar-face-color: #ffffff;
+	scrollbar-highlight-color: #cccccc;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-shadow-color: #cccccc;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #ffffff;
+	scrollbar-arrow-color: #000000;
+	font-family: tahoma, sans-serif, arial;
+	font-size: 11px;
+	color: 0C2E4F;
+	text-decoration: none;
+}
+
+/** class에 스타일에 정의한 selecBox를 넣어준다.
+　* 사용자 옵션 (정의하지 않으면 기본값으로 사용됨)
+　　- setDisplayCount : 옵션 항목 창에 출력될 항목의 갯수를 지정 (기본값 : 10)
+　　- setImage : 드롭다운 항목이 나오도록 클릭하는 화살표 이미지 지정 (기본값 : arrow_image.gif)
+　　- setColor : 셀렉트 박스에서 사용되는 색상 지정
+　　　사용법 : "비활성 글씨색,비활성 바탕색,활성 글씨색,활성 바탕색,비활성 테두리색,활성 테두리색"
+　　　　　　　만약 1개의 색상만 넣으면 비활성 글씨색만 지정하게 된다.
+
+[출처] 셀렉트박스에 스타일 적용하기 후아~|작성자 해용아이
+
+*/
+/*select{behavior: url('/include/selectbox.htc');}*/
+
+#tab_03_01 {width:676px; height:24px; margin:0px auto 8px 20px;/* background:url(../img/tab_line.gif) repeat-x bottom;*/ position:relative;}
+#tab_03_01 p.tab_all {width:77px; height:24px; margin-right:5px; position:relative; float:left;}
+#tab_03_01 p.tab_03_01 {width:63px; height:24px; position:relative; float:left;}
+#tab_03_01 p.tab_03_02 {width:87px; height:24px; position:relative; float:left;}
+#tab_03_01 p.tab_03_03 {width:87px; height:24px; position:relative; float:left;}
+#tab_03_01 p.tab_03_04 {width:88px; height:24px; position:relative; float:left;}
+#tab_03_01 p.tab_03_05 {width:77px; height:24px; position:relative; float:left;}
+#tab_03_02 {width:676px; height:24px; margin:0px auto 13px 20px; /*background:url(../img/tab_line.gif) repeat-x bottom;*/ position:relative;}
+#tab_03_02 p.tab_03_05 {width:77px; height:24px; position:relative; float:left;}
+
+
+#layer_on {width:685px; margin-bottom:10px; margin-left:20px; position:relative;}
+#layer_on #top_bg {width:685px; height:12px; position:relative;}
+#layer_on #m_bg {width:685px; height:56px; background:url(/img/01_info/layer_bg_m.gif) repeat-y; position:relative; overflow:hidden;}
+#layer_on #m_bg p.list {width:622px; height:11px; margin:0px 32px 8px 31px; position:relative;}
+
+#layer_on #m_bg p.list_01 {width:20px; height:11px; margin:0px 16px 4px 31px; position:relative; float:left; display:inline;}
+#layer_on #m_bg #list_01 {width:249px; height:11px; padding:0px 39px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_01 p.list_01_01 {width:40px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_01 p.list_01_02 {width:39px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_01 p.list_01_03 {width:39px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_01 p.list_01_04 {width:30px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_01 p.list_01_05 {width:36px; height:11px; position:relative; float:left;}
+
+#layer_on #m_bg p.list_02 {width:20px; height:11px; margin:0px 16px 4px 0px; position:relative; float:left; display:inline;}
+#layer_on #m_bg #list_02 {width:30px; height:11px; padding:0px 39px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_02 p.list_02_01 {width:30px; height:11px; position:relative; float:left; display:inline;}
+
+#layer_on #m_bg p.list_03 {width:28px; height:11px; margin:0px 16px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_03 {width:28px; height:11px; padding:0px 39px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_03 p.list_03_01 {width:28px; height:11px; position:relative; float:left; display:inline;}
+
+#layer_on #m_bg p.list_04 {width:19px; height:11px; margin:0px 16px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_04 {width:27px; height:11px; padding:0px 39px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_04 p.list_04_01 {width:27px; height:11px;x position:relative; float:left;}
+
+#layer_on #m_bg p.list_05 {width:20px; height:11px; margin:0px 16px 4px 31px; position:relative; float:left; display:inline;}
+#layer_on #m_bg #list_05 {width:173px; height:11px; padding:0px 220px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_05 p.list_05_01 {width:30px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_05 p.list_05_02 {width:30px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_05 p.list_05_03 {width:29px; height:11px; margin-right:15px; position:relative; float:left;}
+#layer_on #m_bg #list_05 p.list_05_04 {width:30px; height:11px; position:relative; float:left;}
+
+#layer_on #m_bg p.list_06 {width:28px; height:11px; margin:0px 16px 4px 0px; position:relative; float:left; display:inline;}
+#layer_on #m_bg #list_06 {width:28px; height:11px; padding:0px 39px 4px 0px; position:relative; float:left;}
+#layer_on #m_bg #list_06 p.list_06_01 {width:28px; height:11px; position:relative; float:left;}
+#layer_on #foot_bg {width:330px; height:16px; position:relative;}

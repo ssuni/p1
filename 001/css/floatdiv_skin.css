@@ -1,0 +1,18 @@
+/* 떠다니는 메뉴 (Floating Menu) */
+ #floatdiv { 
+    position:fixed;
+	z-index:10000000;
+    width:100px;
+    overflow:hidden;
+    right:80px;
+    top:200px; 
+    background-color: transparent;
+    margin:0;
+    padding:0;
+}
+
+#floatdiv ul  { list-style: none; }
+#floatdiv li  { margin-bottom: 2px; text-align: center; }
+#floatdiv a   { color: #5D5D5D; border: 0; text-decoration: none; display: block; }
+#floatdiv a:hover, #floatdiv .menu  { background-color: #5D5D5D; color: #fff; }
+#floatdiv .menu, #floatdiv .last    { margin-bottom: 0px; }

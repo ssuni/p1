@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+
+
+
+#main_visual{overflow:hidden; position:relative; z-index:10; width:100%; height:713px;}
+#main_visual .slider_wrap{position:absolute; top:0px; left:50%; width:1920px; height:713px; margin-left:-960px;}
+#main_visual .bx-pager{position:absolute; bottom:60px; left:50%; margin-left:-580px;}
+#main_visual .bx-pager a{width:14px; height:14px; margin-bottom:10px; border:3px solid #000000; background:none; opacity:1;}
+#main_visual .bx-pager a.active{background:#000000;}
+
+
+#hot_new .mtitle01{margin:100px 0px 40px;}
+#hot_new > div{overflow:hidden; margin-bottom:-13px;}
+#hot_new > div img{float:left; margin:0px 0px 12px 13px;}
+#hot_new > div img.first{margin-left:0px;}
+
+
+
+#filler_event .mtitle01{margin:125px 0px 40px;}
+#filler_event > div{position:relative; width:100%; height:650px; background:url('../images/main/filler_event_img.jpg') fixed center;}
+#filler_event > div .cont{position:absolute; top:191px; left:50%; margin-left:-568px;}
+
+
+
+#skin_care .mtitle01{margin:105px 0px 40px;}
+#skin_care ul{overflow:hidden;}
+#skin_care ul li{float:left; margin-left:28px;}
+#skin_care ul li:first-child{margin-left:0px;}
+
+
+#interior{position:relative; width:100%; height:530px; margin-top:105px;}
+#interior .slider_wrap{position:absolute; top:0px; left:50%; width:1920px; height:530px; margin-left:-960px;}
+
+
+#celeb{overflow:hidden; position:relative; width:100%; height:527px;}
+#celeb img{position:absolute; top:0px; left:50%; margin-left:-960px;}
+
+
+#main_cont01{overflow:hidden; margin-top:70px; margin-bottom:70px;}
+#main_cont01 > div{float:left; overflow:hidden;}
+#main_consult{width:458px; height:420px; background:#ececec;}
+#main_consult h2{padding:40px 0px 25px; text-align:center;}
+#main_consult table{width:355px; margin:0 auto;}
+#main_consult table th{padding-top:7px; font-size:15px; color:#181818; font-weight:400; text-align:left; vertical-align:top;}
+#main_consult table td{padding:5px;}
+#main_consult table td select, #main_consult table td input[type="text"]{width:100%;}
+#main_consult table td select{margin-top:5px;}
+#main_consult table td select:first-child{margin-top:0px;}
+#main_consult p{padding-top:20px; text-align:center;}
+#main_cont01 .cont_link{float:right; width:672px; height:420px;}
+#main_cont01 .cont_link img{float:left; margin-left:7px; margin-bottom:7px;}
+
+#location{position:relative; width:1132px; height:330px; margin:110px auto 90px; text-align:center;}
+#location img{position:relative; z-index:1;}
+#location ul{overflow:hidden; position:absolute; top:250px; left:13px; z-index:2; border:1px solid #040000;}
+#location ul li{float:left; border-left:1px solid #040000; margin-left:-1px;}
+#location ul a{display:block; width:145px; height:52px; font-size:20px; color:#000000; text-align:center; line-height:50px; text-decoration:none;}
+#location ul li.active a, #location ul li:hover a{color:#ffffff; background:#2f2f2f;}
+
+#story{position:relative; width:100%; height:624px;}
+#story .mtitle01{padding:30px 0px 0px;}
+#story .slider_wrap{position:absolute; top:120px; left:50%; width:2760px; height:505px; margin-left:-1380px;}
+#story .slider_wrap > span{display:block; position:absolute; top:30px; z-index:100; width:970px; height:500px;}
+#story .slider_wrap > span.l_bg{left:0px; background:url('../images/main/bg01.png') no-repeat right 0px;}
+#story .slider_wrap > span.r_bg{right:0px; background:url('../images/main/bg02.png') no-repeat left 0px;}
+#story .slider_wrap li{text-align:center;}
+#story .bx-controls-direction{position:absolute; top:260px; left:50%; z-index:102;}
+#story .bx-controls-direction > a{display:block; overflow:hidden; position:absolute; top:0px; left:0px; width:17px; height:35px; margin-top:0px; text-indent:-999px; background:url('../images/icon/story_btn.png') no-repeat 0px 0px;}
+#story .bx-controls-direction .bx-prev{left:-473px;}
+#story .bx-controls-direction .bx-next{left:452px; background-position:-17px 0px;}
+
+
+
+
+
+.cont_size01{width:1136px; margin:0 auto;}
+.mtitle01{text-align:center;}
+

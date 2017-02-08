@@ -1,0 +1,187 @@
+			<script language="javascript">
+				function fnEdit(p_nIdx){
+					var f_oForm	= document.forms["frmMain"];
+					f_oForm.uid.value	= p_nIdx;
+					f_oForm.act.value	= "modify";
+					f_oForm.action			= "<?=$PHP_SELF?>";
+					f_oForm.submit();
+				}
+
+				function fnView(p_nIdx){
+					var f_oForm	= document.forms["frmMain"];
+					f_oForm.uid.value	= p_nIdx;
+					f_oForm.act.value	= "view";
+					f_oForm.action			= "<?=$PHP_SELF?>";
+					f_oForm.submit();
+				}
+
+				function fnChkVal(p_oForm){
+					p_oForm.method		= "post";
+					p_oForm.proc.value	= "search";
+					p_oForm.submit();
+				}
+				function fnChkAll(p_oBox) {
+					var f_oBox	= document.getElementsByName("chk[]");
+					var f_nCnt	= f_oBox.length;
+					var f_bChk	= false;
+					if (p_oBox.checked==true)
+					{
+						f_bChk	= true;
+					}
+					for (i=0; i < f_nCnt; i++)
+					{
+						f_oBox[i].checked	= f_bChk;
+					}
+				}
+				function fnChkItem(p_oBox) {
+					var f_oBox	= document.getElementsByName("chk[]");
+					var f_nCnt	= f_oBox.length;
+					var f_bChk	= true;
+					for ( i = 0; i < f_nCnt ; i++)
+					{
+						if ( f_oBox[i].checked == false ){
+							f_bChk	= false;
+						}
+					}
+					p_oBox.checked	= f_bChk;
+				}
+				function fnChkBox() {
+					var f_oBox	= document.getElementsByName("chk[]");
+					var f_nCnt	= f_oBox.length;
+					var f_nChk	= 0;
+					var f_bChk	= false;
+					for ( i = 0; i < f_nCnt ; i++)
+					{
+						if ( f_oBox[i].checked == true ){
+							f_bChk	= true;
+							f_nChk++;
+						}
+					}
+					return f_nChk;
+				}
+				function fnDelMember(){
+					var f_oForm	= document.forms['frmMain'];
+					var f_nCnt	= fnChkBox();
+					if ( f_nCnt == 0 ){
+						alert('선택된 게시물이 없습니다.');
+						return;
+					}
+					if ( confirm("삭제한 게시물은 복구가 불가능합니다.. 삭제하시겠습니까?") ) { 
+						f_oForm.action	= "proc/contact_delete_delete_proc.php";
+						f_oForm.submit();
+					}
+				}
+
+				function lSubmit() {
+					document.frmMain.act.value = 'list';
+					document.frmMain.submit();
+				}
+
+				function showPop(uid) {
+					location.href="admin_02_08.php?step=next&act=view&uid="+uid+"&search=wr_name&keyword=";
+				}
+
+				function print_word(uid) {
+					location.href="./html/contact_word.php?uid="+uid;
+				}
+				function img_dl(uid) {
+					location.href="./html/contact_img_dl.php?uid="+uid;
+				}
+			</script>
+			<table width="950" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" valign="top">
+					<!-- 검색 시작 -->
+
+					<table width="99%" border="0" cellpadding="1" cellspacing="1" >
+					<form name="frmSearch" method="get" action="<? echo $PHP_SELF; ?>">
+					<input type="hidden" name="step" value="next">
+					<input type="hidden" name="act" value="">
+					<input type="hidden" name="uid" value="">
+						<tr>
+							<td align="right">
+								<select name="search" class="selectBox" style="width:100px; height:19px;" setColor="#6C6C6C,#FFFFFF,#FFFFFF,#6C6C6C,#E6E6E6,#E6E6E6" setImage="/image/bu_arrow.gif">
+								<option value="wr_name">이름</option>
+								<option value="wr_email">이메일</option>
+							</select>			
+							<input name="keyword" type="text" class="text_basic" value="<? echo $keyword; ?>" style="width:150px;height:19px" itemname="검색어" required>
+							<input type="image" src="./img/btn_search.gif" align="absmiddle" style="cursor:pointer;"></td>
+						</tr>
+					</table>
+					</form>
+					<table width="99%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="10"></td>
+						</tr>
+					</table>
+					<form name="frmMain" method="post" action="<? echo $PHP_SELF; ?>">
+					<input type="hidden" name="step" value="next">
+					<input type="hidden" name="act" value="">
+					<input type="hidden" name="uid" value="">
+					<table width="99%" border="2" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td width="25" align="center" class="main_title_02"><input type="checkbox" name="chkall" value="chkall" onclick="fnChkAll(this);" class="check_basic"></td>
+							<td width="35" align="center" class="main_title_02">No</td>
+							<td width="80" align="center" class="main_title_02">성명</td>
+							<td width="100" align="center" class="main_title_02">생년월일</td>
+							<td width="70" align="center" class="main_title_02">이메일</td>
+							<td width="120" align="center" class="main_title_02">신청일</td>
+							<td width="120" align="center" class="main_title_02">관리</td>
+						</tr>
+						<? for( $i = 0; $i < $nTmp; $i++ ) { ?>
+						<tr bgcolor='#FFFFFF'>
+							<td height="25" align="center"><INPUT type="checkbox" name="chk[]" value="<? echo $Data[$i]["uid"]; ?>" onClick="fnChkItem(this.form['chkall']);" class="check_basic"></td>
+							<td align="center" class="table_ct_01"><? echo $viewCount; ?></td>
+							<td align="center" class="table_ct_01" onMouseOver="this.style.backgroundColor='#F3F2F3'" onMouseOut="this.style.backgroundColor='';return"><a href="javascript:fnView('<? echo $Data[$i]["uid"]; ?>');"><? echo $Data[$i]["wr_name"]; ?></a></td>
+							<td align="center" class="table_ct_01"><? echo $Data[$i]["wr_birth"]; ?></td>
+							<td align="center" class="table_ct_01" ><? echo $Data[$i]["wr_email"]; ?></td>
+							<td align="center" class="table_ct_01"><? echo $Data[$i]["wr_datetime"]; ?></td>
+							<td align="center" class="table_ct_01">
+								<input type="button" value="이미지다운" class="" onclick="img_dl(<?php echo $Data[$i]['uid']?>)" />
+								<input type="button" value="doc다운" class="" onclick="print_word(<?php echo $Data[$i]['uid']?>)" />
+								<input type="button" value="내용확인" class="" onclick="showPop(<?php echo $Data[$i]['uid']?>)" />
+							</td>
+						</tr>
+						<? 
+								$viewCount--;
+							} 
+						?>
+					</table>
+					<!-- 페이징 시작 -->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="50" align="center">
+					<? 
+						$get_val = "step=".$step."&level=".$level."&place=".$place."&sex=".$sex."&blnemail=".$blnemail."&blnsms=".$blnsms."&age=".$age."&search=".$search."&keyword=".$keyword;
+						include $_SERVER['DOCUMENT_ROOT']."/include/page.php";
+					?>
+							</td>
+						</tr>
+					</table><!-- 페이징 끝 -->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" valign="top"></td>
+							<td align="right" valign="top"><img src="./img/btn_del.gif" width="60" height="18" align="absmiddle" style="cursor:pointer;" onClick="fnDelMember();"></td>
+						</tr>
+					</table>
+					<!-- 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+					</form>
+			</table>
+<script language="javascript" src="/js/wrest.js"></script>

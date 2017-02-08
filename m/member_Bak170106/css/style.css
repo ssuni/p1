@@ -1,0 +1,113 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+/***************************** ////// COMMON ////// *******************************/
+.m_contents { width:100%; text-align:center; font-size:15pt; border-top:2px solid #885bb6;}
+.m_contents *{line-height:150%;}
+.m_contents a { font-size:15pt; color:#333; font-weight:130%;}
+.m_contents input { font-size:15pt; color:#333;}
+
+/***************************** ////// 회원로그인 ////// *******************************/
+
+.m_header { width:660px; margin:0 auto; padding:30px 0 20px 0; border-bottom:1px solid #e0e0e0; text-align:left;}
+.m_header h2 { font-weight:bold; font-size:30px; color:#333333;}
+
+.m_contents .memberForm { border:1px solid #cdcdcd; height:33px; width:250px;}
+.m_contents .m_login_box { border:3px solid #e0e0e0; width:580px; margin:30px auto 80px auto; text-align:left; position:relative;}
+.m_contents .m_login_box .n_login { position:absolute; left:325px; top:126px; width:113px; height:80px;}
+.m_contents .m_login_box .f_login { position:absolute; left:428px; top:126px; width:113px; height:80px;}
+.m_contents .m_login_box .form { text-align:center; padding:30px 0;}
+.m_contents .m_login_box .form table { width:500px; margin:0 auto; text-align:left;}
+.m_contents .m_login_box .form table th, 
+.m_contents .m_login_box .form table td { padding:5px; vertical-align:middle;}
+.m_contents .m_login_box .form table th { color:#111111; text-align:left;}
+.m_contents .m_login_box .link { width:500px; margin:65px auto 0 auto; text-align:left; border-top:1px solid #e0e0e0; padding-top:20px;}
+.m_contents .m_login_box .link .link1 { height:50px; line-height:50px; position:relative;}
+.m_contents .m_login_box .link .link1 .btn { position:absolute; right:0; top:6px;}
+.m_contents .m_login_box .link .link2 { height:50px; line-height:50px; position:relative;}
+.m_contents .m_login_box .link .link2 .btn { position:absolute; right:0; top:6px;}
+
+/***************************** ////// 약관동의 ////// *******************************/
+.m_contents .m_join_wrap {margin:0 25px; text-align:left;}
+.m_contents .htext { font-size:15pt; padding:40px 0; line-height:140%;}
+.m_contents .htext strong { color:#3378c1;}
+.m_contents h3 { display:block; font-size:20pt; font-weight:bold; color:#111111; padding:18px 0px; line-height:35px; padding-left:31px; position:relative; background:url(../images/stt_bl.png) 2px 26px no-repeat;}
+.m_contents h3 span.st { position:absolute; right:0; top:0; font-size:17pt; color:#ed1c24; text-align:right;}
+.m_contents .agree_box { border:1px solid #dddddd; background:#fff; padding:20px; height:152px; overflow:scroll;}
+.m_contents .agree_box iframe { width:100%; height:110px;}
+.m_contents .agree_form { padding-top:10px; text-align:right; padding-bottom:25px; font-size:15pt; font-weight:bold;}
+.m_contents .agree_box2 { border:1px solid #dddddd; background:#fff; padding:20px; color:#3378c1; font-weight:bold; font-size:15pt; text-align:center;}
+
+.m_contents .point_box { background:#6b7382; height:130px; margin-bottom:30px; padding:20px;}
+.m_contents .point_box ul { color:#d0d0d0; font-size:13pt; font-weight:bold; display:block;}
+.m_contents .point_box ul li.li1 { color:#ffffff; font-size:20pt; height:40px;}
+.m_contents .point_box ul li.li2 { color:#ffffff; font-weight:normal; line-height:130%;}
+
+.m_contents .btn_area { padding-top:25px; padding-bottom:40px; text-align:center;}
+.m_contents .ok_btn { display:inline-block; padding: 12px 30px; background:#3378c1; font-size:18px; font-weight:bold; color:#fff; border:none; text-decoration:none; cursor:pointer;}
+.m_contents .cancel_btn { display:inline-block; padding: 12px 30px; background:#d8dce0; font-size:18px; font-weight:bold; color:#111; border:none; text-decoration:none; cursor:pointer;}
+
+/***************************** ////// 회원정보입력 ////// *******************************/
+
+.m_contents table.join_list { border-top:2px solid #000; width:100%;}
+.m_contents table.join_list td, .m_contents table.join_list th { font-size:15pt; padding:10px; border-bottom:1px solid #dddddd; text-align:left; font-weight:normal;}
+.m_contents table.join_list th { color:#000; text-indent:0; font-size:13pt;}
+.m_contents table.join_list th span.check { color:#ed1c24; font-weight:bold;}
+.m_contents .joinForm1 { border:1px solid #ddd; height:26px; padding:3px; color:#000; font-size:15pt; line-height:100%; background:#fff;}
+.m_contents .joinForm2 { border:1px solid #ddd; height:30px; color:#000; font-size:15pt; line-height:100%; background:#fff;}
+.m_contents .joinForm3 { border:1px solid #ddd; color:#000; font-size:15pt; line-height:100%; background:#fff;}
+.m_contents .stext { color:#3378c1; font-size:13pt; padding-top:5px; }
+.m_contents .sbtn1 { display:inline-block; border:1px solid #3378c1; padding: 7px 15px; background:#fff; font-size:15px; font-weight:bold; color:#3378c1; text-decoration:none; cursor:pointer;}
+
+/***************************** ////// 회원가입완료 ////// *******************************/
+
+.m_contents .m_join_box { border:1px solid #dddddd; border-top:2px solid #3378c1; padding:30px; text-align:center; margin-bottom:50px;}
+.m_contents .contents {}
+.m_contents .contents .t1 { font-size:22pt; color:#3378c1; font-weight:bold;}
+.m_contents .contents .t2 { font-size:18pt; color:#111; font-weight:normal; padding:7px 0 10px 0;}
+.m_contents .contents .t3 { font-size:13pt; color:#666; font-weight:normal; padding-bottom:50px;}
+.m_contents .login_btn { display:inline-block; padding: 7px 15px; background:#3378c1; font-size:15px; font-weight:bold; color:#fff; border:none; text-decoration:none; cursor:pointer;}
+.m_contents .home_btn { display:inline-block; padding: 7px 15px; background:#d8dce0; font-size:15px; font-weight:bold; color:#111; border:none; text-decoration:none; cursor:pointer;}
+
+
+/***************************** ////// 회원가입완료 ////// *******************************/
+
+.m_contents .id_box { float:left; width:50%;}
+
+.m_contents .pw_box { float:left; width:50%;}
+
+.m_contents .id_box .search_box, .m_contents .pw_box .search_box { width:570px; border:1px solid #dddddd; background:#fff; border-top:2px solid #3378c1; position:relative; height:200px;}
+.m_contents .pw_box .search_box { float:right;}
+.m_contents .pw_box h3 { margin-left:30px;}
+.m_contents .id_box table, .m_contents .pw_box table { position:absolute; left:50px; top:30px;}
+.m_contents .id_box table th, .m_contents .pw_box table th { font-size:15px; color:#000; text-align:left; padding:5px;}
+.m_contents .id_box table td, .m_contents .pw_box table td { padding:5px;}
+
+
+/***************************** ////// 기본박스 ////// *******************************/
+.m_contents .m_con_box { padding:30px; text-align:left; margin-bottom:50px;}
+
+/***************************** ////// 개인정보취급방침 ////// *******************************/
+
+#all_div u { text-decoration:none;}
+#all_div,
+#all_div div, #all_div p, #all_div h1, #all_div h2, #all_div td, #all_div th { color:#333;}
+table.alltable {width:100%; border:1px solid #e0e0e0; margin:0; padding:0;}
+table.alltable th,
+table.alltable td { padding:5px; border:1px solid #e0e0e0; margin:0;}
+table.alltable th { background:#f7f7f7; font-weight:bold; text-align:center;}
+table.alltable td { background:#ffffff; font-weight:normal; }
+#all_div { margin:0; padding:0; border:0; line-height:140%;}
+#all_div p { margin:0; padding:5px 0; border:0; line-height:140%;}
+#all_div h1 { border:none; background:none; padding:0; margin:0; font-size:20pt !important;}
+#all_div h2 { border:none; background:none; padding:0; margin:20px 0 10px 0; font-size:18pt !important;}
+#all_div h3 { border:none; background:none; padding:0; margin:0; font-size:16pt !important;}
+
+
+
+
+/***************************** ////// 회원로그인(SNS) ////// *******************************/
+
+.m_contents .m_login_box .sns_list { margin-top:10px;}
+.m_contents .m_login_box .sns_list li { float:left; display:inline-block; .display:inline; zoom:1; padding-right:5px;}

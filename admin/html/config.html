@@ -1,0 +1,335 @@
+			<form name="confFrm" method="post" action="proc/config_edit_proc.php">
+			<input type="hidden" name="act" value="edit">
+			<input type="hidden" name="step" value="next">
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="12" colspan="3"></td>
+				</tr>
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5">
+					<!-- 예약 처리 대상자-->
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="main_title_01">운영정보 설정</td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">타이틀 문구 설정</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr valign="top">
+									<td height="8"></td>
+								</tr>
+								<tr valign="top">
+									<td height="90" background="./img/homepage_title_ment_01.gif" style="background-repeat:no-repeat"><table valign="top" width="100%" height="20" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td valign="top" style="padding-left:22px;"><font color="white"><? echo $Data["title"]; ?></font></td>
+										</tr>
+									</table></td>
+								</tr>
+								<tr>
+									<td class="font_11">- 아래 박스에 변경하시고자 하는 <strong>타이틀명을 입력후 변경 버튼</strong>을 누르세요. </td>
+								</tr>
+								<tr>
+									<td height="33" valign="top"><textarea name="strTitle" style="width:100%;height:18px;" class="title_ment_01"><? echo $Data["title"]; ?></textarea></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table>
+					<!-- 예약 처리 대상자 끝 -->
+					</td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			<!-- 매뉴상단 설정 -->
+			<!-- <table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">매뉴상단 설정</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr valign="top">
+									<td height="8"></td>
+								</tr>
+								<tr valign="top">
+									<td height="90" background="./img/homepage_title_ment_01.gif" style="background-repeat:no-repeat"><table valign="top" width="100%" height="20" border="0" cellpadding="0" cellspacing="0">
+									</table></td>
+								</tr>
+								<tr>
+									<td class="font_11">- 아래 버튼중 변경하시고자 하는 <strong>메뉴형태를 선택후 변경 버튼</strong>을 누르세요. </td>
+								</tr>
+								<tr>
+									<td><table width="100%" cellspacing="0" cellpadding="0" border="0">
+										<tr>
+											<td width="33%" align="center"><input type="radio" name="intHeader" value="1" <?=( !$Data["header"] || $Data["header"] == '1' ) ? "checked" : ""?>> First</td>
+											<td width="33%" align="center"><input type="radio" name="intHeader" value="2" <?=( $Data["header"] == '2' ) ? "checked" : ""?>> Second</td>
+											<td width="33%" align="center"><input type="radio"  name="intHeader"value="3" <?=( $Data["header"] == '3' ) ? "checked" : ""?>> Third</td>
+										</tr>
+									</table></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table> -->
+			<!-- 매뉴상단 설정 끝-->
+			<!-- 키워드 설정 -->
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">검색 키워드 설정</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="25" class="font_11">- 아래 박스에 변경하시고자 하는 <strong>검색키워드를(을) 입력후 변경 버튼</strong>을 누르세요. </td>
+								</tr>
+								<tr>
+									<td height="33" valign="top"><input class="title_ment_01" name="strKeyword" type="text" value="<? echo $Data["keyword"]; ?>" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			<!-- 키워드 설정 끝-->
+			<!-- 이용약관 설정 -->
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">이용약관 변경</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="33" valign="top" class="top_5_bottom_5"><textarea name="strClauses" class="textarea_in" ><? echo $Data["clauses"]; ?></textarea></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			<!-- 이용약관 설정 끝-->
+			<!-- 개인정보보호정책 설정 -->
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">개인정보보호정책 변경</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td class="top_5_bottom_5"><textarea name="strConsent" class="textarea_in"><? echo $Data["consent"]; ?></textarea></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			<!-- 개인정보보호정책 설정 끝-->
+			<!-- 접근금지 IP -->
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">접근금지 IP</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td class="top_5_bottom_5">, 로 구분
+									<textarea name="strRejection" style="width:100%;height:100px;" class="textarea_in"><? echo $Data["rejection"]; ?></textarea></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			<!-- 접근금지 IP -->
+			<!-- 접근금지 IP -->
+			<!--table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">WHOIS SMS 등록</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td class="top_5_bottom_5" align="center">
+										<b>ID :</b> <input type="text" name="strSmsid" style="width:80; height:20px" value="<? echo $Data["smsid"]; ?>">
+										&nbsp; &nbsp; <b>PASS :</b> <input type="password" name="strSmspass" style="width:80;height:20px" value="<? echo $Data["smspass"]; ?>">
+										<!-- &nbsp; &nbsp; <b>cafe24URL :</b> <input type="text" name="strSmsurl" style="width:220;height:20px" value="<? echo $Data["smsurl"]; ?>"> ->
+										&nbsp; &nbsp; <b>smscnt :</b> <input type="text" name="intSmscnt" style="width:50;height:20px" readonly value="<? echo $bagData["smscnt"]; ?>">
+									</td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table-->
+			<table width="99%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="5" height="5"><img src="./img/ct_box_left_top.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_top.gif"></td>
+					<td width="5"><img src="./img/ct_box_right_top.gif" width="5" height="5"></td>
+				</tr>
+				<tr>
+					<td background="./img/ct_box_left.gif"></td>
+					<td align="center" bgcolor="#F5F5F5" class="top_5"><table width="99%" border="0" cellpadding="0" cellspacing="1" bgcolor="E6E6E6">
+						<tr>
+							<td align="center" class="main_title_02">cafe24 SMS 등록</td>
+						</tr>
+						<tr>
+							<td height="25" align="center" bgcolor="#FFFFFF"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td class="top_5_bottom_5" align="center">
+										<b>ID :</b> <input type="text" name="strSmsid" style="width:80; height:20px" value="<?=$Data["smsid"]?>">
+										&nbsp; &nbsp; <b>PASS :</b> <input type="password" name="strSmspass" style="width:80;height:20px" value="<?=$Data["smspass"]?>">
+										&nbsp; &nbsp; <b>Sec.Value :</b> <input type="text" name="strSmssecu" style="width:230;height:20px" value="<?=$Data["securekey"]?>">
+										<br><b>cafe24URL :</b> <input type="text" name="strSmsurl" style="width:450;height:20px" value="<?=$Data["smsurl"]?>">
+										<!--&nbsp; &nbsp; <b>smscnt :</b> <input type="text" name="intSmscnt" style="width:50;height:20px" value="<?=$Data["smscnt"]?>"-->
+									</td>
+								</tr>
+							</table></td>
+						</tr>
+					</table>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="30" align="center"><input type="image" src="./img/btn_modify_ok_01.gif" width="60" height="18" style="cursor:pointer;"></td>
+						</tr>
+					</table></td>
+					<td background="./img/ct_box_right.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"><img src="./img/ct_box_left_bottom.gif" width="5" height="5"></td>
+					<td background="./img/ct_box_bottom.gif"></td>
+					<td><img src="./img/ct_box_right_bottom.gif" width="5" height="5"></td>
+				</tr>
+			</table>
+			</form>
