@@ -46,6 +46,12 @@ if($pageNum!=''){ //$pageNum 있을경우 시작
 		case('5'):
 			$sub_tit = "커뮤니티";
 			$sub_tit2_1 = "게시판관리";
+			$sub_tit2_2 = "공지사항";
+			$sub_tit2_3 = "방송/언론보도";
+			$sub_tit2_4 = "시술후기";
+			$sub_tit2_5 = "온라인상담";
+			$sub_tit2_6 = "이벤트";
+			$sub_tit2_7 = "전후사진";
 		break;
 		case('6'):
 			$sub_tit = "메일관리";
@@ -85,20 +91,20 @@ if($pageNum!=''){ //$pageNum 있을경우 시작
 				}
 			}
 			// 단순 개별 링크
-			switch(substr($sub_menu,0,3)) {
-//				case '200':
-//					echo '<li><a href="/admin/community.php?tb=online_counsel&act=list">온라인상담</a></li>';
+//			switch(substr($sub_menu,0,3)) {
+////				case '200':
+////					echo '<li><a href="/admin/community.php?tb=online_counsel&act=list">온라인상담</a></li>';
+////					break;
+//				case '500':
+//					$sql = "select * from tblBoardManager order by tblGroup asc, tblBname asc";
+//					$result = mysql_query($sql);
+//					while( $list = mysql_fetch_array( $result ) ) {
+//						$on=($tb==$list["tblBtable"])?'on':'';
+//						echo '<li class="'.$on.'"><a href="/admin/community.php?tb='.$list["tblBtable"].'&act=list">'.$list["tblBname"].'</a></li>';
+//					}
 //					break;
-				case '500':
-					$sql = "select * from tblBoardManager order by tblGroup asc, tblBname asc";
-					$result = mysql_query($sql);					
-					while( $list = mysql_fetch_array( $result ) ) {
-						$on=($tb==$list["tblBtable"])?'on':'';
-						echo '<li class="'.$on.'"><a href="/admin/community.php?tb='.$list["tblBtable"].'&act=list">'.$list["tblBname"].'</a></li>';
-					}
-					break;
-			}
-			?>
+//			}
+//			?>
 			</ul>
 <?} //$pageNum 있을경우 끝?>
 <div class="leftBar">
@@ -108,7 +114,9 @@ if($pageNum!=''){ //$pageNum 있을경우 시작
 						<tr>
 							<td class="tt1">SMS 잔여횟수</td>
 							<td class="info"><strong><?=$api->getSmsCount()?></strong> 건</td>
+
 						</tr>
+
 					</table>
 					<p class="bottom"></p>
 				</div>
