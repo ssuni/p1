@@ -5,25 +5,8 @@
  * Date: 2017. 2. 8.
  * Time: PM 4:42
  */
-
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "p1";
-
-if(!$connect) {
-    $connect = mysql_connect($servername, $username, $password);
-    mysql_select_db($dbname, $connect);
-    if (!$connect) {
-        $errno=mysql_errno($connect);
-        $errmsg=mysql_error($connect);
-        echo "데이터 베이스에 연결할 수 없습니다.<br>";
-        echo "에러코드: $errno, $errmsg ";
-        exit;
-    }
-    mysql_query('set names utf8');
-}
-
+include $_SERVER['DOCUMENT_ROOT']."/include/dbconfig.php";
+include $_SERVER['DOCUMENT_ROOT']."/include/function.php";
 /* Database connection end */
 
 
@@ -34,7 +17,7 @@ $requestData= $_REQUEST;
 $columns = array(
 // datatable column index  => database column name
     0 =>'tblNumber',
-    1 =>'tblNumber',
+    1 =>'tblStrComment',
     2 =>'tblStrSubject',
     3=> 'tblStrName',
     4=> 'tblDtmRegDate',
@@ -86,7 +69,10 @@ $newDate = date( 'Y-m-d 00:00:00', time() - ( 86400*3 ) ); /* 3일간 표시 */
 while( $row = @mysql_fetch_array($query) ) {  // preparing an array
     $nestedData=array();
     $nestedData[] = $row["tblNumber"];
-    $nestedData[] = $row["tblNumber"];
+    if(!$row['tblStrSaveFile']) {
+        $src = imgTag($row["tblStrComment"]);
+    }
+    $nestedData[] = str_replace("\\","",$src[0]);;
 //    $nestedData[] = $row["tblStrSubject"];
     $nestedData[] = ( $row["tblDtmRegDate"] >= $newDate ) ? $row["tblStrSubject"]."&nbsp;<img src='/board/skin/counsel/images/icon_new.gif' align='absmiddle' alt='새글'>" :$row["tblStrSubject"];
     $nestedData[] = $row["tblStrName"];

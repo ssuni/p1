@@ -9,6 +9,7 @@ $subNum = 2;
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
     /**************************
   DEFAULT BOOTSTRAP STYLES
@@ -132,7 +133,7 @@ $subNum = 2;
         border-bottom: 3px solid #036;
     }
     table.type09 tbody th {
-        width: 100px;
+        width: 200px;
         padding: 20px;
         font-weight: bold;
         vertical-align: top;
@@ -140,7 +141,7 @@ $subNum = 2;
         background: #f3f6f7;
     }
     table.type09 td {
-        width: 400px;
+        width: 80%;
         padding: 10px;
         vertical-align: top;
         border-bottom: 1px solid #ccc;
@@ -215,8 +216,20 @@ $subNum = 2;
                 'className': 'dt-body-center',
                 'render': function (data, type, full, meta){
                     return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-                }
-            }],
+                      },
+                },
+                {
+                    targets: 1,
+                    'searchable': false,
+                    'orderable': false,
+                    'className': 'dt-body-center',
+                    visible: true,
+                    'render': function (data, type, full, meta) {
+                        return '<img width="80px;" height="50px" name="img[]" src="' + data + '" value="' + $('<div/>').text(data).html() + '">';
+                    }
+                },
+                {"className": "dt-center", "targets": "_all"}
+            ],
             order: [[ 5, 'desc' ]]
 
 
@@ -354,7 +367,7 @@ $subNum = 2;
         }).DataTable();
 
         //온라인상담 답변
-        $(".remodal-confirm").on('click',function(){
+        $("#updateWrite").on('click',function(){
             var idx = $("#hiddenIdx").val();
             var content = $(".ta6").val();
             if(content == "") {
@@ -440,72 +453,89 @@ $subNum = 2;
 
                     <br>
                     <button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
-                    <button data-remodal-action="confirm" class="remodal-confirm">저장</button>
+                    <button data-remodal-action="confirm" class="remodal-confirm" id="updateWrite">저장</button>
                 </div>
                 <!--팝업폼-->
-                <!--팝업폼-->
+
+                <!--팝업폼 write-->
+
                 <div class="remodal" data-remodal-id="modalWrite"
                      data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
                     <button data-remodal-action="close" class="remodal-close"></button>
                     <h1><span id="subject">공지사항 등록</span></h1>
-                    <table class="type09">
-                        <thead>
-                        <tr>
-                            <th scope="cols"></th>
-                            <th scope="cols"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope='row'>제목</th>
-                            <td><input type="text" id="title" value="" class="winput" style="width:380px; height: 100%;"/></td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>관리자</th>
-                            <td><input type="text" id="" value="" class="winput" style="width:380px; height: 100%;" placeholder="관리자"/></td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>연락처</th>
-                            <td>
-                                <input type="text" id="phone1" value="" class="winput" style="width:80px; height: 100%;" placeholder="010"/> -
-                                <input type="text" id="phone2" value="" class="winput" style="width:80px; height: 100%;" placeholder="1234"/> -
-                                <input type="text" id="phone3" value="" class="winput" style="width:80px; height: 100%;" placeholder="5678"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>등록일</th>
-                            <td><input type="text" class="winput" style="width:380px; height: 100%;" id="datepicker1" placeholder="*설정시 등록일이 변경됩니다." ></td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>조회수</th>
-                            <td><input type="text" class="winput" style="width:380px; height: 100%;" placeholder="*설정시 조회수가 변경됩니다." ></td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>첨부파일</th>
-                            <td><input type="file" style="width:380px; height: 100%; padding: 10px;"  ></td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>답변내용</th>
-                            <td>
-                                <textarea name="editor1" id="editor1" rows="10" cols="80">This is my textarea to be replaced with CKEditor.
-                                </textarea>
-                            </td>
-                        </tr>
+                        <form name="frmMain" id="frmMain" method="post" enctype="multipart/form-data" id="frmMain" onsubmit="return submitContents(this);" >
+                            <input type="hidden" name="tb" value="notice"/>
+                                <table class="type09">
+                                    <thead>
+                                    <tr>
+                                        <th scope="cols"></th>
+                                        <th scope="cols"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope='row'>제목</th>
+                                        <td><input type="text" id="title" name="title" value="" class="winput" style="width:380px; height: 100%;"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>관리자</th>
+                                        <td><input type="text" id="name" name="name" value="" class="winput" style="width:380px; height: 100%;" placeholder="관리자"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>연락처</th>
+                                        <td>
+                                            <input type="text" id="phone1" name="phone1" value="" class="winput" style="width:80px; height: 100%;" placeholder="010"/> -
+                                            <input type="text" id="phone2" name="phone2" value="" class="winput" style="width:80px; height: 100%;" placeholder="1234"/> -
+                                            <input type="text" id="phone3" name="phone3"value="" class="winput" style="width:80px; height: 100%;" placeholder="5678"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>등록일</th>
+                                        <td><input type="text" name="date" class="winput" style="width:380px; height: 100%;" id="datepicker1" placeholder="*설정시 등록일이 변경됩니다." ></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>조회수</th>
+                                        <td><input type="text" id="count" name="count"class="winput" style="width:380px; height: 100%;" placeholder="*설정시 조회수가 변경됩니다." ></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>지점</th>
+                                        <td><select class="winput" style="width: 380px;" name="division">
+                                                <option value="1">논현점</option>
+                                                <option value="2">강남점</option>
+                                                <option value="3">청담점</option>
+                                                <option value="4">일산점</option>
+                                                <option value="5">화정점</option>
 
-                        </tbody>
-                    </table>
+                                            </select></td>
+                                    </tr>
+            <!--                        <tr>-->
+            <!--                            <th scope='row'>첨부파일</th>-->
+            <!--                            <td><input type="file" style="width:380px; height: 100%; padding: 10px;"  ></td>-->
+            <!--                        </tr>-->
+                                    <tr>
+                                        <th scope='row'>답변내용</th>
+                                        <td>
+                                            <textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea>
+                                            <p style="display:none"><textarea name="strComment" id="strComment" cols="45" rows="5" style="width:880px;" itemname="내용"></textarea></p>
+                                        </td>
+                                    </tr>
 
+                                    </tbody>
+                                </table>
+                        </form>
                     <br>
                     <button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
-                    <button data-remodal-action="confirm" class="remodal-confirm">저장</button>
+                    <button data-remodal-action="confirm" class="remodal-confirm" id="write_ok">저장</button>
                 </div>
-                <!--팝업폼-->
+                    </form>
+
+                <!--팝업폼 write-->
 
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
-                        <th>번호</th>
+                        <th>이미지</th>
                         <th>글제목</th>
                         <th>글쓴이</th>
                         <th>작성일</th>
@@ -523,10 +553,136 @@ $subNum = 2;
 	</div>
 	<? include "inc/bottom.php" ?>
 </div>
-<script>
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    CKEDITOR.replace( 'editor1' );
+<!--<script>-->
+<!--    // Replace the <textarea id="editor1"> with a CKEditor-->
+<!--    // instance, using default configuration.-->
+<!--    CKEDITOR.replace( 'editor1' );-->
+<!--</script>-->
+<script type="text/javascript">
+    var oEditors = [];
+
+    // 추가 글꼴 목록
+    //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "ir1",
+        sSkinURI: "/editor/SmartEditor2Skin.html",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+            fOnBeforeUnload : function(){
+                //alert("완료!");
+            }
+        }, //boolean
+        fOnAppLoad : function(){
+            //예제 코드
+            //oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+        },
+        fCreator: "createSEditor2"
+    });
+    <?if($_SESSION["ss_level"] <= 2 && $act=="modify"){ ?>
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "ir2",
+        sSkinURI: "/editor/SmartEditor2Skin.html",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+            fOnBeforeUnload : function(){
+                //alert("완료!");
+            }
+        }, //boolean
+        fOnAppLoad : function(){
+            //예제 코드
+            //oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+        },
+        fCreator: "createSEditor2"
+    });
+    <? } ?>
+    function pasteHTML() {
+        var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+        oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+    }
+
+    function showHTML() {
+        var sHTML = oEditors.getById["ir1"].getIR();
+        alert(sHTML);
+    }
+
+    function submitContents(elClickedObj) {
+        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+
+        // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+        document.getElementById("strComment").value = document.getElementById("ir1").value;
+
+        <?if($_SESSION["ss_level"] <= 2 && $act=="modify"){ ?>
+        oEditors.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+
+        // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+        document.getElementById("strReply").value = document.getElementById("ir2").value;
+        <? } ?>
+        try {
+            var breaker = fnConfirm(elClickedObj)
+            if (breaker == false)
+            {
+                return false;
+            }
+        } catch(e) {}
+    }
+
+    function setDefaultFont() {
+        var sDefaultFont = '궁서';
+        var nFontSize = 24;
+        oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+    }
 </script>
+
+<script>
+    $(document).ready(function(){
+      $("#write_ok").on('click',function(){
+          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+          document.getElementById("strComment").value = document.getElementById("ir1").value;
+          var content = document.getElementById("strComment").value
+          var params = jQuery("#frmMain").serialize();
+          console.log(params)
+
+          $.ajax({
+              type:"POST",
+              url:'/admin/proc/board_insert_proc.php',
+              data:params,
+              success: function(response){
+                  var result = JSON.parse(response)
+                  console.log(result);
+              }
+          });
+
+//          $.post('/admin/proc/board_insert_proc.php',,{
+//
+////                'title': title,
+////                'name' : name,
+////                'phone1' : phone1,
+////                'phone2' : phone2,
+////                'phone3' : phone3,
+////                'date' : date,
+////                'content' : content
+//
+//                },function (response) {
+//                var result = JSON.parse(response)
+//                console.log('response')
+//                console.log(response)
+//            })
+      })
+    })
+</script>
+
+// 전환,공통 스크립트
+<?
+include $_SERVER['DOCUMENT_ROOT']."/include/switch_script.php";
+include $_SERVER['DOCUMENT_ROOT']."/include/common_script.php";
+?>
 </body>
 </html>

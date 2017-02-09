@@ -1,7 +1,7 @@
 <?php 
 $db_host="localhost";
 $db_user="root";
-$db_pass="root";
+$db_pass="apmsetup";
 $db_name="p1";
 
 if(!$connect) {

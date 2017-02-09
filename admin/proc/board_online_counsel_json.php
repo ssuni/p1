@@ -6,23 +6,7 @@
  * Time: 오후 2:14
  */
 /* Database connection start */
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "p1";
-
-if(!$connect) {
-    $connect = mysql_connect($servername, $username, $password);
-    mysql_select_db($dbname, $connect);
-    if (!$connect) {
-        $errno=mysql_errno($connect);
-        $errmsg=mysql_error($connect);
-        echo "데이터 베이스에 연결할 수 없습니다.<br>";
-        echo "에러코드: $errno, $errmsg ";
-        exit;
-    }
-    mysql_query('set names utf8');
-}
+include $_SERVER['DOCUMENT_ROOT']."/include/dbconfig.php";
 
 /* Database connection end */
 
