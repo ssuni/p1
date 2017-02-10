@@ -161,7 +161,21 @@ $subNum = 2;
             showMonthAfterYear: true,
             changeMonth: true,
             changeYear: true,
-            yearSuffix: '년'
+            yearSuffix: '년',
+            onSelect: function(datetext){
+                var d = new Date(); // for now
+                var h = d.getHours();
+                h = (h < 10) ? ("0" + h) : h ;
+
+                var m = d.getMinutes();
+                m = (m < 10) ? ("0" + m) : m ;
+
+                var s = d.getSeconds();
+                s = (s < 10) ? ("0" + s) : s ;
+
+                datetext = datetext + " " + h + ":" + m + ":" + s;
+                $('#datepicker1').val(datetext);
+            }
         });
     });
 </script>
@@ -230,7 +244,7 @@ $subNum = 2;
                 },
                 {"className": "dt-center", "targets": "_all"}
             ],
-            order: [[ 5, 'desc' ]]
+            order: [[ 4, 'desc' ]]
 
 
         });
@@ -292,7 +306,12 @@ $subNum = 2;
                     html += "<input type='hidden' id='hiddenIdx' value='" + result['idx'] + "'/>"
                     html += "</tr>"
                     html += "<tr>"
-                    html += "<th scope='row'>실명</th>"
+                    html += "<th scope='row'>글제목</th>"
+                    html += "<td>" + result['subject'] + "</td>"
+                    html += "</tr>"
+                    html += "<tr>"
+                    html += "<tr>"
+                    html += "<th scope='row'>작성자</th>"
                     html += "<td>" + result['name'] + "</td>"
                     html += "</tr>"
                     html += "<tr>"
@@ -301,18 +320,43 @@ $subNum = 2;
                     html += "<td>" + result['date'] + "</td>"
                     html += "</tr>"
                     html += "<tr>"
-                    html += "<tr>"
-                    html += "<th scope='row'>글제목</th>"
-                    html += "<td>" + result['subject'] + "</td>"
-                    html += "</tr>"
-                    html += "<tr>"
+
                     html += "<th scope='row'>상담내용</th>"
-                    html += "<td>" + result['comment'] + "</td>"
+                    html += "<td><textarea name='ir2' id='ir2' rows='10' cols='100' style='width:100%; height:412px; display:none;'></textarea>"
+                    html +=   "<p style='display:none'><textarea name='strComment2' id='strComment2' cols='45' rows='5' style='width:880px;' itemname='내용'></textarea></p>"
+                    html +=  "</td>"
                     html += "</tr>"
                     if (result['reply']) {
                         $(".ta6").val(result['reply'].replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/gi, ''))
                     }
+
                     $("#popuptbody").append(html)
+                    var oEditors2 = [];
+
+                    // 추가 글꼴 목록
+                    //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+                    nhn.husky.EZCreator.createInIFrame({
+                        oAppRef: oEditors2,
+                        elPlaceHolder: "ir2",
+                        sSkinURI: "/editor/SmartEditor2Skin.html",
+                        htParams : {
+                            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+                            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+                            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+                            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+                            fOnBeforeUnload : function(){
+                                //alert("완료!");
+                            }
+                        }, //boolean
+                        fOnAppLoad : function(){
+                            //예제 코드
+                            oEditors2.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", [result['content']]);	// 에디터의 내용이 textarea에 적용됩니다.
+//                            oEditors.getById["ir2"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+                        },
+                        fCreator: "createSEditor2"
+                    });
+//                    oEditors2.getById["ir2"].exec("PASTE_HTML", [result['content']]);
+
                 });
             }
             $(".ta6").focus()
@@ -679,7 +723,7 @@ $subNum = 2;
     })
 </script>
 
-// 전환,공통 스크립트
+
 <?
 include $_SERVER['DOCUMENT_ROOT']."/include/switch_script.php";
 include $_SERVER['DOCUMENT_ROOT']."/include/common_script.php";

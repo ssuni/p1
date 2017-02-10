@@ -19,7 +19,11 @@ $table = $_REQUEST['tb'];
     }
 
 $title = $_REQUEST['title'];
-$name = ($_REQUEST['name']) ? $_REQUEST['name'] : '관리자';
+if($table == 'tbl_notice'){
+    $name = ($_REQUEST['name']) ? $_REQUEST['name'] : '관리자';
+}else{
+    $name =  $_REQUEST['name'];
+}
 
 $phone1 = $_REQUEST['phone1'];
 $phone2 = $_REQUEST['phone2'];
@@ -33,16 +37,18 @@ $content = $_REQUEST['strComment'];
 $division = $_REQUEST['division'];
 
 $sql = "INSERT into ".$table." set";
-$sql .= " tblIntFid= 1 ,";
-$sql .= " tblStrThread= 'A' ,";
+$sql .= " tblIntFid= 1,";
+$sql .= " tblStrThread= 'A',";
 $sql .= " tblStrId='".$_SESS["ss_id"]."',";
 $sql .= " tblStrSubject='".$title."',";
 $sql .= " tblStrMobile='".$phone."',";
 $sql .= " tblStrEmail='".$email."',";
+$sql .= " tblStrName='".$name."',";
 $sql .= " tblStrComment='".$content."',";
-$sql .= " tblStrMobile='".$phone."',";
-$sql .= " tblStrDtmRegDate='".$date."',";
-$sql .= " division='".$division."',";
+$sql .= " tblDtmRegDate='".$date."',";
+$sql .= " division='".$division."'";
+
+mysql_query($sql);
 
 if ($_SESSION['ss_level'] <= 2) {			// 부관리자 이상만 로그
     $pk = mysql_insert_id();
@@ -58,4 +64,4 @@ if ($_SESSION['ss_level'] <= 2) {			// 부관리자 이상만 로그
 
 
 
-echo json_encode($file);
+echo json_encode($name);
