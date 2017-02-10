@@ -175,6 +175,7 @@ $subNum = 2;
 
                 datetext = datetext + " " + h + ":" + m + ":" + s;
                 $('#datepicker1').val(datetext);
+                $('#datepicker2').val(datetext);
             }
         });
     });
@@ -298,6 +299,7 @@ $subNum = 2;
                     'boardtype': boardtype,
                     'idx': idx
                 }, function (response) {
+
                     var result = JSON.parse(response)
                     console.log(result)
                     html += "<tr>"
@@ -316,11 +318,14 @@ $subNum = 2;
                     html += "</tr>"
                     html += "<tr>"
                     html += "<tr>"
-                    html += "<th scope='row'>작성일</th>"
+                    html += "<th scope='row'>등록일</th>"
                     html += "<td>" + result['date'] + "</td>"
                     html += "</tr>"
                     html += "<tr>"
-
+                    html += "<th scope='row'>등록일 변경</th>"
+                    html += "<td><input type='text' name='date2' id='date2' class='winput' style='width:380px; height: 100%;' id='datepicker2' ></td>"
+                    html += "</tr>"
+                    html += "<tr>"
                     html += "<th scope='row'>상담내용</th>"
                     html += "<td><textarea name='ir2' id='ir2' rows='10' cols='100' style='width:100%; height:412px; display:none;'></textarea>"
                     html +=   "<p style='display:none'><textarea name='strComment2' id='strComment2' cols='45' rows='5' style='width:880px;' itemname='내용'></textarea></p>"
@@ -331,7 +336,40 @@ $subNum = 2;
                     }
 
                     $("#popuptbody").append(html)
-                    var oEditors2 = [];
+
+                    $(document).find("input[name=date2]").removeClass('hasDatepicker').datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        prevText: '이전 달',
+                        nextText: '다음 달',
+                        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                        dayNames: ['일','월','화','수','목','금','토'],
+                        dayNamesShort: ['일','월','화','수','목','금','토'],
+                        dayNamesMin: ['일','월','화','수','목','금','토'],
+                        showMonthAfterYear: true,
+                        changeMonth: true,
+                        changeYear: true,
+                        yearSuffix: '년',
+                        onSelect: function(datetext){
+                            var d = new Date(); // for now
+                            var h = d.getHours();
+                            h = (h < 10) ? ("0" + h) : h ;
+
+                            var m = d.getMinutes();
+                            m = (m < 10) ? ("0" + m) : m ;
+
+                            var s = d.getSeconds();
+                            s = (s < 10) ? ("0" + s) : s ;
+
+                            datetext = datetext + " " + h + ":" + m + ":" + s;
+                            $('#datepicker2').val(datetext);
+                        },
+                        defaultDate: result['date']
+                    });
+
+
+//                    var $datepicker = $('#datepicker2');
+//                    $datepicker.datepicker('setDate', new Date());
 
                     // 추가 글꼴 목록
                     //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
@@ -350,8 +388,9 @@ $subNum = 2;
                         }, //boolean
                         fOnAppLoad : function(){
                             //예제 코드
-                            oEditors2.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", [result['content']]);	// 에디터의 내용이 textarea에 적용됩니다.
-//                            oEditors.getById["ir2"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+//                            oEditors2.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", [result['comment']]);	// 에디터의 내용이 textarea에 적용됩니다.
+//                            oEditors2.getById["ir2"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+                            oEditors2.getById["ir2"].exec("PASTE_HTML", [result['comment']]);
                         },
                         fCreator: "createSEditor2"
                     });
@@ -410,19 +449,7 @@ $subNum = 2;
 //			alert('paging click')
         }).DataTable();
 
-        //온라인상담 답변
-        $("#updateWrite").on('click',function(){
-            var idx = $("#hiddenIdx").val();
-            var content = $(".ta6").val();
-            if(content == "") {
-                alert('답변내용이 없습니다.')
-            }else {
-                $.post('/admin/proc/boardAjax.php', {'type': 'reply', 'idx': idx, 'reply': content}, function (response) {
-                    var result = JSON.parse(response)
-                    console.log(result)
-                })//답변내용ajax
-            }
-        })
+
         $('textarea').keypress(function(event) {
             if (event.which == 13) {
                 event.preventDefault();
@@ -497,7 +524,7 @@ $subNum = 2;
 
                     <br>
                     <button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
-                    <button data-remodal-action="confirm" class="remodal-confirm" id="updateWrite">저장</button>
+                    <button data-remodal-action="confirm" class="remodal-confirm" id="updateWrite">수정</button>
                 </div>
                 <!--팝업폼-->
 
@@ -604,7 +631,7 @@ $subNum = 2;
 <!--</script>-->
 <script type="text/javascript">
     var oEditors = [];
-
+    var oEditors2 = [];
     // 추가 글꼴 목록
     //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
     nhn.husky.EZCreator.createInIFrame({
@@ -704,22 +731,28 @@ $subNum = 2;
               }
           });
 
-//          $.post('/admin/proc/board_insert_proc.php',,{
-//
-////                'title': title,
-////                'name' : name,
-////                'phone1' : phone1,
-////                'phone2' : phone2,
-////                'phone3' : phone3,
-////                'date' : date,
-////                'content' : content
-//
-//                },function (response) {
-//                var result = JSON.parse(response)
-//                console.log('response')
-//                console.log(response)
-//            })
       })
+        //공지사항 답변
+        $("#updateWrite").on('click',function(){
+            oEditors2.getById["ir2"].exec("UPDATE_CONTENTS_FIELD", []);
+            document.getElementById("strComment2").value = document.getElementById("ir2").value;
+            var idx = $("#hiddenIdx").val();
+            var date = $("#date2").val();
+            var content = document.getElementById("strComment2").value
+
+            alert(date);
+
+//            var idx = $("#hiddenIdx").val();
+//            var content = $(".ta6").val();
+//            if(content == "") {
+//                alert('답변내용이 없습니다.')
+//            }else {
+//                $.post('/admin/proc/boardAjax.php', {'type': 'reply', 'idx': idx, 'reply': content}, function (response) {
+//                    var result = JSON.parse(response)
+//                    console.log(result)
+//                })//답변내용ajax
+//            }
+        })
     })
 </script>
 
